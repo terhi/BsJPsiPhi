@@ -1,6 +1,5 @@
 #include "HeavyFlavorAnalysis/BsToJpsiPhi/interface/BsToJpsiPhiRootTree.h"
-#include<vector>
-#include <iostream>
+
 using namespace std;
 
 
@@ -22,179 +21,196 @@ void BsToJpsiPhiRootTree::createTree(const std::string filename)
   // create tree structure
   bsTree_ = new TTree("BsTree","BsTree",bufsize);
 
-PtJetTrkPt_= new std::vector<float>(); 
-PtJetTrkCharge_= new std::vector<int>();
+
+PVTrkCharge_ = new std::vector<int>();
+PVTrkPt_ = new std::vector<float>();
+PVTrkEta_ = new std::vector<float>();
+PVTrkPhi_ = new std::vector<float>();
+
+BpPVTrkCharge_ = new std::vector<int>();
+BpPVTrkPt_ = new std::vector<float>();
+BpPVTrkEta_ = new std::vector<float>();
+BpPVTrkPhi_ = new std::vector<float>();
 
 BJetTrkCharge_ = new std::vector<int>();
 BJetTrkPt_ = new std::vector<float>();
 
-/*
-vector<int> &vr = *JetTrkCharge_; //Create a reference
-cout << vr[0] << endl;
-cout << vr[1] << endl;
-cout << vr[2] << endl;
-cout << vr[3] << endl;
-bsTree_->Branch("JetTrkCharge","vector<int>",&vr);
-*/
+BpBJetTrkCharge_ = new std::vector<int>();
+BpBJetTrkPt_ = new std::vector<float>();
 
-//bsTree_->Branch("JetTrkCharge","vector< vector<int> >",JetTrkCharge_);
-//bsTree_->Branch("JetTrkPt","vector< vector<float> >",JetTrkPt_);
 
-bsTree_->Branch("PtJetTrkCharge","vector<int>",PtJetTrkCharge_);
-bsTree_->Branch("PtJetTrkPt","vector<float>",PtJetTrkPt_);
-
+//jet variables
 bsTree_->Branch("BJetTrkCharge","vector<int>",BJetTrkCharge_);
 bsTree_->Branch("BJetTrkPt","vector<float>",BJetTrkPt_);
 
-bsTree_->Branch("TagMuRecoIP3D"      , TagMuRecoIP3D_       ,"TagMuRecoIP3D_[25]/D");
-bsTree_->Branch("TagMuRecoIP3DErr"   , TagMuRecoIP3DErr_    ,"TagMuRecoIP3DErr_[25]/D" );
+bsTree_->Branch("BpBJetTrkCharge","vector<int>",BpBJetTrkCharge_);
+bsTree_->Branch("BpBJetTrkPt","vector<float>",BpBJetTrkPt_);
 
-bsTree_->Branch(  "TagMuRecoPt"             , TagMuRecoPt_ ,"TagMuRecoPt_[25]/D");   
-bsTree_->Branch(  "TagMuRecoP"             , TagMuRecoP_ ,"TagMuRecoP_[25]/D"); 
-bsTree_->Branch(  "TagMuRecoEta"             , TagMuRecoEta_ ,"TagMuRecoEta_[25]/D");
-bsTree_->Branch(  "TagMuRecoPhi"             , TagMuRecoPhi_ ,"TagMuRecoPhi_[25]/D");
-bsTree_->Branch(  "TagMuRecoChg"             , TagMuRecoChg_ ,"TagMuRecoChg_[25]/D");
-bsTree_->Branch(  "TagMuSimu"             , TagMuSimu_ ,"TagMuSimu_[25]/D");
-bsTree_->Branch(  "MuRecoMCmother"             , MuRecoMCmother_ ,"MuRecoMCmother_[25]/I");
-bsTree_->Branch(  "MuRecoMCMotherMother", MuRecoMCMotherMother_ ,"MuRecoMCMotherMother_[25]/I");
-bsTree_->Branch(  "TagMuRecoPtRel", TagMuRecoPtRel_ ,"TagMuRecoPtRel_[25]/D");
-bsTree_->Branch(  "TagMuJetdR", TagMuJetdR_ ,"TagMuJetdR_[25]/D");
+bsTree_->Branch("PVTrkCharge","vector<int>",PVTrkCharge_);
+bsTree_->Branch("PVTrkPt","vector<float>",PVTrkPt_);
+bsTree_->Branch("PVTrkEta","vector<float>",PVTrkEta_);
+bsTree_->Branch("PVTrkPhi","vector<float>",PVTrkPhi_);
 
-bsTree_->Branch("GlobalTagMuon", GlobalTagMuon_, "GlobalTagMuon_[25]/I");
-bsTree_->Branch("TrackerTagMuon", TrackerTagMuon_, "TrackerTagMuon_[25]/I");
-bsTree_->Branch("PFTagMuon", PFTagMuon_, "PFTagMuon_[25]/I");
+bsTree_->Branch("BpPVTrkCharge","vector<int>",BpPVTrkCharge_);
+bsTree_->Branch("BpPVTrkPt","vector<float>",BpPVTrkPt_);
+bsTree_->Branch("BpPVTrkEta","vector<float>",BpPVTrkEta_);
+bsTree_->Branch("BpPVTrkPhi","vector<float>",BpPVTrkPhi_);
 
 
-bsTree_->Branch(  "TagMuListSize"             , &TagMuListSize_ ,"TagMuListSize/I");
+bsTree_->Branch("BJetParton", &BJetParton_, "BJetParton/I");
+bsTree_->Branch("BJetEta", &BJetEta_, "BJetEta/D");
+bsTree_->Branch("BJetPhi", &BJetPhi_,"BJetPhi/D");
+bsTree_->Branch("BJetPt", &BJetPt_,"BJetPt/D");
+bsTree_->Branch("JetBTagProb", &JetBTagProb_,"JetBTagProb/D");
+
+bsTree_->Branch("BpBJetParton", &BpBJetParton_, "BpBJetParton/I");
+bsTree_->Branch("BpBJetEta", &BpBJetEta_, "BpBJetEta/D");
+bsTree_->Branch("BpBJetPhi", &BpBJetPhi_,"BpBJetPhi/D");
+bsTree_->Branch("BpBJetPt", &BpBJetPt_,"BpBJetPt/D");
+bsTree_->Branch("BpJetBTagProb", &BpJetBTagProb_,"BpJetBTagProb/D");
+
+//jet variables
+
+bsTree_->Branch("BplusCharge",&BplusCharge_,"BplusCharge/I");
+bsTree_->Branch("BplusMu1Eta",&BplusMu1Eta_,"BplusMu1Eta/D");
+bsTree_->Branch("BplusMu2Eta",&BplusMu2Eta_,"BplusMu2Eta/D");
+bsTree_->Branch("JpsiPtbplus_fit",&JpsiPtbplus_fit_,"JpsiPtbplus_fit/D");
+
+// Muon tagging //
+bsTree_->Branch("BpTagIP",&BpTagIP_,"BpTagIP/D");
+bsTree_->Branch("BpTagPt",&BpTagPt_,"BpTagPt/D");
+bsTree_->Branch("BpTagCharge",&BpTagCharge_,"BpTagCharge/I");
+bsTree_->Branch("BpTagEta",&BpTagEta_,"BpTagEta/D");
+bsTree_->Branch("BpTagPhi",&BpTagPhi_,"BpTagPhi/D");
+bsTree_->Branch("BpTagP",&BpTagP_,"BpTagP/D");
+bsTree_->Branch("BpTagPF",&BpTagPF_,"BpTagPF/I");
+bsTree_->Branch("BpTagGENID",&BpTagGENID_,"BpTagGENID/I");
+
+bsTree_->Branch("BsTagIP",&BsTagIP_,"BsTagIP/D");
+bsTree_->Branch("BsTagPt",&BsTagPt_,"BsTagPt/D");
+bsTree_->Branch("BsTagCharge",&BsTagCharge_,"BsTagCharge/I");
+bsTree_->Branch("BsTagEta",&BsTagEta_,"BsTagEta/D");
+bsTree_->Branch("BsTagPhi",&BsTagPhi_,"BsTagPhi/D");
+bsTree_->Branch("BsTagP",&BsTagP_,"BsTagP/D");
+bsTree_->Branch("BsTagPF",&BsTagPF_,"BsTagPF/I");
+bsTree_->Branch("BsTagGENID",&BsTagGENID_,"BsTagGENID/I");
+
+bsTree_->Branch("BdTagIP",&BdTagIP_,"BdTagIP/D");
+bsTree_->Branch("BdTagPt",&BdTagPt_,"BdTagPt/D");
+bsTree_->Branch("BdTagCharge",&BdTagCharge_,"BdTagCharge/I");
+bsTree_->Branch("BdTagEta",&BdTagEta_,"BdTagEta/D");
+bsTree_->Branch("BdTagPhi",&BdTagPhi_,"BdTagPhi/D");
+bsTree_->Branch("BdTagP",&BdTagP_,"BdTagP/D");
+bsTree_->Branch("BdTagPF",&BdTagPF_,"BdTagPF/I");
+bsTree_->Branch("BdTagGENID",&BdTagGENID_,"BdTagGENID/I");
+// Muon tagging //
+
+// Electron tagging //
+bsTree_->Branch("BpTagEIDNonTrig",&BpTagEIDNonTrig_,"BpTagEIDNonTrig/D");
+bsTree_->Branch("BpTagEIDTrig",&BpTagEIDTrig_,"BpTagEIDTrig/D");
+bsTree_->Branch("BpTagEIDTrigNoIP",&BpTagEIDTrigNoIP_,"BpTagEIDTrigNoIP/D");
+bsTree_->Branch("BpTagEIP",&BpTagEIP_,"BpTagEIP/D");
+bsTree_->Branch("BpTagEPt",&BpTagEPt_,"BpTagEPt/D");
+bsTree_->Branch("BpTagECharge",&BpTagECharge_,"BpTagECharge/I");
+bsTree_->Branch("BpTagEEta",&BpTagEEta_,"BpTagEEta/D");
+bsTree_->Branch("BpTagEPhi",&BpTagEPhi_,"BpTagEPhi/D");
+bsTree_->Branch("BpTagEP",&BpTagEP_,"BpTagEP/D");
+bsTree_->Branch("BpTagEGENID",&BpTagEGENID_,"BpTagEGENID/I");
+
+bsTree_->Branch("BsTagEIDNonTrig",&BsTagEIDNonTrig_,"BsTagEIDNonTrig/D");
+bsTree_->Branch("BsTagEIDTrig",&BsTagEIDTrig_,"BsTagEIDTrig/D");
+bsTree_->Branch("BsTagEIDTrigNoIP",&BsTagEIDTrigNoIP_,"BsTagEIDTrigNoIP/D");
+bsTree_->Branch("BsTagEIP",&BsTagEIP_,"BsTagEIP/D");
+bsTree_->Branch("BsTagEPt",&BsTagEPt_,"BsTagEPt/D");
+bsTree_->Branch("BsTagECharge",&BsTagECharge_,"BsTagECharge/I");
+bsTree_->Branch("BsTagEEta",&BsTagEEta_,"BsTagEEta/D");
+bsTree_->Branch("BsTagEPhi",&BsTagEPhi_,"BsTagEPhi/D");
+bsTree_->Branch("BsTagEP",&BsTagEP_,"BsTagEP/D");
+bsTree_->Branch("BsTagEGENID",&BsTagEGENID_,"BsTagEGENID/I");
+
+bsTree_->Branch("BdTagEIP",&BdTagEIP_,"BdTagEIP/D");
+bsTree_->Branch("BdTagEPt",&BdTagEPt_,"BdTagEPt/D");
+bsTree_->Branch("BdTagECharge",&BdTagECharge_,"BdTagECharge/I");
+bsTree_->Branch("BdTagEEta",&BdTagEEta_,"BdTagEEta/D");
+bsTree_->Branch("BdTagEPhi",&BdTagEPhi_,"BdTagEPhi/D");
+bsTree_->Branch("BdTagEP",&BdTagEP_,"BdTagEP/D");
+bsTree_->Branch("BdTagEGENID",&BdTagEGENID_,"BdTagEGENID/I");
+bsTree_->Branch("BdTagEIDNonTrig",&BdTagEIDNonTrig_,"BdTagEIDNonTrig/D");
+bsTree_->Branch("BdTagEIDTrig",&BdTagEIDTrig_,"BdTagEIDTrig/D");
+bsTree_->Branch("BdTagEIDTrigNoIP",&BdTagEIDTrigNoIP_,"BdTagEIDTrigNoIP/D");
+
+// Electron tagging //
+
+
+bsTree_->Branch("BdMuonCat1",&BdMuonCat1_,"BdMuonCat1/I");
+bsTree_->Branch("BdMuonCat2",&BdMuonCat2_,"BdMuonCat2/I");
+bsTree_->Branch("BplusM_fit",&BplusM_fit_,"BplusM_fit/D");
+bsTree_->Branch("BplusVtxProb",&BplusVtxProb_,"BplusVtxProb/D");
+bsTree_->Branch("BplusChi2",&BplusChi2_,"BplusChi2/D");
+bsTree_->Branch("BplusPt",&BplusPt_,"BplusPt/D");
+bsTree_->Branch("BplusPtot",&BplusPtot_,"BplusPtot/D");
+bsTree_->Branch("KplusPt",&KplusPt_,"KplusPt/D");
+bsTree_->Branch("KplusPtot",&KplusPtot_,"KplusPtot/D");
+bsTree_->Branch("BplusMu1Pt",&BplusMu1Pt_,"BplusMu1Pt/D");
+bsTree_->Branch("BplusMu2Pt",&BplusMu2Pt_,"BplusMu2Pt/D");
+bsTree_->Branch("BpJpsiVtxProb",&BpJpsiVtxProb_,"BpJpsiVtxProb/D");
+bsTree_->Branch("BpCosDeltaAlpha",&BpCosDeltaAlpha_,"BpCosDeltaAlpha/D");
+bsTree_->Branch("BpMuMuDCA",&BpMuMuDCA_,"BpMuMuDCA/D");
+bsTree_->Branch("BpMuMuDistance",&BpMuMuDistance_,"BpMuMuDistance/D");
+bsTree_->Branch("BpMuMuDistanceSigma",&BpMuMuDistanceSigma_,"BpMuMuDistanceSigma/D");
+bsTree_->Branch("BpMuDr1",&BpMuDr1_,"BpMuDr1/D");
+bsTree_->Branch("BpMuDr2",&BpMuDr2_,"BpMuDr2/D");
+bsTree_->Branch("BpMuonCat1",&BpMuonCat1_,"BpMuonCat1/I");
+bsTree_->Branch("BpMuonCat2",&BpMuonCat2_,"BpMuonCat2/I");
+bsTree_->Branch("BplusMu1Ptot",&BplusMu1Ptot_,"BplusMu1Ptot/D");
+bsTree_->Branch("BplusMu2Ptot",&BplusMu2Ptot_,"BplusMu2Ptot/D");
+bsTree_->Branch("BplusEta",&BplusEta_,"BplusEta/D");
+bsTree_->Branch("BplusPhi",&BplusPhi_,"BplusPhi/D");
+bsTree_->Branch("JpsiMass_bplus",&JpsiMass_bplus_,"JpsiMass_bplus/D");
+bsTree_->Branch("JpsiPt_bplus",&JpsiPt_bplus_,"JpsiPt_bplus/D");
+bsTree_->Branch("BplusPVindex",&BplusPVindex_,"BplusPVindex/I");
+bsTree_->Branch("BpCt2DPVCosTheta",&BpCt2DPVCosTheta_,"BpCt2DPVCosTheta/D");
+bsTree_->Branch("BpCtErr2DCostheta",&BpCtErr2DCostheta_,"BpCtErr2DCostheta/D");
+bsTree_->Branch("IP3DKandJpsiVtx",&IP3DKandJpsiVtx_,"IP3DKandJpsiVtx/D");
+bsTree_->Branch("IP3DKandJpsiVtxErr",&IP3DKandJpsiVtxErr_,"IP3DKandJpsiVtxErr/D");
+bsTree_->Branch("BpmatchDoubleMu01",&BpmatchDoubleMu01_,"BpmatchDoubleMu01/I");
+bsTree_->Branch("BpmatchDoubleMu02",&BpmatchDoubleMu02_,"BpmatchDoubleMu02/I");
+bsTree_->Branch("BpmatchDoubleMu41",&BpmatchDoubleMu41_,"BpmatchDoubleMu41/I");
+bsTree_->Branch("BpmatchDoubleMu42",&BpmatchDoubleMu42_,"BpmatchDoubleMu42/I");
+bsTree_->Branch("BpmatchDoubleMu01DiMuon0",&BpmatchDoubleMu01DiMuon0_,"BpmatchDoubleMu01DiMuon0/I");
+bsTree_->Branch("BpmatchDoubleMu02DiMuon0",&BpmatchDoubleMu02DiMuon0_,"BpmatchDoubleMu02DiMuon0/I");
+bsTree_->Branch("BplusKmcId",&BplusKmcId_,"BplusKmcId/I");
+bsTree_->Branch("BplusKmomId",&BplusKmomId_,"BplusKmomId/I");
+bsTree_->Branch("BplusMu1mcId",&BplusMu1mcId_,"BplusMu1mcId/I");
+bsTree_->Branch("BplusMu1momId",&BplusMu1momId_,"BplusMu1momId/I");
+bsTree_->Branch("BplusMu1gmomId",&BplusMu1gmomId_,"BplusMu1gmomId/I");
+bsTree_->Branch("BplusMu2mcId",&BplusMu2mcId_,"BplusMu2mcId/I");
+bsTree_->Branch("BplusMu2momId",&BplusMu2momId_,"BplusMu2momId/I");
+bsTree_->Branch("BplusMu2gmomId",&BplusMu2gmomId_,"BplusMu2gmomId/I");
+bsTree_->Branch("isMatchedBplus",&isMatchedBplus_,"isMatchedBplus/I");
+
+bsTree_->Branch("BplusDecayChannel",&BplusDecayChannel_,"BplusDecayChannel/I");
+
+bsTree_->Branch(  "BcP"             , &BcP_,                "BcP/D");
+bsTree_->Branch(  "BcCosAlpha"             , &BcCosAlpha_,                "BcCosAlpha/D");
+bsTree_->Branch(  "BcIP3D"             , &BcIP3D_,                "BcIP3D/D");
+bsTree_->Branch(  "BcCt"             , &BcCt_,                "BcCt/D");
+bsTree_->Branch(  "BcM"             , &BcM_,                "BcM/D");
+bsTree_->Branch(  "BcMC"             , &BcMC_,                "BcMC/I");
+bsTree_->Branch(  "BcAng"             , &BcAng_,                "BcAng/D");
+bsTree_->Branch(  "BcAngPi"             , &BcAngPi_,                "BcAngPi/D");
+bsTree_->Branch(  "BcProb"             , &BcProb_,                "BcProb/D");
+bsTree_->Branch(  "BctrackPt"             , &BctrackPt_,                "BctrackPt/D");
+
 bsTree_->Branch("BsLxy3DMC", &BsLxy3DMC_, "BsLxy3DMC/D");
 bsTree_->Branch("BsLxy2DMC", &BsLxy2DMC_, "BsLxy2DMC/D");
 bsTree_->Branch("BsPMC", &BsPMC_, "BsPMC/D");
-
-bsTree_->Branch("BsPVDist2d", &BsPVDist2d_, "BsPVDist2d/D");
-bsTree_->Branch("BsPVDist3d", &BsPVDist3d_, "BsPVDist3d/D");
-
 bsTree_->Branch(  "PVZpos"             , PVZpos_ ,"PVZpos_[30]/D");
-bsTree_->Branch(  "NTracksInPV"             , NTracksInPV_ ,"NTracksInPV_[30]/I" ); 
-bsTree_->Branch(  "PVAbsPt"             , PVAbsPt_ ,"PVAbsPt_[30]/D");     
+bsTree_->Branch(  "NTracksInPV"             , NTracksInPV_ ,"NTracksInPV_[30]/I" );
+bsTree_->Branch(  "PVAbsPt"             , PVAbsPt_ ,"PVAbsPt_[30]/D");
 bsTree_->Branch("SVZpos", SVZpos_, "SVZpos_[30]/D");
 bsTree_->Branch("BsPtMC", &BsPtMC_, "BsPtMC/D");
 bsTree_->Branch("FirstBsMCZpos", &FirstBsMCZpos_, "FirstBsMCZpos/D");
-bsTree_->Branch("BsCosThetaReco", &BsCosThetaReco_, "BsCosThetaReco/D");
-
-
-bsTree_->Branch("BsCt3DPVCosTheta", &BsCt3DPVCosTheta_, "BsCt3DPVCosTheta/D");
-bsTree_->Branch("BsCt2DPVCosTheta", &BsCt2DPVCosTheta_, "BsCt2DPVCosTheta/D");
-
-bsTree_->Branch("BsCt3DPVHighestPt", &BsCt3DPVHighestPt_, "BsCt3DPVHighestPt/D");
-bsTree_->Branch("BsCt2DPVHighestPt", &BsCt2DPVHighestPt_, "BsCt2DPVHighestPt/D");
-
-bsTree_->Branch("BsCosThetaReco", &BsCosThetaReco_, "BsCosThetaReco/D");
-bsTree_->Branch("PVindex", &PVindex_, "PVindex/I");
-
-// Jet variables
-bsTree_->Branch("BsJetPx", &BsJetPx_, "BsJetPx/D");
-bsTree_->Branch("BsJetPy", &BsJetPy_, "BsJetPy/D");
-bsTree_->Branch("BsJetPz", &BsJetPz_, "BsJetPz/D");
-bsTree_->Branch("BsJetdR", &BsJetdR_, "BsJetdR/D");
-
-bsTree_->Branch("BdJetPx", &BsJetPx_, "BsJetPx/D");
-bsTree_->Branch("BdJetPy", &BsJetPy_, "BsJetPy/D");
-bsTree_->Branch("BdJetPz", &BsJetPz_, "BsJetPz/D");
-bsTree_->Branch("BdJetdR", &BdJetdR_, "BdJetdR/D");
-
-bsTree_->Branch("BplusJetPx", &BplusJetPx_,"BplusJetPx/D");
-bsTree_->Branch("BplusJetPy", &BplusJetPy_,"BplusJetPy/D");
-bsTree_->Branch("BplusJetPz", &BplusJetPz_,"BplusJetPz/D");
-bsTree_->Branch("BplusPtJetdR", &BplusPtJetdR_,"BplusPtJetdR/D");
-bsTree_->Branch("BplusBJetdR", &BplusBJetdR_,"BplusBJetdR/D");
-
-bsTree_->Branch("BsPtJetdR", &BsPtJetdR_,"BsPtJetdR/D");
-bsTree_->Branch("BsBJetdR", &BsBJetdR_,"BsBJetdR/D");
-
-bsTree_->Branch("PtJetPt", &PtJetPt_,"BJetPt/D");
-bsTree_->Branch("BJetPt", &BJetPt_,"BJetPt/D");
-
-bsTree_->Branch("JetBTagProb", &JetBTagProb_,"JetBTagProb/D");
-bsTree_->Branch("BsJetCharge", &BsJetCharge_ ,"BsJetCharge/D");
-bsTree_->Branch("BdJetCharge", &BdJetCharge_ ,"BdJetCharge/D");
-bsTree_->Branch("BplusJetCharge", &BplusJetCharge_ ,"BplusJetCharge/D");
-
-//Bplus variables
-
-bsTree_->Branch("BplusIsPV", &BplusIsPV_, "BplusIsPV/I");
-bsTree_->Branch("BplusIsBS", &BplusIsBS_, "BplusIsBS/I");
-bsTree_->Branch("BplusPVindex", &BplusPVindex_, "BplusPVindex/I");
-bsTree_->Branch("BplusVtxProb"	 , 	 &BplusVtxProb_ ,  "BplusVtxProb/D");
-bsTree_->Branch("BplusM_fit"	 ,	 &BplusM_fit_   ,  "BplusM_fit/D");
-bsTree_->Branch("BplusChi2"      ,       &BplusChi2_    ,  "BplusChi2/D");
-bsTree_->Branch("BplusPt"	 ,	 &BplusPt_      ,  "BplusPt/D");
-bsTree_->Branch("KplusPt"        ,       &KplusPt_      ,  "KplusPt/D");
-bsTree_->Branch("KplusPtot"      ,       &KplusPtot_    ,  "KplusPtot/D");
-bsTree_->Branch("BplusMu1Pt"     ,       &BplusMu1Pt_    ,  "BplusMu1Pt/D");	
-bsTree_->Branch("BplusMu2Pt"     ,       &BplusMu2Pt_    ,  "BplusMu2Pt/D");
-bsTree_->Branch("BplusMu1Ptot"   ,       &BplusMu1Ptot_  ,  "BplusMu1Ptot/D");
-bsTree_->Branch("BplusMu2Ptot"   ,       &BplusMu2Ptot_  ,  "BplusMu2Ptot/D");
-bsTree_->Branch("BplusLxy"       ,       &BplusLxy_      ,  "BplusLxy/D");
-bsTree_->Branch("BplusLxyz"      ,       &BplusLxyz_     ,  "BplusLxyz/D");
-bsTree_->Branch("BplusLxyErr"    ,      &BplusLxyErr_    ,  "BplusLxyErr/D");
-bsTree_->Branch("BplusLxyzErr"   ,      &BplusLxyzErr_   ,  "BplusLxyzErr/D");	
-bsTree_->Branch("BplusCt3D"       ,      &BplusCt3D_     ,  "BplusCt3D/D");
-bsTree_->Branch("BplusCtErr3D"    ,      &BplusCtErr3D_  ,  "BplusCtErr3D/D");
-bsTree_->Branch("BplusPtot"   ,       &BplusPtot_ ,     "BplusPtot/D" );
-bsTree_->Branch("BplusCt3D_2"   ,       &BplusCt3D_2_ , "BplusCt3D_2/D" );
-bsTree_->Branch("BplusCt2D_2"   ,       &BplusCt2D_2_ , "BplusCt2D_2/D" );
-bsTree_->Branch("BplusCt2D"   ,       &BplusCt2D_ ,     "BplusCt2D/D" );
-bsTree_->Branch("BplusCtPerSigma3D"   ,  &BplusCtPerSigma3D_,    "BplusCtPerSigma3D/D" );
-bsTree_->Branch("BplusKIP3D"   ,       &BplusKIP3D_ ,     "BplusKIP3D/D" );
-bsTree_->Branch("BplusKIP3DErr"   ,       &BplusKIP3DErr_ ,     "BplusKIP3DErr/D" );
-bsTree_->Branch("IP3DKandJpsiVtx"  ,       &IP3DKandJpsiVtx_ , "IP3DKandJpsiVtx/D"  );
-bsTree_->Branch("IP3DKandJpsiVtxErr"  ,     &IP3DKandJpsiVtxErr_, "IP3DKandJpsiVtxErr/D" );
-//HLT trigger matching
-bsTree_->Branch("BpmatchDoubleMu01", &BpmatchDoubleMu01_, "BpmatchDoubleMu01/I");
-bsTree_->Branch("BpmatchDoubleMu02", &BpmatchDoubleMu02_,"BpmatchDoubleMu02/I");
-
-
-//R matching 
-bsTree_->Branch("BplusKmcId"   ,       &BplusKmcId_  , "BplusKmcId/I"  ); 
-bsTree_->Branch("BplusKmomId"   ,       &BplusKmomId_ , "BplusKmomId/I" );
-
-
-bsTree_->Branch("BplusMu1mcId"   ,       &BplusMu1mcId_  , "BplusMu1mcId/I"  );
-bsTree_->Branch("BplusMu1momId"   ,       &BplusMu1momId_ , "BplusMu1momId/I" );
-bsTree_->Branch("BplusMu1gmomId" ,       &BplusMu1gmomId_, "BplusMu1gmomId/I");
-bsTree_->Branch("BplusMu2mcId"   ,       &BplusMu2mcId_  , "BplusMu2mcId/I"  );
-bsTree_->Branch("BplusMu2momId"   ,       &BplusMu2momId_ , "BplusMu2momId/I" );
-bsTree_->Branch("BplusMu2gmomId" ,       &BplusMu2gmomId_, "BplusMu2gmomId/I");
-
-bsTree_->Branch("isMatchedBplus" ,       &isMatchedBplus_, "isMatchedBplus/I");
-bsTree_->Branch("BplusCtErr2D" ,       &BplusCtErr2D_, "BplusCtErr2D/D");
-bsTree_->Branch("BplusCtPerSigma2D" ,       &BplusCtPerSigma2D_, "BplusCtPerSigma2D/D");
-bsTree_->Branch("BplusDecayChannel" ,     &BplusDecayChannel_, "BplusDecayChannel/D");
-bsTree_->Branch("JpsiMass_bplus" ,     &JpsiMass_bplus_   , "JpsiMass_bplus/D");
-bsTree_->Branch("JpsiPt_bplus"   ,     &JpsiPt_bplus_      , "JpsiPt_bplus/D");
-bsTree_->Branch("BplusCosTheta"  ,     &BplusCosTheta_     ,  "BplusCosTheta/D");
-bsTree_->Branch("LxyPerSigma2D"  ,     &LxyPerSigma2D_     ,  "LxyPerSigma2D/D");
-bsTree_->Branch("BplusEta" , &BplusEta_ , "BplusEta/D"); 
-bsTree_->Branch("BplusPhi" , &BplusPhi_ , "BplusPhi/D"); 
-
- 
-//Bplus variables
-
-
-// new Bd variables
-bsTree_->Branch("BdCt3D" , &BdCt3D_ , "BdCt3D/D"); 
-bsTree_->Branch("BdCtErr3D" , &BdCtErr3D_ , "BdCtErr3D/D"); 
-bsTree_->Branch("BdCt2D" , &BdCt2D_ , "BdCt2D/D");
-bsTree_->Branch("BdCtErr2D" , &BdCtErr2D_ , "BdCtErr2D/D");  
-// new Bd variables
-
-bsTree_->Branch("BsCt3DPVCosTheta", &BsCt3DPVCosTheta_, "BsCt3DPVCosTheta/D");
-bsTree_->Branch("BsCt2DPVCosTheta", &BsCt2DPVCosTheta_, "BsCt2DPVCosTheta/D");
-
-bsTree_->Branch("BsCt3DPVHighestPt", &BsCt3DPVHighestPt_, "BsCt3DPVHighestPt/D");
-bsTree_->Branch("BsCt2DPVHighestPt", &BsCt2DPVHighestPt_, "BsCt2DPVHighestPt/D");
-
-bsTree_->Branch("BsCosThetaReco", &BsCosThetaReco_, "BsCosThetaReco/D");
 
 bsTree_->Branch(  "ihaveajpsi"             , &ihaveajpsi_,                "ihaveajpsi/I");                                         
 bsTree_->Branch(  "BsCowboy"             , &BsCowboy_,                "BsCowboy/I");                                         
@@ -231,33 +247,11 @@ bsTree_->Branch(  "triggerbit_7Jpsi_Displaced_v3"  , &triggerbit_7Jpsi_Displaced
 bsTree_->Branch(  "triggerbit_3p5Jpsi_Displaced_v2"  , &triggerbit_3p5Jpsi_Displaced_v2_,     "triggerbit_3p5Jpsi_Displaced_v2/I");             
 bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v1"  , &triggerbit_4Jpsi_Displaced_v1_,     "triggerbit_4Jpsi_Displaced_v1/I");             
 bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v4"  , &triggerbit_4Jpsi_Displaced_v4_,     "triggerbit_4Jpsi_Displaced_v4/I");             
-
-bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v5"  , &triggerbit_4Jpsi_Displaced_v5_,     "triggerbit_4Jpsi_Displaced_v5/I");
-
-bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v9"  , &triggerbit_4Jpsi_Displaced_v9_,     "triggerbit_4Jpsi_Displaced_v9/I");
-        
-bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v10" , &triggerbit_4Jpsi_Displaced_v10_,     "triggerbit_4Jpsi_Displaced_v10/I");
-
-bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v11" , &triggerbit_4Jpsi_Displaced_v11_,     "triggerbit_4Jpsi_Displaced_v11/I");
-
-bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v12" , &triggerbit_4Jpsi_Displaced_v12_,     "triggerbit_4Jpsi_Displaced_v12/I");
-
-     
+bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v5"  , &triggerbit_4Jpsi_Displaced_v5_,     "triggerbit_4Jpsi_Displaced_v5/I");             
 bsTree_->Branch(  "triggerbit_5Jpsi_Displaced_v1"  , &triggerbit_5Jpsi_Displaced_v1_,     "triggerbit_5Jpsi_Displaced_v1/I");             
 bsTree_->Branch(  "triggerbit_5Jpsi_Displaced_v2"  , &triggerbit_5Jpsi_Displaced_v2_,     "triggerbit_5Jpsi_Displaced_v2/I");             
 bsTree_->Branch(  "triggerbit_5Jpsi_Displaced_v4"  , &triggerbit_5Jpsi_Displaced_v4_,     "triggerbit_5Jpsi_Displaced_v4/I");             
-bsTree_->Branch(  "triggerbit_5Jpsi_Displaced_v5"  , &triggerbit_5Jpsi_Displaced_v5_,     "triggerbit_5Jpsi_Displaced_v5/I");
-
-
-bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_Muon_v15"	  , &triggerbit_Dimuon0_Jpsi_Muon_v15_,     "triggerbit_Dimuon0_Jpsi_Muon_v15/I"  ); 
-      
-bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_Muon_v16"	  , &triggerbit_Dimuon0_Jpsi_Muon_v16_,"triggerbit_Dimuon0_Jpsi_Muon_v16/I"); 
-
- 
-bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_Muon_v17"	  , &triggerbit_Dimuon0_Jpsi_Muon_v17_ ,"triggerbit_Dimuon0_Jpsi_Muon_v17/I"); 
-
-bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_Muon_v18"	  , &triggerbit_Dimuon0_Jpsi_Muon_v18_, "triggerbit_Dimuon0_Jpsi_Muon_v18/I"); 
-       
+bsTree_->Branch(  "triggerbit_5Jpsi_Displaced_v5"  , &triggerbit_5Jpsi_Displaced_v5_,     "triggerbit_5Jpsi_Displaced_v5/I");             
 bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v1"	  , &triggerbit_Dimuon0_Jpsi_v1_,     "triggerbit_Dimuon0_Jpsi_v1/I"  );                        
 bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v3"	  , &triggerbit_Dimuon0_Jpsi_v3_,     "triggerbit_Dimuon0_Jpsi_v3/I"  );                        
 bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v5"	  , &triggerbit_Dimuon0_Jpsi_v5_,     "triggerbit_Dimuon0_Jpsi_v5/I"  );                        
@@ -266,6 +260,11 @@ bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v9"	  , &triggerbit_Dimuon0_Jpsi_v9_,
 bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v10"	  , &triggerbit_Dimuon0_Jpsi_v10_,     "triggerbit_Dimuon0_Jpsi_v10/I"  );                        
 bsTree_->Branch(  "triggerbit_Dimuon10_Barrel"	  , &triggerbit_Dimuon10_Barrel_,     "triggerbit_Dimuon10_Barrel/I"  );                        
 bsTree_->Branch(  "triggerbit_Dimuon13_Barrel"	  , &triggerbit_Dimuon13_Barrel_,     "triggerbit_Dimuon13_Barrel/I"  );                        
+bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_Muon_v15"      , &triggerbit_Dimuon0_Jpsi_Muon_v15_,     "triggerbit_Dimuon0_Jpsi_Muon_v15/I"  );
+bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v9"         , &triggerbit_4Jpsi_Displaced_v9_,     "triggerbit_4Jpsi_Displaced_v9/I"  );
+bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v10"        , &triggerbit_4Jpsi_Displaced_v10_,     "triggerbit_4Jpsi_Displaced_v10/I"  );
+bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v11"        , &triggerbit_4Jpsi_Displaced_v11_,     "triggerbit_4Jpsi_Displaced_v11/I"  );
+bsTree_->Branch(  "triggerbit_4Jpsi_Displaced_v12"        , &triggerbit_4Jpsi_Displaced_v12_,     "triggerbit_4Jpsi_Displaced_v12/I"  );
 bsTree_->Branch(  "BSx"				  , &BSx_,                              "BSx/D");                                                     
 bsTree_->Branch(  "BSy"				  , &BSy_,                              "BSy/D");                                                    
 bsTree_->Branch(  "BSz"				  , &BSz_,                              "BSz/D");                                                       
@@ -308,29 +307,11 @@ bsTree_->Branch( "lumiSection"   ,       &lumiSection_   ,       "lumiSection/I"
 
 bsTree_->Branch( "PUinteraction"   ,         &PUinteraction_   ,         "PUinteraction/I"   ); 
 
-bsTree_->Branch( "PionDeDx"                   ,&PionDeDx_ ,                      "PionDeDx_[25]/D");                         
-bsTree_->Branch( "KaonDeDx"                   ,&KaonDeDx_ ,                      "KaonDeDx_[25]/D");                         
-bsTree_->Branch( "KaonPt"                   ,&KaonPt_ ,                      "KaonPt_[25]/D");                         
-bsTree_->Branch( "PionPt"                   ,&PionPt_ ,                      "PionPt_[25]/D");                         
               
 // bsTree_->Branch( "MuRecoPt2"                   ,&MuRecoPt2_ ,                      "MuRecoPt2[15]/D");       
 // bsTree_->Branch( "MuRecoChg2"                   ,&MuRecoChg2_ ,                      "MuRecoChg2[15]/I");                            
 // bsTree_->Branch( "MuRecoEta2"                   ,&MuRecoEta2_ ,                      "MuRecoEta2[15]/D");                            
 // bsTree_->Branch( "MuRecoPhi2"                   ,&MuRecoPhi2_ ,                      "MuRecoPhi2[15]/D");                                    
-
-bsTree_->Branch( "matchDoubleMu01DiMuon0_",&matchDoubleMu01DiMuon0_ ,                      "matchDoubleMu01DiMuon0_/I");            
-
-bsTree_->Branch( "matchDoubleMu02DiMuon0_",&matchDoubleMu02DiMuon0_ ,                      "matchDoubleMu02DiMuon0_/I");            
-         
-bsTree_->Branch( "BpmatchDoubleMu01DiMuon0_",&BpmatchDoubleMu01DiMuon0_ ,                      "matchDoubleMu01DiMuon0_/I");            
-
-bsTree_->Branch( "BpmatchDoubleMu02DiMuon0_",&BpmatchDoubleMu02DiMuon0_ ,                      "BpmatchDoubleMu02DiMuon0_/I");   
-
-bsTree_->Branch( "BdmatchDoubleMu01DiMuon0_",&BdmatchDoubleMu01DiMuon0_ ,                      "matchDoubleMu01DiMuon0_/I");            
-
-bsTree_->Branch( "BdmatchDoubleMu02DiMuon0_",&BdmatchDoubleMu02DiMuon0_ ,                      "BdmatchDoubleMu02DiMuon0_/I");   
-
-
 
 bsTree_->Branch( "matchL11"                   ,&matchL11_,                      "matchL11/I");                                                   
 bsTree_->Branch( "matchL12"                   ,&matchL12_,                      "matchL12/I");                                                   
@@ -382,8 +363,9 @@ bsTree_->Branch( "BdmatchDoubleMu101"                   ,&BdmatchDoubleMu101_,  
 bsTree_->Branch( "BdmatchDoubleMu102"                   ,&BdmatchDoubleMu102_,                      "BdmatchDoubleMu102/I");                                                   
 bsTree_->Branch( "BdmatchDoubleMu131"                   ,&BdmatchDoubleMu131_,                      "BdmatchDoubleMu131/I");                                                   
 bsTree_->Branch( "BdmatchDoubleMu132"                   ,&BdmatchDoubleMu132_,                      "BdmatchDoubleMu132/I");                                                   
+bsTree_->Branch( "matchDoubleMu121"                   ,&matchDoubleMu121_,                      "matchDoubleMu121/I");                                                   
+bsTree_->Branch( "matchDoubleMu122"                   ,&matchDoubleMu122_,                      "matchDoubleMu122/I");                                                   
 
-                                
 bsTree_->Branch( "MuonType", &MuonType_, "MuonType/I");
 
 bsTree_->Branch(  "JpsiVtxProb"			  , &JpsiVtxProb_,                      "JpsiVtxProb/D");                                               
@@ -398,6 +380,8 @@ bsTree_->Branch(  "JpsiMu1Phi_alone"		  , &JpsiMu1Phi_alone_,                 "J
 bsTree_->Branch(  "JpsiMu2Phi_alone"		  , &JpsiMu2Phi_alone_,                 "JpsiMu2Phi_alone/D");                                          
 bsTree_->Branch(  "JpsiMu1Eta_alone"		  , &JpsiMu1Eta_alone_,                 "JpsiMu1Eta_alone/D");                                          
 bsTree_->Branch(  "JpsiMu2Eta_alone"		  , &JpsiMu2Eta_alone_,                 "JpsiMu2Eta_alone/D");                                          
+bsTree_->Branch(  "MuonCat1"		  , &MuonCat1_,               "MuonCat1/I");                                     
+bsTree_->Branch(  "MuonCat2"		  , &MuonCat2_,               "MuonCat2/I");                                     
 bsTree_->Branch(  "JpsiMuon1Cat_alone"		  , &JpsiMuon1Cat_alone_,               "JpsiMuon1Cat_alone/I");                                     
 bsTree_->Branch(  "JpsiMuon2Cat_alone"		  , &JpsiMuon2Cat_alone_,               "JpsiMuon2Cat_alone/I");                                     
 bsTree_->Branch(  "BdJpsiMuon1Cat_alone"		  , &BdJpsiMuon1Cat_alone_,               "BdJpsiMuon1Cat_alone/I");                                     
@@ -604,8 +588,10 @@ bsTree_->Branch(  "Mu2TMLastStationOptimizedLowPtTight", &Mu2TMLastStationOptimi
 bsTree_->Branch(  "Mu2TMLastStationAngTight"      , &Mu2TMLastStationAngTight_,         "Mu2TMLastStationAngTight/I");
 bsTree_->Branch(  "Mu2TMOneStationAngTight"       , &Mu2TMOneStationAngTight_,          "Mu2TMOneStationAngTight/I");
 bsTree_->Branch(  "Mu2TMLastStationOptimizedBarrelLowPtTight", &Mu2TMLastStationOptimizedBarrelLowPtTight_, "Mu2TMLastStationOptimizedBarrelLowPtTight/I");
-              
-              
+
+bsTree_->Branch(  "BsCtErr2DCostheta"                     , &BsCtErr2DCostheta_,                             "BsCtErr2DCostheta/D");              
+bsTree_->Branch("BsCt3DPVCosTheta", &BsCt3DPVCosTheta_, "BsCt3DPVCosTheta/D");
+bsTree_->Branch("BsCt2DPVCosTheta", &BsCt2DPVCosTheta_, "BsCt2DPVCosTheta/D");              
 bsTree_->Branch(  "BsDist3d"			  , &BsDist3d_,                         "BsDist3d/D");                                                  
 bsTree_->Branch(  "BsDist3dErr"			  , &BsDist3dErr_,                      "BsDist3dErr/D");                                               
 bsTree_->Branch(  "BsTime3d"			  , &BsTime3d_,                         "BsTime3d/D");                                                  
@@ -655,7 +641,9 @@ bsTree_->Branch(  "BMMC"			  , BMMC_,                              "BMMC[10]/D")
 bsTree_->Branch(  "BsCt3DMC"			  , &BsCt3DMC_,                              "BsCt3DMC/D");                         
 bsTree_->Branch(  "BsCt2DMC"			  , &BsCt2DMC_,                              "BsCt2DMC/D");                         
 bsTree_->Branch(  "BsIniFlavour"			  , &BsIniFlavour_,                              "BsIniFlavour/I");                         
+bsTree_->Branch(  "BsEndFlavour"			  , &BsEndFlavour_,                              "BsEndFlavour/I");                         
 bsTree_->Branch(  "BdIniFlavour"			  , &BdIniFlavour_,                              "BdIniFlavour/I");                         
+bsTree_->Branch(  "BdEndFlavour"			  , &BdEndFlavour_,                              "BdEndFlavour/I");                         
 bsTree_->Branch(  "ChannelID"			  , &ChannelID_,                              "ChannelID_/I");                         
 bsTree_->Branch(  "BdChannelID"			  , &BdChannelID_,                              "BdChannelID_/I");                         
 bsTree_->Branch(  "BPtMC"			  , BPtMC_,                             "BPtMC[10]/D");                                         
@@ -687,8 +675,7 @@ bsTree_->Branch(  "genBsVtx_z"			  , &genBsVtx_z_,                       "genBsV
 bsTree_->Branch(  "genBsVtx_y"			  , &genBsVtx_y_,                       "genBsVtx_y/D");                                                
 bsTree_->Branch(  "genBsVtx_x"			  , &genBsVtx_x_,                       "genBsVtx_x/D");                                                
 bsTree_->Branch(  "genBsSVtx_z"			  , &genBsSVtx_z_,                      "genBsSVtx_z/D");                                               
-bsTree_->Branch(  "genBsSVtx_y" 		  , &genBsSVtx_y_,                      "genBsSVtx_y/D");     
-                                       
+bsTree_->Branch(  "genBsSVtx_y" 		  , &genBsSVtx_y_,                      "genBsSVtx_y/D");                                               
 bsTree_->Branch(  "genBsSVtx_x"			  , &genBsSVtx_x_,                      "genBsSVtx_x/D");                                               
 bsTree_->Branch(  "isGenJpsiEvent"		  , &isGenJpsiEvent_,                   "isGenJpsiEvent/I");                                           
 bsTree_->Branch(  "BdFitChi2_Hyp1"		  , &BdFitChi2_Hyp1_,                   "BdFitChi2_Hyp1/D");                                            
@@ -809,9 +796,151 @@ void BsToJpsiPhiRootTree::writeFile()
 
 void BsToJpsiPhiRootTree::resetEntries()
 {
+
+
+  BJetParton_ = -9999999;
+  BJetEta_= -9999999;
+  BJetPhi_ = -9999999;
+  BJetPt_ = -9999999;
+  JetBTagProb_ = -9999999;
+
+  BpBJetParton_ = -9999999;
+  BpBJetEta_= -9999999;
+  BpBJetPhi_ = -9999999;
+  BpBJetPt_ = -9999999;
+  BpJetBTagProb_ = -9999999;
+
+
+  BplusCharge_=-9999999;
+  BplusMu1Eta_=-9999999;
+  BplusMu2Eta_=-9999999;
+  JpsiPtbplus_fit_=-9999999;
+
+  BpTagIP_=-9999999;
+  BpTagPt_=-9999999;
+  BpTagCharge_=-9999999;
+  BpTagEta_=-9999999;
+  BpTagPhi_=-9999999;
+  BpTagP_=-9999999;
+  BpTagPF_=-9999999;
+  BpTagGENID_=-9999999;
+
+  BpTagEIDNonTrig_ = -9999999;
+  BpTagEIDTrig_ = -9999999;
+  BpTagEIDTrigNoIP_ = -9999999;
+
+  BsTagEIDNonTrig_ = -9999999;
+  BsTagEIDTrig_ = -9999999;
+  BsTagEIDTrigNoIP_ = -9999999;
+
+  BdTagEIDNonTrig_ = -9999999;
+  BdTagEIDTrig_ = -9999999;
+  BdTagEIDTrigNoIP_ = -9999999;
+
+  BpTagEIP_=-9999999;
+  BpTagEPt_=-9999999;
+  BpTagECharge_=-9999999;
+  BpTagEEta_=-9999999;
+  BpTagEPhi_=-9999999;
+  BpTagEP_=-9999999;
+  BpTagEGENID_=-9999999;
+
+  BsTagEIP_=-9999999;
+  BsTagEPt_=-9999999;
+  BsTagECharge_=-9999999;
+  BsTagEEta_=-9999999;
+  BsTagEPhi_=-9999999;
+  BsTagEP_=-9999999;
+  BsTagEGENID_=-9999999;
+
+  BdTagEIP_=-9999999;
+  BdTagEPt_=-9999999;
+  BdTagECharge_=-9999999;
+  BdTagEEta_=-9999999;
+  BdTagEPhi_=-9999999;
+  BdTagEP_=-9999999;
+  BdTagEGENID_=-9999999;
+
+
+  BsTagIP_=-9999999;
+  BsTagPt_=-9999999;
+  BsTagCharge_=-9999999;
+  BsTagEta_=-9999999;
+  BsTagPhi_=-9999999;
+  BsTagP_=-9999999;
+  BsTagPF_=-9999999;
+  BsTagGENID_=-9999999;
+  BdTagIP_=-9999999;
+  BdTagPt_=-9999999;
+  BdTagCharge_=-9999999;
+  BdTagEta_=-9999999;
+  BdTagPhi_=-9999999;
+  BdTagP_=-9999999;
+  BdTagPF_=-9999999;
+  BdTagGENID_=-9999999;
+  BdMuonCat1_=-9999999;
+  BdMuonCat2_=-9999999;
+  BplusM_fit_=-9999999;
+  BplusVtxProb_=-9999999;
+  BplusChi2_=-9999999;
+  BplusPt_=-9999999;
+  BplusPtot_=-9999999;
+  KplusPt_=-9999999;
+  KplusPtot_=-9999999;
+  BplusMu1Pt_=-9999999;
+  BplusMu2Pt_=-9999999;
+  BpJpsiVtxProb_=-9999999;
+  BpCosDeltaAlpha_=-9999999;
+  BpMuMuDCA_=-9999999;
+  BpMuMuDistance_=-9999999;
+  BpMuMuDistanceSigma_=-9999999;
+  BpMuDr1_=-9999999;
+  BpMuDr2_=-9999999;
+  BpMuonCat1_=-9999999;
+  BpMuonCat2_=-9999999;
+  BplusMu1Ptot_=-9999999;
+  BplusMu2Ptot_=-9999999;
+  BplusEta_=-9999999;
+  BplusPhi_=-9999999;
+  JpsiMass_bplus_=-9999999;
+  JpsiPt_bplus_=-9999999;
+  BplusPVindex_=-9999999;
+  BpCt2DPVCosTheta_=-9999999;
+  BpCtErr2DCostheta_=-9999999;
+  IP3DKandJpsiVtx_=-9999999;
+  IP3DKandJpsiVtxErr_=-9999999;
+  BpmatchDoubleMu01_=-9999999;
+  BpmatchDoubleMu02_=-9999999;
+  BpmatchDoubleMu41_=-9999999;
+  BpmatchDoubleMu42_=-9999999;
+  BpmatchDoubleMu01DiMuon0_=-9999999;
+  BpmatchDoubleMu02DiMuon0_=-9999999;
+  BplusKmcId_=-9999999;
+  BplusKmomId_=-9999999;
+  BplusMu1mcId_=-9999999;
+  BplusMu1momId_=-9999999;
+  BplusMu1gmomId_=-9999999;
+  BplusMu2mcId_=-9999999;
+  BplusMu2momId_=-9999999;
+  BplusMu2gmomId_=-9999999;
+  isMatchedBplus_=-9999999;
+ 
+  BplusDecayChannel_=-9999999;
+
   runNumber_ =  -9999;
   eventNumber_ =  -9999;
   lumiSection_ =  -9999;
+
+  BcP_ =  -9999;
+  BcIP3D_ =  -9999;
+  BcCosAlpha_ =  -9999;
+  BcCt_ =  -9999;
+  BcM_ =  -9999;
+  BcMC_ =  -9999;
+  BcAng_ =  -9999;
+  BcAngPi_ =  -9999;
+  BcProb_ =  -9999;
+  BctrackPt_ = -9999;
  
   PUinteraction_ = -9999999;
 
@@ -852,14 +981,7 @@ void BsToJpsiPhiRootTree::resetEntries()
   triggerbit_3p5Jpsi_Displaced_v2_ = -9999999;                                     
   triggerbit_4Jpsi_Displaced_v1_ = -9999999;                                     
   triggerbit_4Jpsi_Displaced_v4_ = -9999999;                                     
-
-  triggerbit_4Jpsi_Displaced_v5_ = -9999999;
-  triggerbit_4Jpsi_Displaced_v9_ = -9999999;
-  triggerbit_4Jpsi_Displaced_v10_ = -9999999;
-  triggerbit_4Jpsi_Displaced_v11_ = -9999999; 
-  triggerbit_4Jpsi_Displaced_v12_ = -9999999;                                         
-                                      
-
+  triggerbit_4Jpsi_Displaced_v5_ = -9999999;                                     
   triggerbit_5Jpsi_Displaced_v1_ = -9999999;                                     
   triggerbit_5Jpsi_Displaced_v2_ = -9999999;                                     
   triggerbit_5Jpsi_Displaced_v4_ = -9999999;                                     
@@ -872,8 +994,23 @@ void BsToJpsiPhiRootTree::resetEntries()
   triggerbit_Dimuon0_Jpsi_v10_= -9999999;   
   triggerbit_Dimuon10_Barrel_= -9999999;
   triggerbit_Dimuon13_Barrel_= -9999999;
+  triggerbit_Dimuon0_Jpsi_Muon_v15_= -9999999;
+  triggerbit_4Jpsi_Displaced_v9_= -9999999;
+  triggerbit_4Jpsi_Displaced_v10_= -9999999;
+  triggerbit_4Jpsi_Displaced_v11_= -9999999;
+  triggerbit_4Jpsi_Displaced_v12_= -9999999;
 
 
+  for(int i = 0; i<30; i++){
+    SVZpos_[i] = -9999999;
+    PVZpos_[i] = -9999999;
+    PVAbsPt_[i] = -9999999;
+    NTracksInPV_[i] = -9999999;
+  }
+
+  BsLxy3DMC_ = -9999999;
+  BsLxy2DMC_ = -9999999;
+  BsPMC_ = -9999999;
 
   BSx_ = -9999999;
   BSy_ = -9999999;
@@ -951,14 +1088,6 @@ void BsToJpsiPhiRootTree::resetEntries()
   matchDoubleMu102_ =  -9999999;
   matchDoubleMu131_ =  -9999999;
   matchDoubleMu132_ =  -9999999;
-
-matchDoubleMu01DiMuon0_ = -999;
-matchDoubleMu02DiMuon0_ = -999;
-BpmatchDoubleMu01DiMuon0_ = -999;
-BpmatchDoubleMu02DiMuon0_ = -999;
-BdmatchDoubleMu01DiMuon0_ = -999;
-BdmatchDoubleMu02DiMuon0_ = -999;
-
   BdmatchL11_ =  -9999999;
   BdmatchL12_ =  -9999999;
   Bdmatch2mu01_ =  -9999999;
@@ -981,6 +1110,8 @@ BdmatchDoubleMu02DiMuon0_ = -999;
   BdmatchDoubleMu102_ =  -9999999;
   BdmatchDoubleMu131_ =  -9999999;
   BdmatchDoubleMu132_ =  -9999999;
+  matchDoubleMu121_ =  -9999999;
+  matchDoubleMu122_ =  -9999999;
 
   MuonType_ = - 9999999;
 
@@ -996,6 +1127,8 @@ BdmatchDoubleMu02DiMuon0_ = -999;
   JpsiMu2Phi_alone_ = -9999999;
   JpsiMu1Eta_alone_ = -9999999;
   JpsiMu2Eta_alone_ = -9999999;
+  MuonCat1_ = -9999999;
+  MuonCat2_ = -9999999;
   JpsiMuon1Cat_alone_ = -9999999;
   JpsiMuon2Cat_alone_ = -9999999;
   BdJpsiMuon1Cat_alone_ = -9999999;
@@ -1040,7 +1173,7 @@ BdmatchDoubleMu02DiMuon0_ = -999;
   BsNumberOfCandidatesBeforeFit_ =  0;
   BsNumberOfCandidatesAfterFit_ =  0;
   BsNumberOfCandidatesAfterBestFit_ =  0;
-  BsFitM_ = -999;
+  BsFitM_ = -9999999;
   K1Pt_fit_ = -9999999;
   K2Pt_fit_ = -9999999;
   PhiM_fit_ = -9999999;
@@ -1186,8 +1319,9 @@ BdmatchDoubleMu02DiMuon0_ = -999;
   Mu2TMOneStationAngTight_=-9999999;
   Mu2TMLastStationOptimizedBarrelLowPtTight_=-9999999;
 
-  
-
+  BsCtErr2DCostheta_ = -9999999;
+  BsCt3DPVCosTheta_ = -9999999;
+  BsCt2DPVCosTheta_ =-9999999;
   BsDist3d_ = -9999999;
   BsDist3dErr_ = -9999999;
   BsTime3d_ = -9999999;
@@ -1303,8 +1437,8 @@ BdPVerrz_refit_ = -9999999;
   BdErrX_ = -9999999;
   BdErrY_ = -9999999;
   BdErrXY_ = -9999999;
-  BdCt_ = -999;
-  BdCtErr_ = -999;
+  BdCt_ = -9999999;
+  BdCtErr_ = -9999999;
   BdDist3d_ = -9999999;
   BdDist3dErr_ = -9999999;
   BdTime3d_ = -9999999;
@@ -1327,129 +1461,17 @@ BdMu2mcId_   = -9999999;
 BdMu2momId_  = -9999999;
 BdMu2gmomId_ = -9999999;
 
-//jet variables 
-//JetTrkPt_= new std::vector< std::vector<float>* >(); //initialisation of std vector pointer
-//JetTrkCharge_= new std::vector< std::vector<int>* >(); //initialisation of std vector pointer
-
-
-BsJetdR_ = -999;
-BsJetPx_ = -999;
-BsJetPy_ = -999;
-BsJetPz_ = -999;
-
-BdJetdR_ = -999;
-BdJetPx_ = -999;
-BdJetPy_ = -999;
-BdJetPz_ = -999;
-
-BsPtJetdR_ = -999;
-BsBJetdR_ = -999;
-
-PtJetPt_ = -999;
-BJetPt_ = -999;
-
-BplusPtJetdR_ = -999;
-BplusBJetdR_ = -999;
-BplusJetPx_ = -999;
-BplusJetPy_ = -999;
-BplusJetPz_ = -999;
-JetBTagProb_ = -999;
-
-BdJetCharge_ = -999;
-BsJetCharge_ = -999;
-BplusJetCharge_ = -999;
-
-triggerbit_Dimuon0_Jpsi_Muon_v15_ = -999;
-triggerbit_Dimuon0_Jpsi_Muon_v16_ = -999;
-triggerbit_Dimuon0_Jpsi_Muon_v17_ = -999;
-triggerbit_Dimuon0_Jpsi_Muon_v18_ = -999;
-//jet variables
-
- PVindex_ = -999;
-
-//Bplus variables
-  BplusIsBS_ = -999;
-  BplusIsPV_ = -999; 
-  BplusPVindex_ = -999;
-  BplusPhi_ = -99999999;    
-  BplusEta_ = -99999999; 
-triggerbit_7Jpsi_Displaced_v1_ =  -9999999;  
-LxyPerSigma2D_ = -9999999;
-  JpsiMass_bplus_ = -9999999;
-  JpsiPt_bplus_ = -9999999;
-  BplusCosTheta_ = -9999999;
-  BplusCtPerSigma2D_ = -9999999;
-  BplusCtErr2D_ = -9999999; 
-  BplusCtPerSigma3D_ = -9999999;
-  BplusCt2D_= -9999999;
-  BplusCt2D_2_= -9999999; 
-  BplusCt3D_2_ = -9999999; 
-  BplusVtxProb_ = -9999999; 
-  BplusM_fit_ = -9999999;
-  BplusChi2_ = -9999999;
-  KplusPt_ = -9999999;
-  KplusPtot_ = -9999999;
-  BplusPt_ = -9999999; 
-  BplusMu1Pt_ = -9999999; 
-  BplusMu2Pt_ = -9999999; 
-  BplusMu1Ptot_ = -9999999;
-  BplusMu2Ptot_ = -9999999; 
-  BplusLxy_ = -9999999;
-  BplusLxyErr_ = -9999999;
-  BplusLxyz_ = -9999999;
-  BplusLxyzErr_= -9999999;	
-  BplusCt3D_ =	-9999999;
-  BplusCtErr3D_ = -9999999;
-  BplusPtot_ = -9999999;
-  BplusDecayChannel_ =  -9999999;
-  BplusKmcId_= -9999999;	
-  BplusKmomId_ = -9999999;
-
-
-  BplusMu1mcId_= -9999999;
-  BplusMu1momId_= -9999999;
-  BplusMu1gmomId_= -9999999;	
-	
-  BplusMu2mcId_= -9999999;
-  BplusMu2momId_ = -9999999;
-  BplusMu2gmomId_ = -9999999;
-
-  isMatchedBplus_ = -9999999;
-
-  BpmatchDoubleMu01_ = -999;
-  BpmatchDoubleMu02_ = -999;
-
-  IP3DKandJpsiVtx_ = -999;
-  IP3DKandJpsiVtxErr_ = -999;  	 
-  BplusKIP3D_ = -999;
-  BplusKIP3DErr_ = -999; 	
-//Bplus variables
-
-//new Bd variables
-BdCt3D_ = -999; 
-BdCtErr3D_ =-999; 
-BdCt2D_ =-999;
-BdCtErr2D_ =-999; 
-//new Bd variables
-
-
 BsCt3DMC_ = -9999999;
 BsCt2DMC_ = -9999999;
 BsIniFlavour_ = -9999999;
+BsEndFlavour_ = -9999999;
 BdIniFlavour_ = -9999999;
+BdEndFlavour_ = -9999999;
 ChannelID_ = -9999999;
 BdChannelID_ = -9999999;
 BscosthetaMC_ = -9999999;
 BsphiMC_ = -9999999;
 BscospsiMC_ = -9999999;
-BsCosThetaReco_ = -9999999;
-
-BsCt3DPVCosTheta_ = -999;
-BsCt2DPVCosTheta_ =-999;
-
-BsCt3DPVHighestPt_ = -999;
-BsCt2DPVHighestPt_ = -999;
-
 
   for(int i=0; i<7; i++){
     K1Fit_par_[i] = -9999999;
@@ -1460,43 +1482,9 @@ BsCt2DPVHighestPt_ = -999;
     BdK1_kpi_par_Hyp2_[i] = -9999999;
     BdK2_kpi_par_Hyp2_[i] = -9999999;
   }
-    
 
-	for(int i = 0; i<30; i++){
 
-		SVZpos_[i] = -999.0;
-		PVZpos_[i] = -999.0;		
-		PVAbsPt_[i] = -999.0;
-		NTracksInPV_[i] = -999;
 
-		if(i<25){
-			TagMuRecoPtRel_[i] = -999;
-			TagMuRecoIP3D_[i] = -999.0;
-			TagMuRecoIP3DErr_[i] = -999.0;
-			TagMuRecoPt_[i] = -999.0;   
-			TagMuRecoP_[i]= -999.0; 
-			TagMuRecoEta_[i] = -999.0;
-			TagMuRecoPhi_[i] = -999.0;
-			TagMuRecoChg_[i] = -999.0;
-			TagMuSimu_[i] = -999.0;
-			MuRecoMCmother_[i] = -999;
-			MuRecoMCMotherMother_[i] = -999;
-			GlobalTagMuon_[i] = 0;
-			TrackerTagMuon_[i] = 0;
-			TagMuJetdR_[i]=-999.0;
-			PFTagMuon_[i] = 0;
-		}
-		
-	}
-
-	BsLxy3DMC_ = -999;
-	BsLxy2DMC_ = -999;
-	TagMuListSize_ = -999;
-	BsPMC_ = -999;
-	BsPtMC_ = -999;
-	FirstBsMCZpos_ = -999;
-	BsPVDist3d_= -999;
-	BsPVDist2d_ = -99;
 
   for(int i=0; i<10; i++){ 
     BmesonsId_[i]  =  -9999999;
@@ -1525,7 +1513,7 @@ BsCt2DPVHighestPt_ = -999;
     BCt_MC3D_[i]    =  -9999999;
     
     GenNumberOfDaughters_[i] =  -9999999;
-	
+
     for(int j=0;j<15;j++){
       BDauIdMC_[i][j]= -9999999;       
 	
@@ -1537,8 +1525,6 @@ BsCt2DPVHighestPt_ = -999;
       
       GenNumberOfDaughtersDaughters_[i][j] =  -9999999;
       
-
-
       for(int k=0; k<10; k++){
 	BDauDauIdMC_[i][j][k]= -9999999;
 	
@@ -1639,49 +1625,104 @@ void BsToJpsiPhiRootTree::readTree(std::vector<std::string> filenames){
 
 void BsToJpsiPhiRootTree::setBranchAddresses(){
 
-bsTree_->SetBranchAddress("PtJetTrkPt", PtJetTrkPt_);
-bsTree_->SetBranchAddress("PtJetTrkCharge", PtJetTrkCharge_);
+bsTree_->SetBranchAddress( "BplusCharge", &BplusCharge_ );
+bsTree_->SetBranchAddress( "BplusMu1Eta", &BplusMu1Eta_ );
+bsTree_->SetBranchAddress( "BplusMu2Eta", &BplusMu2Eta_ );
+bsTree_->SetBranchAddress( "JpsiPtbplus_fit", &JpsiPtbplus_fit_ );
+bsTree_->SetBranchAddress( "BpTagIP", &BpTagIP_ );
+bsTree_->SetBranchAddress( "BpTagPt", &BpTagPt_ );
+bsTree_->SetBranchAddress( "BpTagCharge", &BpTagCharge_ );
+bsTree_->SetBranchAddress( "BpTagEta", &BpTagEta_ );
+bsTree_->SetBranchAddress( "BpTagPhi", &BpTagPhi_ );
+bsTree_->SetBranchAddress( "BpTagP", &BpTagP_ );
+bsTree_->SetBranchAddress( "BpTagPF", &BpTagPF_ );
+bsTree_->SetBranchAddress( "BpTagGENID", &BpTagGENID_ );
+bsTree_->SetBranchAddress( "BsTagIP", &BsTagIP_ );
+bsTree_->SetBranchAddress( "BsTagPt", &BsTagPt_ );
+bsTree_->SetBranchAddress( "BsTagCharge", &BsTagCharge_ );
+bsTree_->SetBranchAddress( "BsTagEta", &BsTagEta_ );
+bsTree_->SetBranchAddress( "BsTagPhi", &BsTagPhi_ );
+bsTree_->SetBranchAddress( "BsTagP", &BsTagP_ );
+bsTree_->SetBranchAddress( "BsTagPF", &BsTagPF_ );
+bsTree_->SetBranchAddress( "BsTagGENID", &BsTagGENID_ );
+bsTree_->SetBranchAddress( "BdTagIP", &BdTagIP_ );
+bsTree_->SetBranchAddress( "BdTagPt", &BdTagPt_ );
+bsTree_->SetBranchAddress( "BdTagCharge", &BdTagCharge_ );
+bsTree_->SetBranchAddress( "BdTagEta", &BdTagEta_ );
+bsTree_->SetBranchAddress( "BdTagPhi", &BdTagPhi_ );
+bsTree_->SetBranchAddress( "BdTagP", &BdTagP_ );
+bsTree_->SetBranchAddress( "BdTagPF", &BdTagPF_ );
+bsTree_->SetBranchAddress( "BdTagGENID", &BdTagGENID_ );
+bsTree_->SetBranchAddress( "BdMuonCat1", &BdMuonCat1_ );
+bsTree_->SetBranchAddress( "BdMuonCat2", &BdMuonCat2_ );
+bsTree_->SetBranchAddress( "BplusM_fit", &BplusM_fit_ );
+bsTree_->SetBranchAddress( "BplusVtxProb", &BplusVtxProb_ );
+bsTree_->SetBranchAddress( "BplusChi2", &BplusChi2_ );
+bsTree_->SetBranchAddress( "BplusPt", &BplusPt_ );
+bsTree_->SetBranchAddress( "BplusPtot", &BplusPtot_ );
+bsTree_->SetBranchAddress( "KplusPt", &KplusPt_ );
+bsTree_->SetBranchAddress( "KplusPtot", &KplusPtot_ );
+bsTree_->SetBranchAddress( "BplusMu1Pt", &BplusMu1Pt_ );
+bsTree_->SetBranchAddress( "BplusMu2Pt", &BplusMu2Pt_ );
+bsTree_->SetBranchAddress( "BpJpsiVtxProb", &BpJpsiVtxProb_ );
+bsTree_->SetBranchAddress( "BpCosDeltaAlpha", &BpCosDeltaAlpha_ );
+bsTree_->SetBranchAddress( "BpMuMuDCA", &BpMuMuDCA_ );
+bsTree_->SetBranchAddress( "BpMuMuDistance", &BpMuMuDistance_ );
+bsTree_->SetBranchAddress( "BpMuMuDistanceSigma", &BpMuMuDistanceSigma_ );
+bsTree_->SetBranchAddress( "BpMuDr1", &BpMuDr1_ );
+bsTree_->SetBranchAddress( "BpMuDr2", &BpMuDr2_ );
+bsTree_->SetBranchAddress( "BpMuonCat1", &BpMuonCat1_ );
+bsTree_->SetBranchAddress( "BpMuonCat2", &BpMuonCat2_ );
+bsTree_->SetBranchAddress( "BplusMu1Ptot", &BplusMu1Ptot_ );
+bsTree_->SetBranchAddress( "BplusMu2Ptot", &BplusMu2Ptot_ );
+bsTree_->SetBranchAddress( "BplusEta", &BplusEta_ );
+bsTree_->SetBranchAddress( "BplusPhi", &BplusPhi_ );
+bsTree_->SetBranchAddress( "JpsiMass_bplus", &JpsiMass_bplus_ );
+bsTree_->SetBranchAddress( "JpsiPt_bplus", &JpsiPt_bplus_ );
+bsTree_->SetBranchAddress( "BplusPVindex", &BplusPVindex_ );
+bsTree_->SetBranchAddress( "BpCt2DPVCosTheta", &BpCt2DPVCosTheta_ );
+bsTree_->SetBranchAddress( "BpCtErr2DCostheta", &BpCtErr2DCostheta_ );
+bsTree_->SetBranchAddress( "IP3DKandJpsiVtx", &IP3DKandJpsiVtx_ );
+bsTree_->SetBranchAddress( "IP3DKandJpsiVtxErr", &IP3DKandJpsiVtxErr_ );
+bsTree_->SetBranchAddress( "BpmatchDoubleMu01", &BpmatchDoubleMu01_ );
+bsTree_->SetBranchAddress( "BpmatchDoubleMu02", &BpmatchDoubleMu02_ );
+bsTree_->SetBranchAddress( "BpmatchDoubleMu41", &BpmatchDoubleMu41_ );
+bsTree_->SetBranchAddress( "BpmatchDoubleMu42", &BpmatchDoubleMu42_ );
+bsTree_->SetBranchAddress( "BpmatchDoubleMu01DiMuon0", &BpmatchDoubleMu01DiMuon0_ );
+bsTree_->SetBranchAddress( "BpmatchDoubleMu02DiMuon0", &BpmatchDoubleMu02DiMuon0_ );
+bsTree_->SetBranchAddress( "BplusKmcId", &BplusKmcId_ );
+bsTree_->SetBranchAddress( "BplusKmomId", &BplusKmomId_ );
+bsTree_->SetBranchAddress( "BplusMu1mcId", &BplusMu1mcId_ );
+bsTree_->SetBranchAddress( "BplusMu1momId", &BplusMu1momId_ );
+bsTree_->SetBranchAddress( "BplusMu1gmomId", &BplusMu1gmomId_ );
+bsTree_->SetBranchAddress( "BplusMu2mcId", &BplusMu2mcId_ );
+bsTree_->SetBranchAddress( "BplusMu2momId", &BplusMu2momId_ );
+bsTree_->SetBranchAddress( "BplusMu2gmomId", &BplusMu2gmomId_ );
+bsTree_->SetBranchAddress( "isMatchedBplus", &isMatchedBplus_ );
 
-bsTree_->SetBranchAddress(  "TagMuRecoIP3D"             , &TagMuRecoIP3D_ );
-bsTree_->SetBranchAddress(  "TagMuRecoIP3DErr"          , &TagMuRecoIP3DErr_ );
+bsTree_->SetBranchAddress( "BplusDecayChannel", &BplusDecayChannel_ );
 
-bsTree_->SetBranchAddress(  "TagMuRecoPtRel"             , &TagMuRecoPtRel_ ); 
-bsTree_->SetBranchAddress(  "TagMuRecoPt"             , &TagMuRecoPt_ );   
-bsTree_->SetBranchAddress(  "TagMuRecoP"              , &TagMuRecoP_ ); 
-bsTree_->SetBranchAddress(  "TagMuRecoEta"            , &TagMuRecoEta_ );
-bsTree_->SetBranchAddress(  "TagMuRecoPhi"            , &TagMuRecoPhi_ );
-bsTree_->SetBranchAddress(  "TagMuRecoChg"            , &TagMuRecoChg_ );
-bsTree_->SetBranchAddress(  "TagMuListSize"	      , &TagMuListSize_);
-bsTree_->SetBranchAddress(  "TagMuSimu"	      	      , &TagMuSimu_);	
-bsTree_->SetBranchAddress(  "MuRecoMCmother"          , &MuRecoMCmother_ );
-bsTree_->SetBranchAddress(  "MuRecoMCMotherMother"    , &MuRecoMCMotherMother_ );
 
-bsTree_->SetBranchAddress(  "TagMuJetdR", &TagMuJetdR_ );
+bsTree_->SetBranchAddress(  "BcP"             , &BcP_);
+bsTree_->SetBranchAddress(  "BcCosAlpha"             , &BcCosAlpha_);
+bsTree_->SetBranchAddress(  "BcIP3D"             , &BcIP3D_);
+bsTree_->SetBranchAddress(  "BcCt"             , &BcCt_);
+bsTree_->SetBranchAddress(  "BcM"             , &BcM_);
+bsTree_->SetBranchAddress(  "BcMC"             , &BcMC_);
+bsTree_->SetBranchAddress(  "BcAng"             , &BcAng_);
+bsTree_->SetBranchAddress(  "BcAngPi"             , &BcAngPi_);
+bsTree_->SetBranchAddress(  "BcProb"             , &BcProb_);
+bsTree_->SetBranchAddress(  "BctrackPt"             , &BctrackPt_);
 
-//bsTree_->SetBranchAddress("GlobalTagMuon", &GlobalTagMuon_);
-//bsTree_->SetBranchAddress("TrackerTagMuon", &TrackerTagMuon_);
-bsTree_->SetBranchAddress("PFTagMuon", &PFTagMuon_);
 bsTree_->SetBranchAddress("BsLxy3DMC", &BsLxy3DMC_);
 bsTree_->SetBranchAddress("BsLxy2DMC", &BsLxy2DMC_);
 bsTree_->SetBranchAddress("BsPMC", &BsPMC_);
-
-bsTree_->SetBranchAddress("BsPVDist2d", &BsPVDist2d_);
-bsTree_->SetBranchAddress("BsPVDist3d", &BsPVDist3d_);
-
 bsTree_->SetBranchAddress(  "PVZpos"            , &PVZpos_ );
-bsTree_->SetBranchAddress(  "NTracksInPV"       , &NTracksInPV_  ); 
-bsTree_->SetBranchAddress( "PVAbsPt"           , &PVAbsPt_); 
+bsTree_->SetBranchAddress(  "NTracksInPV"       , &NTracksInPV_  );
+bsTree_->SetBranchAddress( "PVAbsPt"           , &PVAbsPt_);
 bsTree_->SetBranchAddress(  "SVZpos"            , &SVZpos_ );
 bsTree_->SetBranchAddress("BsPtMC", &BsPtMC_);
 bsTree_->SetBranchAddress("FirstBsMCZpos", &FirstBsMCZpos_);
-bsTree_->SetBranchAddress("BsCosThetaReco", &BsCosThetaReco_);
-
-
-bsTree_->SetBranchAddress("BsCt3DPVCosTheta", &BsCt3DPVCosTheta_ );
-bsTree_->SetBranchAddress("BsCt2DPVCosTheta", &BsCt2DPVCosTheta_ );
-
-bsTree_->SetBranchAddress("BsCt3DPVHighestPt", &BsCt3DPVHighestPt_ );
-bsTree_->SetBranchAddress("BsCt2DPVHighestPt", &BsCt2DPVHighestPt_ );
 
 bsTree_->SetBranchAddress(  "runNumber"             , &runNumber_  );                    
 bsTree_->SetBranchAddress(  "eventNumber"             , &eventNumber_  );                    
@@ -1702,107 +1743,7 @@ bsTree_->SetBranchAddress(  "BdMu2QualityG"             , &BdMu2QualityG_);
 bsTree_->SetBranchAddress(  "BdMu1QualityT"             , &BdMu1QualityT_);
 bsTree_->SetBranchAddress(  "BdMu2QualityT"             , &BdMu2QualityT_); 
 
-
-bsTree_->SetBranchAddress(  "NVertices"             , &NVertices_  ); 
-bsTree_->SetBranchAddress("PVindex", &PVindex_);
-
-//Jet variables
-
-bsTree_->SetBranchAddress("PtJetPt", &PtJetPt_);
-bsTree_->SetBranchAddress("BJetPt", &BJetPt_);
-
-bsTree_->SetBranchAddress("BsJetdR", &BsJetdR_);
-bsTree_->SetBranchAddress("BsJetPx", &BsJetPx_);
-bsTree_->SetBranchAddress("BsJetPy", &BsJetPy_);
-bsTree_->SetBranchAddress("BsJetPz", &BsJetPz_);
-
-bsTree_->SetBranchAddress("BdJetdR", &BdJetdR_);
-bsTree_->SetBranchAddress("BdJetPx", &BdJetPx_);
-bsTree_->SetBranchAddress("BdJetPy", &BdJetPy_);
-bsTree_->SetBranchAddress("BdJetPz", &BdJetPz_);
-
-bsTree_->SetBranchAddress("BplusPtJetdR", &BplusPtJetdR_);
-bsTree_->SetBranchAddress("BplusBJetdR", &BplusBJetdR_);
-
-bsTree_->SetBranchAddress("BsPtJetdR", &BsPtJetdR_);
-bsTree_->SetBranchAddress("BsBJetdR", &BsBJetdR_);
-
-bsTree_->SetBranchAddress("BplusJetPx", &BplusJetPx_);
-bsTree_->SetBranchAddress("BplusJetPy", &BplusJetPy_);
-bsTree_->SetBranchAddress("BplusJetPz", &BplusJetPz_);
-bsTree_->SetBranchAddress("JetBTagProb", &JetBTagProb_);
-
-
-bsTree_->SetBranchAddress("BsJetCharge", &BsJetCharge_ );
-bsTree_->SetBranchAddress("BdJetCharge", &BdJetCharge_ );
-bsTree_->SetBranchAddress("BplusJetCharge", &BplusJetCharge_ );
-
-//Bplus variables
-
-
-bsTree_->SetBranchAddress("BplusIsPV", &BplusIsPV_);
-bsTree_->SetBranchAddress("BplusIsBS", &BplusIsBS_);
-bsTree_->SetBranchAddress("BplusPVindex", &BplusPVindex_);
-bsTree_->SetBranchAddress("BplusEta" , &BplusEta_ ); 
-bsTree_->SetBranchAddress("JpsiMass_bplus" ,     &JpsiMass_bplus_ );
-bsTree_->SetBranchAddress("JpsiPt_bplus"   ,     &JpsiPt_bplus_ );
-bsTree_->SetBranchAddress("BplusCosTheta"  ,     &BplusCosTheta_ );
-bsTree_->SetBranchAddress("BplusDecayChannel" ,       &BplusDecayChannel_);
-bsTree_->SetBranchAddress("BplusCtPerSigma2D" ,       &BplusCtPerSigma2D_);
-bsTree_->SetBranchAddress("BplusCtErr2D" ,       &BplusCtErr2D_);
-bsTree_->SetBranchAddress("BplusCtPerSigma3D"	 , &BplusCtPerSigma3D_  );
-bsTree_->SetBranchAddress("BplusVtxProb"	 , &BplusVtxProb_  );
-bsTree_->SetBranchAddress("BplusM_fit"	 , &BplusM_fit_    );
-bsTree_->SetBranchAddress("BplusChi2"		 , &BplusChi2_     );
-bsTree_->SetBranchAddress("KplusPtot"      	 , &KplusPtot_     );
-bsTree_->SetBranchAddress("KplusPt"      	 , &KplusPt_       );
-bsTree_->SetBranchAddress("BplusLxyz"      	 , &BplusLxyz_     );
-bsTree_->SetBranchAddress("BplusLxyzErr"       , &BplusLxyzErr_);
-bsTree_->SetBranchAddress("BplusMu1Pt"     ,       &BplusMu1Pt_ );	
-bsTree_->SetBranchAddress("BplusMu2Pt"     ,       &BplusMu2Pt_ );
-bsTree_->SetBranchAddress("BplusLxy"       ,       &BplusLxy_   );
-bsTree_->SetBranchAddress("BplusLxyErr"    ,       &BplusLxyErr_ );
-bsTree_->SetBranchAddress("BplusPt"	   ,	   &BplusPt_    );
-bsTree_->SetBranchAddress("BplusCt3D"      ,      &BplusCt3D_   );
-bsTree_->SetBranchAddress("BplusCtErr3D"   ,      &BplusCtErr3D_);
-bsTree_->SetBranchAddress("BplusMu1Ptot"   ,       &BplusMu1Ptot_  );
-bsTree_->SetBranchAddress("BplusMu2Ptot"   ,       &BplusMu2Ptot_  );
-bsTree_->SetBranchAddress("BplusPtot"      ,       &BplusPtot_  );
-bsTree_->SetBranchAddress("BplusCt3D_2"   ,       &BplusCt3D_2_ );
-bsTree_->SetBranchAddress("BplusCt2D_2"   ,       &BplusCt2D_2_ );
-bsTree_->SetBranchAddress("BplusCt2D"     ,       &BplusCt2D_);
-bsTree_->SetBranchAddress("BplusKmcId"     ,       &BplusKmcId_  );
-bsTree_->SetBranchAddress("BplusKmomId"    ,       &BplusKmomId_ );
-bsTree_->SetBranchAddress("BplusMu1mcId"   ,       &BplusMu1mcId_  );
-bsTree_->SetBranchAddress("BplusMu1momId"  ,       &BplusMu1momId_);
-bsTree_->SetBranchAddress("BplusMu1gmomId" ,       &BplusMu1gmomId_);
-bsTree_->SetBranchAddress("BplusMu2mcId"   ,       &BplusMu2mcId_  );
-bsTree_->SetBranchAddress("BplusMu2momId"  ,       &BplusMu2momId_);
-bsTree_->SetBranchAddress("BplusMu2gmomId" ,       &BplusMu2gmomId_);
-bsTree_->SetBranchAddress("isMatchedBplus" ,       &isMatchedBplus_);
-bsTree_->SetBranchAddress("BplusKIP3D"     ,       &BplusKIP3D_    );
-bsTree_->SetBranchAddress("BplusKIP3DErr"  ,       &BplusKIP3DErr_ );
-bsTree_->SetBranchAddress("IP3DKandJpsiVtx"  ,       &IP3DKandJpsiVtx_ );
-bsTree_->SetBranchAddress("IP3DKandJpsiVtxErr"  ,     &IP3DKandJpsiVtxErr_ );
-
-bsTree_->SetBranchAddress("LxyPerSigma2D"  ,     &LxyPerSigma2D_ );
-bsTree_->SetBranchAddress("BplusPhi" , &BplusPhi_ ); 
-
-bsTree_->SetBranchAddress("BpmatchDoubleMu01", &BpmatchDoubleMu01_ );
-bsTree_->SetBranchAddress("BpmatchDoubleMu02", &BpmatchDoubleMu02_ );
-//Bplus variables
-  
-
-//new Bd variables 
-
-bsTree_->SetBranchAddress("BdCt3D" , &BdCt3D_ ); 
-bsTree_->SetBranchAddress("BdCtErr3D" , &BdCtErr3D_ ); 
-bsTree_->SetBranchAddress("BdCt2D" , &BdCt2D_ );
-bsTree_->SetBranchAddress("BdCtErr2D" , &BdCtErr2D_ );  
-// new Bd variables                 
-
-bsTree_->SetBranchAddress(  "NVertices"             , &NVertices_  ); 
-
+bsTree_->SetBranchAddress(  "NVertices"             , &NVertices_  );                    
 bsTree_->SetBranchAddress(  "triggerbit_HLTmu3Tk"             , &triggerbit_HLTmu3Tk_  );                    
 bsTree_->SetBranchAddress(  "triggerbit_HLTmu5"		  , &triggerbit_HLTmu5_  );                                   
 bsTree_->SetBranchAddress(  "triggerbit_HLTmu7"		  , &triggerbit_HLTmu7_  );                                   
@@ -1825,31 +1766,11 @@ bsTree_->SetBranchAddress(  "triggerbit_7Jpsi_Displaced_v3"	  , &triggerbit_7Jps
 bsTree_->SetBranchAddress(  "triggerbit_3p5Jpsi_Displaced_v2"	  , &triggerbit_3p5Jpsi_Displaced_v2_  );               
 bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v1"	  , &triggerbit_4Jpsi_Displaced_v1_  );               
 bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v4"	  , &triggerbit_4Jpsi_Displaced_v4_  );               
-
-bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v5"	  , &triggerbit_4Jpsi_Displaced_v5_  );
-bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v9"	  , &triggerbit_4Jpsi_Displaced_v9_  );      
-
-bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v10"	  , &triggerbit_4Jpsi_Displaced_v10_  );              
-
-bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v11"	  , &triggerbit_4Jpsi_Displaced_v11_  );    
-bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v12"	  , &triggerbit_4Jpsi_Displaced_v12_  ); 
-      
-
+bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v5"	  , &triggerbit_4Jpsi_Displaced_v5_  );               
 bsTree_->SetBranchAddress(  "triggerbit_5Jpsi_Displaced_v1"	  , &triggerbit_5Jpsi_Displaced_v1_  );               
 bsTree_->SetBranchAddress(  "triggerbit_5Jpsi_Displaced_v2"	  , &triggerbit_5Jpsi_Displaced_v2_  );               
 bsTree_->SetBranchAddress(  "triggerbit_5Jpsi_Displaced_v4"	  , &triggerbit_5Jpsi_Displaced_v4_  );               
 bsTree_->SetBranchAddress(  "triggerbit_5Jpsi_Displaced_v5"	  , &triggerbit_5Jpsi_Displaced_v5_  );               
-
-bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_Muon_v15"	  , &triggerbit_Dimuon0_Jpsi_Muon_v15_); 
-
-bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_Muon_v16"	  , &triggerbit_Dimuon0_Jpsi_Muon_v16_); 
-
-bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_Muon_v17"	  , &triggerbit_Dimuon0_Jpsi_Muon_v17_); 
-
-bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_Muon_v18"	  , &triggerbit_Dimuon0_Jpsi_Muon_v18_); 
-
-
-
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v1"	  , &triggerbit_Dimuon0_Jpsi_v1_  );                        
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v3"	  , &triggerbit_Dimuon0_Jpsi_v3_  );                        
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v5"	  , &triggerbit_Dimuon0_Jpsi_v5_  );                        
@@ -1858,6 +1779,11 @@ bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v9"	  , &triggerbit_Dimuon0
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v10"	  , &triggerbit_Dimuon0_Jpsi_v10_  );                        
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon10_Barrel"	  , &triggerbit_Dimuon10_Barrel_  );                        
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon13_Barrel"	  , &triggerbit_Dimuon13_Barrel_  );                        
+bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_Muon_v15"    , &triggerbit_Dimuon0_Jpsi_Muon_v15_  );
+bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v9"       , &triggerbit_4Jpsi_Displaced_v9_  );
+bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v10"      , &triggerbit_4Jpsi_Displaced_v10_  );
+bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v11"      , &triggerbit_4Jpsi_Displaced_v11_  );
+bsTree_->SetBranchAddress(  "triggerbit_4Jpsi_Displaced_v12"      , &triggerbit_4Jpsi_Displaced_v12_  );
 
 bsTree_->SetBranchAddress(  "BSx"				  , &BSx_  );                                                
 bsTree_->SetBranchAddress(  "BSy"				  , &BSy_  );                                               
@@ -1895,14 +1821,6 @@ bsTree_->SetBranchAddress( "PVerrx_refit",	 &PVerrx_refit_     );
 bsTree_->SetBranchAddress( "PVerry_refit",	 &PVerry_refit_     );
 bsTree_->SetBranchAddress( "PVerrz_refit",	 &PVerrz_refit_     );
 
-bsTree_->SetBranchAddress(  "PionDeDx"                         , &PionDeDx_  );
-bsTree_->SetBranchAddress(  "KaonDeDx"                         , &KaonDeDx_  );
-bsTree_->SetBranchAddress(  "KaonPt"                         , &KaonPt_  );
-bsTree_->SetBranchAddress(  "PionPt"                         , &PionPt_  );
-//bsTree_->SetBranchAddress(  "MuRecoChg2"                         , &MuRecoChg2_  );
-bsTree_->SetBranchAddress(  "MuRecoPhi1"                         , &MuRecoPhi1_  );
-//bsTree_->SetBranchAddress(  "MuRecoPhi2"                         , &MuRecoPhi2_  );
-
 bsTree_->SetBranchAddress(  "matchL11"                         , &matchL11_  );
 bsTree_->SetBranchAddress(  "matchL12"                         , &matchL12_  );
 bsTree_->SetBranchAddress(  "match2mu01"                         , &match2mu01_  );
@@ -1930,14 +1848,6 @@ bsTree_->SetBranchAddress(  "matchDoubleMu132"                         , &matchD
 bsTree_->SetBranchAddress(  "matchmu0tk01"                         , &matchmu0tk01_  );
 bsTree_->SetBranchAddress(  "matchmu0tk02"                         , &matchmu0tk02_  );
 bsTree_->SetBranchAddress(  "matchFilterJpsi1"                         , &matchFilterJpsi1_  );
-bsTree_->SetBranchAddress(  "matchDoubleMu01DiMuon0", &matchDoubleMu01DiMuon0_  );
-bsTree_->SetBranchAddress(  "matchDoubleMu02DiMuon0", &matchDoubleMu02DiMuon0_  );
-
-bsTree_->SetBranchAddress( "BpmatchDoubleMu01DiMuon0", &BpmatchDoubleMu01DiMuon0_ );            
-bsTree_->SetBranchAddress( "BpmatchDoubleMu02DiMuon0",&BpmatchDoubleMu02DiMuon0_ ); 
-bsTree_->SetBranchAddress("BdmatchDoubleMu01DiMuon0",&BdmatchDoubleMu01DiMuon0_ );            
-bsTree_->SetBranchAddress( "BdmatchDoubleMu02DiMuon0",&BdmatchDoubleMu02DiMuon0_ );
-
 bsTree_->SetBranchAddress(  "matchFilterJpsi2"                         , &matchFilterJpsi2_  );
 bsTree_->SetBranchAddress(  "BdmatchL11"                         , &BdmatchL11_  );
 bsTree_->SetBranchAddress(  "BdmatchL12"                         , &BdmatchL12_  );
@@ -1961,9 +1871,8 @@ bsTree_->SetBranchAddress(  "BdmatchDoubleMu101"                         , &Bdma
 bsTree_->SetBranchAddress(  "BdmatchDoubleMu102"                         , &BdmatchDoubleMu102_  );
 bsTree_->SetBranchAddress(  "BdmatchDoubleMu131"                         , &BdmatchDoubleMu131_  );
 bsTree_->SetBranchAddress(  "BdmatchDoubleMu132"                         , &BdmatchDoubleMu132_  );
-
-
-
+bsTree_->SetBranchAddress(  "matchDoubleMu121"                         , &matchDoubleMu121_  );
+bsTree_->SetBranchAddress(  "matchDoubleMu122"                         , &matchDoubleMu122_  );
 
 bsTree_->SetBranchAddress( "BdMu1Pt_beffit", &BdMu1Pt_beffit_);
 bsTree_->SetBranchAddress( "BdMu1Pz_beffit", &BdMu1Pz_beffit_);
@@ -1994,6 +1903,8 @@ bsTree_->SetBranchAddress(  "JpsiMu1Phi_alone"		  , &JpsiMu1Phi_alone_  );
 bsTree_->SetBranchAddress(  "JpsiMu2Phi_alone"		  , &JpsiMu2Phi_alone_  );                                     
 bsTree_->SetBranchAddress(  "JpsiMu1Eta_alone"		  , &JpsiMu1Eta_alone_  );                                     
 bsTree_->SetBranchAddress(  "JpsiMu2Eta_alone"		  , &JpsiMu2Eta_alone_  );                                     
+bsTree_->SetBranchAddress(  "MuonCat1"		  , &MuonCat1_  );                                
+bsTree_->SetBranchAddress(  "MuonCat2"		  , &MuonCat2_  );                                
 bsTree_->SetBranchAddress(  "JpsiMuon1Cat_alone"		  , &JpsiMuon1Cat_alone_  );                                
 bsTree_->SetBranchAddress(  "JpsiMuon2Cat_alone"		  , &JpsiMuon2Cat_alone_  );                                
 bsTree_->SetBranchAddress(  "BdJpsiMuon1Cat_alone"		  , &BdJpsiMuon1Cat_alone_  );                                
@@ -2180,7 +2091,10 @@ bsTree_->SetBranchAddress(  "Mu2TMLastStationOptimizedLowPtTight", &Mu2TMLastSta
 bsTree_->SetBranchAddress(  "Mu2TMLastStationAngTight"    , &Mu2TMLastStationAngTight_  );
 bsTree_->SetBranchAddress(  "Mu2TMOneStationAngTight"     , &Mu2TMOneStationAngTight_  );
 bsTree_->SetBranchAddress(  "Mu2TMLastStationOptimizedBarrelLowPtTight", &Mu2TMLastStationOptimizedBarrelLowPtTight_  );
-                    
+
+bsTree_->SetBranchAddress(  "BsCtErr2DCostheta"                   , &BsCtErr2DCostheta_  );                   
+bsTree_->SetBranchAddress("BsCt3DPVCosTheta", &BsCt3DPVCosTheta_ );
+bsTree_->SetBranchAddress("BsCt2DPVCosTheta", &BsCt2DPVCosTheta_ ); 
 bsTree_->SetBranchAddress(  "BsDist3d"			  , &BsDist3d_  );                                             
 bsTree_->SetBranchAddress(  "BsDist3dErr"			  , &BsDist3dErr_  );                                          
 bsTree_->SetBranchAddress(  "BsTime3d"			  , &BsTime3d_  );                                             
@@ -2230,7 +2144,9 @@ bsTree_->SetBranchAddress(  "BMMC"			  , BMMC_  );
 bsTree_->SetBranchAddress(  "BsCt2DMC"			  , &BsCt2DMC_  );                             
 bsTree_->SetBranchAddress(  "BsCt3DMC"			  , &BsCt3DMC_  );                             
 bsTree_->SetBranchAddress(  "BsIniFlavour"			  , &BsIniFlavour_  );                             
+bsTree_->SetBranchAddress(  "BsEndFlavour"			  , &BsEndFlavour_  );                             
 bsTree_->SetBranchAddress(  "BdIniFlavour"			  , &BdIniFlavour_  );                             
+bsTree_->SetBranchAddress(  "BdEndFlavour"			  , &BdEndFlavour_  );                             
 bsTree_->SetBranchAddress(  "ChannelID"			  , &ChannelID_  );                             
 bsTree_->SetBranchAddress(  "BdChannelID"			  , &BdChannelID_  );                             
 bsTree_->SetBranchAddress(  "BPtMC"			  , BPtMC_  );                                         

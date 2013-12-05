@@ -9,3 +9,4 @@ How to run in the 5_X releases:
 -addpkg MuonAnalysis/MuonAssociators
 
 to include the MVA electron ID yuo need further steps:
+https://twiki.cern.ch/twiki/bin/view/CMS/MultivariateElectronIdentification#Recipe_for_53X

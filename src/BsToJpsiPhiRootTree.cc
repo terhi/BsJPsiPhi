@@ -38,6 +38,11 @@ BJetTrkPt_ = new std::vector<float>();
 BpBJetTrkCharge_ = new std::vector<int>();
 BpBJetTrkPt_ = new std::vector<float>();
 
+bsTree_->Branch("MuonMultiplicity", &MuonMultiplicity_, "MuonMultiplicity/I");
+bsTree_->Branch("ElectronMultiplicity", &ElectronMultiplicity_, "ElectronMultiplicity/I");
+bsTree_->Branch("TrackMultiplicity", &TrackMultiplicity_,"TrackMultiplicity/I");
+bsTree_->Branch("TrackMultiplicityBp", &TrackMultiplicityBp_,"TrackMultiplicityBp/I");
+bsTree_->Branch("TrackMultiplicityBd", &TrackMultiplicityBd_,"TrackMultiplicityBd/I");
 
 //jet variables
 bsTree_->Branch("BJetTrkCharge","vector<int>",BJetTrkCharge_);
@@ -797,6 +802,11 @@ void BsToJpsiPhiRootTree::writeFile()
 void BsToJpsiPhiRootTree::resetEntries()
 {
 
+TrackMultiplicityBd_ = -9999999;
+TrackMultiplicityBp_ = -9999999;
+TrackMultiplicity_ = -9999999;
+MuonMultiplicity_ = -9999999;
+ElectronMultiplicity_ = -9999999;
 
   BJetParton_ = -9999999;
   BJetEta_= -9999999;

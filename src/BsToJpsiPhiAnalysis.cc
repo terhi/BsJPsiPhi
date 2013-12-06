@@ -471,6 +471,11 @@ double bestVtxProbBplus = -1;
     if(allmuons->size()>0) std::cout<<"******found number of muons= "<< allmuons->size() << std::endl;
   }
 
+  bsRootTree_->MuonMultiplicity_ = allmuons->size();
+  bsRootTree_->ElectronMultiplicity_ = allelectrons->size();
+
+ // cout << "Ele multiplicity " << allelectrons->size() << endl;
+ // cout << "Muon multiplicity " << allmuons->size() << endl;
   // variables to determine minima of fit probability
   double minVtxP = -99.;   //KK hypothesis
   double minJpsiP = -99;   // jpsi alone
@@ -1158,6 +1163,10 @@ double bestVtxProbBplus = -1;
             if(verbose_ == true){   std::cout<<"Found the min Costheta PV "<<Bsvec<<std::endl;}
             if (PVCosThetaIndex==-1) { continue;}
 				BsPVVtxInd = PVCosThetaIndex;
+				const Vertex &Bsvtx = (*recVtxs)[BsPVVtxInd];
+				bsRootTree_->TrackMultiplicity_ = Bsvtx.nTracks();
+	//		cout <<"Track multiplicity Bs " << Bsvtx.nTracks() << endl;
+
             PVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trk1Ref, trk2Ref); 
             //bsRootTree_->BsCt3DPVCosTheta_ = BsPDGMass*( (bVertex->position().x()-PVvtxCosTheta.x())*Bsvec.x() + (bVertex->position().y()-PVvtxCosTheta.y())*Bsvec.y() + (bVertex->position().z()-PVvtxCosTheta.z())*Bsvec.z() )/( Bsvec.x()*Bsvec.x() + Bsvec.y()*Bsvec.y() + Bsvec.z()*Bsvec.z() );
             bsRootTree_->BsCt3DPVCosTheta_ = BsPDGMass_*( (kvfbsvertex.position().x()-PVvtxCosTheta.x())*Bsvec.x() + (kvfbsvertex.position().y()-PVvtxCosTheta.y())*Bsvec.y() + (kvfbsvertex.position().z()-PVvtxCosTheta.z())*Bsvec.z() )/( Bsvec.x()*Bsvec.x() + Bsvec.y()*Bsvec.y() + Bsvec.z()*Bsvec.z() );
@@ -2049,8 +2058,9 @@ double bestVtxProbBplus = -1;
            
               BdPVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trkkst1 , trkkst2);
 
-
-
+			const Vertex &Bdvtx = (*recVtxs)[PVCosThetaIndex];
+		 	bsRootTree_->TrackMultiplicityBd_ = Bdvtx.nTracks();
+			//cout <<"Track multiplicity Bd " << Bdvtx.nTracks() << endl;
 	      // proper decay time and proper decay length with the refitted vertex
 	      VertexDistanceXY vdist;	      
 	      if(Bdvec.perp()!=0) {
@@ -2414,7 +2424,11 @@ double bestVtxProbBplus = -1;
 
        bsRootTree_->BplusPVindex_ = PVCosThetaIndex;
 	    if(PVCosThetaIndex == -1){ continue;}
-           
+ 
+		 const Vertex &Bpvtx = (*recVtxs)[PVCosThetaIndex];
+		 bsRootTree_->TrackMultiplicityBp_ = Bpvtx.nTracks();
+		// cout <<"Track multiplicity Bp " << Bpvtx.nTracks() << endl;
+          
 	    reco::Vertex BplusPVVtx = (*recVtxs)[PVCosThetaIndex]; 
 	    double BplusPVx = BplusPVVtx.x(); 
 	    double BplusPVy = BplusPVVtx.y();

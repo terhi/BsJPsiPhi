@@ -51,6 +51,12 @@ public:
         int BpTagGENID_;
 
 
+		  int TrackMultiplicity_ ;
+		  int TrackMultiplicityBp_ ;
+		  int TrackMultiplicityBd_ ;	
+		  int	MuonMultiplicity_ ;
+		  int ElectronMultiplicity_;
+
 		  double BpTagEIDNonTrig_;
   		  double BpTagEIDTrig_; 
   		  double BpTagEIDTrigNoIP_; 	

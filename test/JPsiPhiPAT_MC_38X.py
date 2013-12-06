@@ -200,12 +200,12 @@ useL1MatchingWindowForSinglets(process)
 addMCinfo(process)
 #changeTriggerProcessName(process, "REDIGI36X")
 switchOffAmbiguityResolution(process) # Switch off ambiguity resolution: allow multiple reco muons to match to the same trigger muon
-#process.muonMatchHLTL3.maxDeltaR = 0.1
-#process.muonMatchHLTL3.maxDPtRel = 10.0
-#process.muonMatchHLTCtfTrack.maxDeltaR = 0.1
-#process.muonMatchHLTCtfTrack.maxDPtRel = 10.0
-#process.muonMatchHLTTrackMu.maxDeltaR = 0.1
-#process.muonMatchHLTTrackMu.maxDPtRel = 10.0
+process.muonMatchHLTL3.maxDeltaR = 0.1
+process.muonMatchHLTL3.maxDPtRel = 10.0
+process.muonMatchHLTCtfTrack.maxDeltaR = 0.1
+process.muonMatchHLTCtfTrack.maxDPtRel = 10.0
+process.muonMatchHLTTrackMu.maxDeltaR = 0.1
+process.muonMatchHLTTrackMu.maxDPtRel = 10.0
 
 #
 #################################################################

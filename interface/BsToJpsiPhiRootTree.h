@@ -285,7 +285,12 @@ public:
         int  BdMu2QualityG_;
         int  BdMu1QualityT_;
         int  BdMu2QualityT_;
-
+        int  BsSoftMuon1_;
+        int  BsSoftMuon2_;
+        int  BpSoftMuon1_;
+        int  BpSoftMuon2_;
+        int  BdSoftMuon1_;
+        int  BdSoftMuon2_;
 
 	double	BSx_ ;
 	double	BSy_ ;

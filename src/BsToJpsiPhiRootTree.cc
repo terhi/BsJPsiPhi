@@ -229,6 +229,12 @@ bsTree_->Branch(  "BdMu1QualityG"             , &BdMu1QualityG_,                
 bsTree_->Branch(  "BdMu2QualityG"             , &BdMu2QualityG_,                "BdMu2QualityG/I");                                         
 bsTree_->Branch(  "BdMu1QualityT"             , &BdMu1QualityT_,                "BdMu1QualityT/I");                                         
 bsTree_->Branch(  "BdMu2QualityT"             , &BdMu2QualityT_,                "BdMu2QualityT/I");                                         
+bsTree_->Branch(  "BsSoftMuon1"             , &BsSoftMuon1_,                "BsSoftMuon1/I");                                         
+bsTree_->Branch(  "BsSoftMuon2"             , &BsSoftMuon2_,                "BsSoftMuon2/I");                                         
+bsTree_->Branch(  "BpSoftMuon1"             , &BpSoftMuon1_,                "BpSoftMuon1/I");                                         
+bsTree_->Branch(  "BpSoftMuon2"             , &BpSoftMuon2_,                "BpSoftMuon2/I");                                         
+bsTree_->Branch(  "BdSoftMuon1"             , &BdSoftMuon1_,                "BdSoftMuon1/I");                                         
+bsTree_->Branch(  "BdSoftMuon2"             , &BdSoftMuon2_,                "BdSoftMuon2/I");                                         
 bsTree_->Branch(  "NVertices"             , &NVertices_,                "NVertices/I");                                         
 bsTree_->Branch(  "triggerbit_HLTmu3Tk"             , &triggerbit_HLTmu3Tk_,                "triggerbit_HLTmu3Tk/I");                                         
 bsTree_->Branch(  "triggerbit_HLTmu5"		  , &triggerbit_HLTmu5_,                "triggerbit_HLTmu5/I");                                      
@@ -966,7 +972,12 @@ ElectronMultiplicity_ = -9999999;
   BdMu2QualityG_=  -9999;
   BdMu1QualityT_=  -9999;
   BdMu2QualityT_=  -9999;
-
+  BsSoftMuon1_=  -9999;
+  BsSoftMuon2_=  -9999;
+  BpSoftMuon1_=  -9999;
+  BpSoftMuon2_=  -9999;
+  BdSoftMuon1_=  -9999;
+  BdSoftMuon2_=  -9999;
 
   NVertices_ = -9999999;
   triggerbit_HLTmu3Tk_ = -9999999;
@@ -1752,6 +1763,12 @@ bsTree_->SetBranchAddress(  "BdMu1QualityG"             , &BdMu1QualityG_);
 bsTree_->SetBranchAddress(  "BdMu2QualityG"             , &BdMu2QualityG_);
 bsTree_->SetBranchAddress(  "BdMu1QualityT"             , &BdMu1QualityT_);
 bsTree_->SetBranchAddress(  "BdMu2QualityT"             , &BdMu2QualityT_); 
+bsTree_->SetBranchAddress(  "BsSoftMuon1"             , &BsSoftMuon1_); 
+bsTree_->SetBranchAddress(  "BsSoftMuon2"             , &BsSoftMuon2_); 
+bsTree_->SetBranchAddress(  "BpSoftMuon1"             , &BpSoftMuon1_); 
+bsTree_->SetBranchAddress(  "BpSoftMuon2"             , &BpSoftMuon2_); 
+bsTree_->SetBranchAddress(  "BdSoftMuon1"             , &BdSoftMuon1_); 
+bsTree_->SetBranchAddress(  "BdSoftMuon2"             , &BdSoftMuon2_); 
 
 bsTree_->SetBranchAddress(  "NVertices"             , &NVertices_  );                    
 bsTree_->SetBranchAddress(  "triggerbit_HLTmu3Tk"             , &triggerbit_HLTmu3Tk_  );                    

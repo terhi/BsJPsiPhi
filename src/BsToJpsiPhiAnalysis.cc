@@ -127,6 +127,8 @@ nominalPionMass(0.139570),
 nominalKstarMass(0.892),
 nominalBplusMass(5.2792) 
 {
+
+
   isMCstudy_ = iConfig.getParameter<bool>("isMCstudy");
   thegenParticlesLabel_ = iConfig.getParameter<InputTag>("genParticlesLabel");
   trackLabelK_ = iConfig.getParameter<edm::InputTag>("TrackLabel_K");
@@ -194,6 +196,7 @@ void
 BsToJpsiPhiAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
   event_counter_++;
+
 
 //  double nominalJpsiMass=3.096916;
 //  double nominalPhiMass=1.019;
@@ -451,6 +454,12 @@ double bestVtxProbBplus = -1;
     if (trigName=="HLT_Dimuon0_Jpsi_Muon_v17" && bsRootTree_->triggerbit_Dimuon0_Jpsi_Muon_v15_==0) bsRootTree_->triggerbit_Dimuon0_Jpsi_Muon_v15_ = hltresults->accept(itrig);
     if (trigName=="HLT_Dimuon0_Jpsi_Muon_v18" && bsRootTree_->triggerbit_Dimuon0_Jpsi_Muon_v15_==0) bsRootTree_->triggerbit_Dimuon0_Jpsi_Muon_v15_ = hltresults->accept(itrig);
 
+ // New for Jspi MC and data
+  if (trigName=="HLT_Dimuon0_Jpsi_v14") bsRootTree_->triggerbit_Dimuon0_Jpsi_v14_ = hltresults->accept(itrig);
+    if (trigName=="HLT_Dimuon0_Jpsi_v15" && bsRootTree_->triggerbit_Dimuon0_Jpsi_v14_==0) bsRootTree_->triggerbit_Dimuon0_Jpsi_v14_ = hltresults->accept(itrig);
+    if (trigName=="HLT_Dimuon0_Jpsi_v16" && bsRootTree_->triggerbit_Dimuon0_Jpsi_v14_==0) bsRootTree_->triggerbit_Dimuon0_Jpsi_v14_ = hltresults->accept(itrig);
+    if (trigName=="HLT_Dimuon0_Jpsi_v17" && bsRootTree_->triggerbit_Dimuon0_Jpsi_v14_==0) bsRootTree_->triggerbit_Dimuon0_Jpsi_v14_ = hltresults->accept(itrig);
+
   }
   
   edm::Handle<pat::MuonCollection> allmuons;
@@ -493,7 +502,7 @@ double bestVtxProbBplus = -1;
       if(verbose_ == true){   std::cout<<"Got the second muon "<<mu2.pt()<<std::endl;}
       
 
-      if (!isMCstudy_) { if ((mu1.triggerObjectMatchesByFilter("hltDisplacedmumuFilterDoubleMu4Jpsi").empty() || mu2.triggerObjectMatchesByFilter("hltDisplacedmumuFilterDoubleMu4Jpsi").empty()) && (mu1.triggerObjectMatchesByFilter("hltVertexmumuFilterJpsiMuon").empty() || mu2.triggerObjectMatchesByFilter("hltVertexmumuFilterJpsiMuon").empty())) continue;}
+  //    if (!isMCstudy_) { if ((mu1.triggerObjectMatchesByFilter("hltDisplacedmumuFilterDoubleMu4Jpsi").empty() || mu2.triggerObjectMatchesByFilter("hltDisplacedmumuFilterDoubleMu4Jpsi").empty()) && (mu1.triggerObjectMatchesByFilter("hltVertexmumuFilterJpsiMuon").empty() || mu2.triggerObjectMatchesByFilter("hltVertexmumuFilterJpsiMuon").empty())) continue;}
 
       if(!mu1.isGlobalMuon() && !mu1.isTrackerMuon()) continue;
       if(!mu2.isGlobalMuon() && !mu2.isTrackerMuon()) continue;      
@@ -2722,7 +2731,7 @@ double bestVtxProbBplus = -1;
   } 
 
 	////////////////////// JET TAGGING Bs BEGIN //////////////////
-
+/*
 	vector<int> jetIndexesBs;
 	vector<int> sharedjetTrksBs;
 	double BprobMaxBjetBs=-1;
@@ -2730,13 +2739,13 @@ double bestVtxProbBplus = -1;
 	int sharedTrkCounterBs,BjetIndexBs=-1;
 		
    if( PVvtxCosTheta.isValid() &&  BsTrkRefs.size() == 4 ){
-/*
-			cout << "Bs track ref vec size "<< BsTrkRefs.size() << endl;
-		   cout << "Bs track ref 0 " << BsTrkRefs[0]->pt() << endl;
-			cout << "Bs track ref 1 " << BsTrkRefs[1]->pt() << endl;
-			cout << "Bs track ref 2 " << BsTrkRefs[2]->pt() << endl;
-			cout << "Bs track ref 2 " << BsTrkRefs[3]->pt() << endl;
-*/
+
+//			cout << "Bs track ref vec size "<< BsTrkRefs.size() << endl;
+//		   cout << "Bs track ref 0 " << BsTrkRefs[0]->pt() << endl;
+//			cout << "Bs track ref 1 " << BsTrkRefs[1]->pt() << endl;
+//			cout << "Bs track ref 2 " << BsTrkRefs[2]->pt() << endl;
+//			cout << "Bs track ref 2 " << BsTrkRefs[3]->pt() << endl;
+
 	for(size_t i=0; i<jets.size(); i++){ //loop over jets
 	  const reco::TrackRefVector & jetTrackVec = jets[i].associatedTracks();
  
@@ -2874,13 +2883,14 @@ double bestVtxProbBplus = -1;
 
   } //end of if BsPVindex and BsTrkRef vec size
 
+*/
 	////////////////////////// JET TAGGING Bs END /////////////////
 
 
 
 
 	////////////////////// JET TAGGING B+ BEGIN //////////////////
-
+/*
 	vector<int> jetIndexesBp;
 	vector<int> sharedjetTrksBp;
 	double BprobMaxBjetBp=-1;
@@ -2890,11 +2900,11 @@ double bestVtxProbBplus = -1;
 //	const Vertex &vtx = (*recVtxs)[PVCosThetaIndex];
    if( bsRootTree_->BplusPVindex_ != -999 &&  BpTrkRefs.size() == 3 ){
 
- /*  cout << "Bp track ref vec size, jee "<< BpTrkRefs.size() << endl;
-		   cout << "Bp track ref 0 " << BpTrkRefs[0]->pt() << endl;
-			cout << "Bp track ref 1 " << BpTrkRefs[1]->pt() << endl;
-			cout << "Bp track ref 2 " << BpTrkRefs[2]->pt() << endl;
-*/
+//      cout << "Bp track ref vec size, jee "<< BpTrkRefs.size() << endl;
+//		   cout << "Bp track ref 0 " << BpTrkRefs[0]->pt() << endl;
+//			cout << "Bp track ref 1 " << BpTrkRefs[1]->pt() << endl;
+//			cout << "Bp track ref 2 " << BpTrkRefs[2]->pt() << endl;
+
 	for(size_t i=0; i<jets.size(); i++){
 	  const reco::TrackRefVector & jetTrackVec = jets[i].associatedTracks();
  
@@ -3038,7 +3048,7 @@ double bestVtxProbBplus = -1;
 	} // end of if(BjetIndex!=-1 )
 
   } //end of if BpPVindex and BpTrkRef vec size
-
+*/
 	////////////////////////// JET TAGGING B+ END /////////////////
 
 
@@ -3094,7 +3104,19 @@ double bestVtxProbBplus = -1;
       bsRootTree_->BpTagPhi_ = tagMuon.phi();
       bsRootTree_->BpTagP_ = tagMuon.p();
       bsRootTree_->BpTagPF_ = tagMuon.isPFMuon();
-      if (isMCstudy_ && tagMuon.genParticlesSize()>0){ bsRootTree_->BpTagGENID_=tagMuon.genParticle()->pdgId();}
+      if(isMCstudy_ && tagMuon.genParticlesSize()>0){ 
+		  bsRootTree_->BpTagGENID_=tagMuon.genParticle()->pdgId();
+
+		  cout << "Bp tag mu id " <<bsRootTree_->BpTagGENID_ << endl;		
+			if(tagMuon.genParticle()->mother()!=0){
+				bsRootTree_->BpTagMomGENID_=tagMuon.genParticle()->mother()->pdgId();
+				cout << "Bp tag mu mom id " << bsRootTree_->BpTagMomGENID_ << endl;
+			}
+			if(tagMuon.genParticle()->mother()->mother()!=0){
+				bsRootTree_->BpTagGmomGENID_=tagMuon.genParticle()->mother()->mother()->pdgId();
+				cout << "Bp tag mu Gmom id " << bsRootTree_->BpTagGmomGENID_ << endl;
+			}
+		}			
     }
 
     if (bsoverlap==false && bstagged==false && PVvtxCosTheta.isValid()  ) {
@@ -3108,7 +3130,17 @@ double bestVtxProbBplus = -1;
       bsRootTree_->BsTagPhi_ = tagMuon.phi();
       bsRootTree_->BsTagP_ = tagMuon.p();
       bsRootTree_->BsTagPF_ = tagMuon.isPFMuon();
-      if (isMCstudy_ && tagMuon.genParticlesSize()>0){ bsRootTree_->BsTagGENID_=tagMuon.genParticle()->pdgId(); }
+      if(isMCstudy_ && tagMuon.genParticlesSize()>0){ 
+			bsRootTree_->BsTagGENID_=tagMuon.genParticle()->pdgId();
+			if(tagMuon.genParticle()->mother()!=0){
+				bsRootTree_->BsTagMomGENID_=tagMuon.genParticle()->mother()->pdgId();
+//				cout << "Bs tag mu mom " << tagMuon.genParticle()->mother()->pdgId() << endl; 				
+			}
+			if(tagMuon.genParticle()->mother()->mother()!=0){
+				bsRootTree_->BsTagGmomGENID_=tagMuon.genParticle()->mother()->mother()->pdgId();
+//				cout << "Bs tag mu Gmom " << tagMuon.genParticle()->mother()->mother()->pdgId() << endl; 		
+			} 
+		}
     }
     if (bdoverlap==false && bdtagged==false && BdPVvtxCosTheta.isValid()) {
       bdtagged=true;
@@ -3120,7 +3152,17 @@ double bestVtxProbBplus = -1;
       bsRootTree_->BdTagPhi_ = tagMuon.phi();
       bsRootTree_->BdTagP_ = tagMuon.p();
       bsRootTree_->BdTagPF_ = tagMuon.isPFMuon();
-      if (isMCstudy_ && tagMuon.genParticlesSize()>0){ bsRootTree_->BdTagGENID_=tagMuon.genParticle()->pdgId(); }
+      if (isMCstudy_ && tagMuon.genParticlesSize()>0){ 
+			bsRootTree_->BdTagGENID_=tagMuon.genParticle()->pdgId(); 
+			if(tagMuon.genParticle()->mother()!=0){
+				bsRootTree_->BdTagMomGENID_=tagMuon.genParticle()->mother()->pdgId();
+//				cout << "Bd tag mu mom " << tagMuon.genParticle()->mother()->pdgId() << endl; 				
+			}
+			if(tagMuon.genParticle()->mother()->mother()!=0){
+				bsRootTree_->BdTagGmomGENID_=tagMuon.genParticle()->mother()->mother()->pdgId();
+//				cout << "Bd tag mu Gmom " << tagMuon.genParticle()->mother()->mother()->pdgId() << endl; 		
+			} 	
+		}
     }
   }
   
@@ -3129,7 +3171,7 @@ double bestVtxProbBplus = -1;
    ////////////////////// Electron Tagging begin ////////////////////
 
 
-if(verbose_ == true){   std::cout<<"Begin electron tagging"<<std::endl;}
+  if(verbose_ == true){   std::cout<<"Begin electron tagging"<<std::endl;}
  // cout<<"Begin tagging"<<std::endl;
  // edm::ESHandle<TransientTrackBuilder> ttrackBuilder;
  // iSetup.get<TransientTrackRecord>().get("TransientTrackBuilder",ttrackBuilder);
@@ -3158,7 +3200,7 @@ if(verbose_ == true){   std::cout<<"Begin electron tagging"<<std::endl;}
     if (bpoverlapEle==false && bptaggedEle==false && BpPVvtxCosTheta.isValid()) {
       bptaggedEle=true;
 //	   cout << "Ele found ! " << endl;
-		 elecounter++;
+		elecounter++;
       bsRootTree_->BpTagEIP_ = (IPTools::absoluteImpactParameter3D(trkTagEleTT, BpPVvtxCosTheta)).second.value();  
 
 //	cout << "tagEle id " << tagEle.electronID("mvaNonTrigV0") << endl;
@@ -3173,8 +3215,20 @@ if(verbose_ == true){   std::cout<<"Begin electron tagging"<<std::endl;}
       bsRootTree_->BpTagEPhi_ = tagEle.phi();
       bsRootTree_->BpTagEP_ = tagEle.p();
 
-      if (isMCstudy_ && tagEle.genParticlesSize()>0){ bsRootTree_->BpTagEGENID_=tagEle.genParticle()->pdgId();}
+      if(isMCstudy_ && tagEle.genParticlesSize()>0){ 
 
+			bsRootTree_->BpTagEGENID_=tagEle.genParticle()->pdgId();
+
+	//		cout << 	"Bp tag ele id " << tagEle.genParticle()->pdgId() << endl; 	
+			if(tagEle.genParticle()->mother()!=0){
+				bsRootTree_->BpTagEMomGENID_=tagEle.genParticle()->mother()->pdgId();
+	//			cout << "Bp tag ele mom " << tagEle.genParticle()->mother()->pdgId() << endl; 				
+			}
+			if(tagEle.genParticle()->mother()->mother()!=0){
+				bsRootTree_->BpTagEGmomGENID_=tagEle.genParticle()->mother()->mother()->pdgId();
+	//			cout << "Bp tag ele Gmom " << tagEle.genParticle()->mother()->mother()->pdgId() << endl; 		
+			}
+		} 	
     }
 
 
@@ -3192,10 +3246,19 @@ if(verbose_ == true){   std::cout<<"Begin electron tagging"<<std::endl;}
       bsRootTree_->BsTagEEta_ = tagEle.eta();
       bsRootTree_->BsTagEPhi_ = tagEle.phi();
       bsRootTree_->BsTagEP_ = tagEle.p();
- //     bsRootTree_->BsTagPF_ = tagMuon.isPFMuon();
-      if (isMCstudy_ && tagEle.genParticlesSize()>0){ bsRootTree_->BsTagEGENID_=tagEle.genParticle()->pdgId(); 
-	//	 cout << "tag e id " << tagEle.genParticle()->pdgId() << endl; 
-}
+
+      if(isMCstudy_ && tagEle.genParticlesSize()>0){ 
+			 bsRootTree_->BsTagEGENID_=tagEle.genParticle()->pdgId(); 
+//			 cout << "tag e id " << tagEle.genParticle()->pdgId() << endl; 
+			if(tagEle.genParticle()->mother()!=0){
+				bsRootTree_->BsTagEMomGENID_=tagEle.genParticle()->mother()->pdgId();
+//				cout << "Bs tag ele mom " << tagEle.genParticle()->mother()->pdgId() << endl; 				
+			}
+			if(tagEle.genParticle()->mother()->mother()!=0){
+				bsRootTree_->BsTagEGmomGENID_=tagEle.genParticle()->mother()->mother()->pdgId();
+//				cout << "Bs tag ele Gmom " << tagEle.genParticle()->mother()->mother()->pdgId() << endl; 		
+			}
+		}
 
     }
 
@@ -3213,15 +3276,24 @@ if(verbose_ == true){   std::cout<<"Begin electron tagging"<<std::endl;}
       bsRootTree_->BdTagEPhi_ = tagEle.phi();
       bsRootTree_->BdTagEP_ = tagEle.p();
       //bsRootTree_->BdTagPF_ = tagEle.isPFMuon();
-      if (isMCstudy_ && tagEle.genParticlesSize()>0){ bsRootTree_->BdTagEGENID_=tagEle.genParticle()->pdgId(); }
+      if (isMCstudy_ && tagEle.genParticlesSize()>0){ 
+			bsRootTree_->BdTagEGENID_=tagEle.genParticle()->pdgId(); 
+
+			if(tagEle.genParticle()->mother()!=0){
+				bsRootTree_->BdTagEMomGENID_=tagEle.genParticle()->mother()->pdgId();
+	//			cout << "Bd tag ele mom " << tagEle.genParticle()->mother()->pdgId() << endl; 				
+			}
+			if(tagEle.genParticle()->mother()->mother()!=0){
+				bsRootTree_->BdTagEGmomGENID_=tagEle.genParticle()->mother()->mother()->pdgId();
+	//			cout << "Bd tag ele Gmom " << tagEle.genParticle()->mother()->mother()->pdgId() << endl; 		
+			}
+		}
 
     }
   }
 
   ////////////////////// Electron Tagging end ///////////////////////
 
-//cout << "Bplus charge " << bsRootTree_->BplusCharge_ << endl; 
-//cout << "Bp matched " <<  bsRootTree_->isMatchedBplus_ << endl;	
   //if ( MinBVtxHyp1>0 || minVtxP>0 )
   //if ((isMCstudy_ && (bsRootTree_->ChannelID_==1 || bsRootTree_->ChannelID_==2 || bsRootTree_->ChannelID_==3 ||  bsRootTree_->ChannelID_==4)) || !isMCstudy_)
     if(verbose_ == true){   std::cout<<"Fill the TTree"<<std::endl;}
@@ -3428,7 +3500,263 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
          } 	
        } // end of  B+ -> Jpsi K+ pi+ pi- channel search	
      } // end of Bplus search      
+
  /////////////////////// Bp Matching //////////////////
+
+
+  //// Bd MC id written by Terhi  //////////////
+
+  if(abs(MC_particleID) == 511 && abs(genBsCand.mother(0)->pdgId()) != 511 ) {
+	
+	  bool isBdJpsiMC=false;
+	  bool isBdKstar=false;	
+	  bool isBdKstarbar=false;	
+	  bool isMixedBd = false;	
+	  	
+	  const Candidate *genBdCand;
+
+	  double bdmomx=genBsCand.px();
+     double bdmomy=genBsCand.py();
+     double bdmomz=genBsCand.pz();
+
+	  double bdpvx=genBsCand.vx();
+     double bdpvy=genBsCand.vy();
+     double bdpvz=genBsCand.vz();
+
+	  double bdsvx = 0; 
+	  double bdsvy = 0;
+	  double bdsvz = 0;
+
+     const Candidate *BdMuPlus=0;
+     const Candidate *BdMuMinus=0;
+     const Candidate *BdKPlus=0;
+     const Candidate *BdKMinus=0;
+
+	  if( genBsCand.numberOfDaughters() == 1 && abs( genBsCand.daughter(0)->pdgId() ) == 511 ){ 
+			isMixedBd = true;
+			genBdCand = genBsCand.daughter(0); 
+//			cout << "mixed "  << endl;
+//			const Candidate *genBdCand = genBsCand.daughter(0); 
+//			const Candidate  &genBdCand = *(genBsCand.daughter(0)); 
+
+	  }
+	
+	  else {genBdCand = &genBsCand; }
+/*
+//		cout << " # B0 daus "  << genBdCand->numberOfDaughters() << endl; 
+		for(size_t l = 0; l < genBdCand->numberOfDaughters(); l++){
+	//		cout << "B0 dau id "  << genBdCand->daughter(l)->pdgId() << endl;
+			if(abs(genBdCand->daughter(l)->pdgId()) == 313 && genBdCand->daughter(l)->numberOfDaughters() > 2){
+					cout << "KStar more than 2 daus " << endl;
+				for(size_t m = 0; m < genBdCand->daughter(l)->numberOfDaughters(); m++){
+					 cout << "B0 Kstar dau id "  << genBdCand->daughter(l)->daughter(m)->pdgId() << endl;
+				}
+			} 
+		}
+*/	 
+	 
+
+	  if( genBdCand->numberOfDaughters() == 2 && abs( genBdCand->daughter(0)->pdgId() ) != 511 && abs( genBdCand->daughter(1)->pdgId() ) != 511 ){
+	
+		for(size_t l = 0; l < genBdCand->numberOfDaughters(); l++){
+			const Candidate * genBdDau =genBdCand->daughter(l);
+
+			// Jpsi search
+			if( abs(genBdDau->pdgId() ) == 443 && genBdDau->numberOfDaughters() > 1 ){
+				int genBdJpsiMuP_Id = 0;
+				int genBdJpsiMuM_Id = 0;
+
+				for(size_t m = 0; m < genBdDau->numberOfDaughters(); m++){
+					if(genBdDau->daughter(m)->pdgId() == 13) {
+						genBdJpsiMuP_Id = genBdDau->daughter(m)->pdgId(); 
+						BdMuPlus = genBdDau->daughter(m);
+					}
+					if(genBdDau->daughter(m)->pdgId() == -13) {
+						genBdJpsiMuM_Id = genBdDau->daughter(m)->pdgId();
+						BdMuMinus = genBdDau->daughter(m); 
+					}
+				}			
+
+				if( genBdJpsiMuP_Id == 13 && genBdJpsiMuM_Id == -13){
+
+					isBdJpsiMC = true;
+
+				}			
+			} // end of Jpsi dau search
+
+
+			// Kstar search
+			if( abs(genBdDau->pdgId() ) == 313  ){
+		
+				int genBdPi = 0;
+				int genBdK =0;			
+	
+			  for(size_t n=0; n < genBdDau->numberOfDaughters(); n++){
+
+					int genBdKDauId = genBdDau->daughter(n)->pdgId();
+
+					if(abs(genBdKDauId) == 211){
+						genBdPi = genBdKDauId;		
+						if(genBdKDauId < 0){BdKMinus = genBdDau->daughter(n); }
+						else BdKPlus = genBdDau->daughter(n);		
+						bsRootTree_->BdKstarPion_ = genBdKDauId;							
+					}
+
+					if(abs(genBdKDauId) == 321){
+						genBdK = genBdKDauId;		
+						if(genBdKDauId < 0){BdKMinus = genBdDau->daughter(n); }
+						else BdKPlus = genBdDau->daughter(n);
+						bsRootTree_->BdKstarKaon_ = genBdKDauId;										
+					}
+				}
+
+				if( genBdK == 321 && genBdPi == -211) { //pi- and K+  
+					isBdKstar = true;
+					//cout << " K* found" << endl; 
+				}
+
+				if( genBdK == -321 && genBdPi == 211) { //pi+ and K-  
+					isBdKstarbar = true;
+					//cout << " K*bar found" << endl; 
+				}
+			   				
+			} // end of K* dau search
+		} // end of dau loop
+
+	 } // end of if genBsCand.numberOfDaughters() == 2 
+			
+	 if(isBdJpsiMC == true && (isBdKstarbar == true || isBdKstar == true) ){
+
+		bsRootTree_->BdIniFlavour_=(int)(MC_particleID/511);
+		bsRootTree_->BdEndFlavour_=(int)(genBdCand->pdgId()/511);
+/*
+		if(isMixedBd == true){ 
+
+			cout << "IniFlavour "  << 511*bsRootTree_->BdIniFlavour_ << endl;
+			cout << "FinalFlavour " << 511*bsRootTree_->BdEndFlavour_ << endl; 
+		}
+	
+*/
+		int flavcheck =0;	
+		if(isMixedBd == true){ flavcheck  = genBdCand->mother(0)->pdgId() ; }		
+		else flavcheck = genBdCand->pdgId();
+
+		if(511*bsRootTree_->BdIniFlavour_ != flavcheck ) { 
+			cout << "Odd flavour " << endl;
+		}
+
+		if(isBdKstarbar == true ){ bsRootTree_->BdChannelID_=2;}
+		if(isBdKstar == true ){ bsRootTree_->BdChannelID_=1; }
+
+	   bdsvx=genBdCand->daughter(0)->vx();
+      bdsvy=genBdCand->daughter(0)->vy();
+      bdsvz=genBdCand->daughter(0)->vz();
+
+
+		
+		// calculate gen ctau 2D
+      //double Lxy2D = ((bssvx-bspvx)*bsmomx+(bssvy-bspvy)*bsmomy);
+      double Lxy2D = sqrt(pow(bdsvx-bdpvx,2)+pow(bdsvy-bdpvy,2));
+      bsRootTree_->BdCt2DMC_ = Lxy2D * 5.2795/sqrt(bdmomx*bdmomx+bdmomy*bdmomy);
+      // calculate gen ctau 3D
+      //double Lxy3D = ((bssvx-bspvx)*bsmomx+(bssvy-bspvy)*bsmomy+(bssvz-bspvz)*bsmomz);
+      double Lxy3D = sqrt(pow(bdsvx-bdpvx,2)+pow(bdsvy-bdpvy,2)+pow(bdsvz-bdpvz,2));
+      bsRootTree_->BdCt3DMC_ = Lxy3D * 5.2795/sqrt(bdmomx*bdmomx+bdmomy*bdmomy+bdmomz*bdmomz);
+
+		//cout << "BdCt2DMC_ " << bsRootTree_->BdCt2DMC_ << " BdCt3DMC_ " << bsRootTree_->BdCt3DMC_ << endl;
+	
+      TLorentzVector PMuPlus;
+      TLorentzVector PMuMinus;	      
+	   TLorentzVector PKPlus;
+	   TLorentzVector PKMinus;
+
+      PMuPlus.SetXYZM(BdMuPlus->px(),BdMuPlus->py(),BdMuPlus->pz(),BdMuPlus->mass());
+      PMuMinus.SetXYZM(BdMuMinus->px(),BdMuMinus->py(),BdMuMinus->pz(),BdMuMinus->mass());
+      PKPlus.SetXYZM(BdKPlus->px(),BdKPlus->py(),BdKPlus->pz(),BdKPlus->mass());
+	   PKMinus.SetXYZM(BdKMinus->px(),BdKMinus->py(),BdKMinus->pz(),BdKMinus->mass());
+	     
+	  // boosting in JPsi restframe
+	  TLorentzVector pjpsi;
+	  pjpsi = PMuPlus + PMuMinus;
+	  TLorentzVector pphi;
+	  pphi = PKPlus + PKMinus;
+	      
+	  // the betas for the boost
+	  TVector3 p3_JPsi;
+	  p3_JPsi = pjpsi.Vect();
+	  p3_JPsi *= -1./pjpsi.E();
+	    
+	  // the boost matrix
+	  TLorentzRotation boost_jpsi(p3_JPsi);
+	  TLorentzVector p_JPsi_JPsi;
+	  p_JPsi_JPsi = boost_jpsi.VectorMultiplication(pjpsi);
+	     
+	  // the different momenta in the new frame
+	  TLorentzVector p_JPsi_muplus;
+	  TLorentzVector p_JPsi_Kplus;
+	  TLorentzVector p_JPsi_phi;
+	      
+	  p_JPsi_muplus = boost_jpsi.VectorMultiplication(PMuPlus);
+	  p_JPsi_Kplus = boost_jpsi.VectorMultiplication(PKPlus);
+     p_JPsi_phi = boost_jpsi.VectorMultiplication(pphi);	      
+	      
+	  // the 3-momenta
+	  TVector3 p3_JPsi_muplus;
+	  p3_JPsi_muplus = p_JPsi_muplus.Vect();
+	  TVector3 p3_JPsi_Kplus;
+	  p3_JPsi_Kplus = p_JPsi_Kplus.Vect();
+	  TVector3 p3_JPsi_phi;
+	  p3_JPsi_phi = p_JPsi_phi.Vect();
+	      
+	  // coordinate system
+	  TVector3 x,y,z;
+	  x = p3_JPsi_phi.Unit();
+	  y = p3_JPsi_Kplus.Unit() - (x * (x * p3_JPsi_Kplus.Unit()));
+	  y = y.Unit();
+	  z = x.Cross(y);
+	   
+     double Bdangle_costheta=p3_JPsi_muplus.Unit() * z;   
+	  bsRootTree_->BdcosthetaMC_ = Bdangle_costheta;
+           
+	  double cos_phi = p3_JPsi_muplus.Unit() * x / TMath::Sqrt(1 - Bdangle_costheta*Bdangle_costheta);
+	  double sin_phi = p3_JPsi_muplus.Unit() * y / TMath::Sqrt(1 - Bdangle_costheta*Bdangle_costheta);
+	  double Bdangle_phi = TMath::ACos(cos_phi);
+	  if (sin_phi < 0){
+	    Bdangle_phi =  -Bdangle_phi;
+          }
+	  bsRootTree_->BdphiMC_ = Bdangle_phi;
+	      
+	  // boosting in phi restframe
+	  TVector3 p3_phi;
+	  p3_phi = pphi.Vect();
+	  p3_phi *= -1./pphi.E();
+	      
+	  // the boost matrix
+	  TLorentzRotation boost_phi(p3_phi);
+	  TLorentzVector p_phi_phi;
+	  p_phi_phi = boost_phi.VectorMultiplication(pphi);
+	      
+	  // the different momenta in the new frame
+	  TLorentzVector p_phi_Kplus;
+	  TLorentzVector p_phi_JPsi;
+	  TLorentzVector p_phi_Bs;
+	      
+	  p_phi_Kplus = boost_phi.VectorMultiplication(PKPlus);
+	  p_phi_JPsi = boost_phi.VectorMultiplication(pjpsi);
+	      
+	  // the 3-momenta
+	  TVector3 p3_phi_Kplus;
+	  p3_phi_Kplus = p_phi_Kplus.Vect();
+	  TVector3 p3_phi_JPsi;
+	  p3_phi_JPsi = p_phi_JPsi.Vect();
+	  bsRootTree_->BdcospsiMC_ = -1 * p3_phi_Kplus.Unit() * p3_phi_JPsi.Unit();
+		
+	 }	// end of if(isBdJpsiMC == true && (isBdKstarbar == true || isBdKstar == true) )
+
+  } // end of if(abs(MC_particleID) == 511 && abs(genBsCand.mother(0)->pdgId()) != 511) 
+
+  ////End of Bd MC id written by Terhi
+
 
 
     // if this particle id is in the list (i.e. if it is a B meson)
@@ -3439,15 +3767,9 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
       bool hasBDaughter=0;
       int numBsDaughters = genBsCand.numberOfDaughters();      
       for(int idau=0; idau < numBsDaughters; idau++) 
-	if( listOfBmesonIds.find( abs(genBsCand.daughter(idau)->pdgId())) != listOfBmesonIds.end() ) hasBDaughter=1;
+			if( listOfBmesonIds.find( abs(genBsCand.daughter(idau)->pdgId())) != listOfBmesonIds.end() ) hasBDaughter=1;
+		
 /*
-      if( abs(MC_particleID)==511) {
-        cout<<"Mother of "<<MC_particleID<<":"<<genBsCand.mother(0)->pdgId()<<endl;
-      }
-      if( abs(MC_particleID)==531) {
-        cout<<"Mother of "<<MC_particleID<<":"<<genBsCand.mother(0)->pdgId()<<endl;
-      }
- */  
       if( abs(genBsCand.mother(0)->pdgId()) != 511 && abs(MC_particleID)==511) {
         const Candidate * genBsCand2 =genBsCand.daughter(0);
         bool isBdKstarKmPip=false;
@@ -3468,11 +3790,14 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
         const Candidate *bdkplus=0;
         const Candidate *bdkminus=0;
         int BdHasMixed=-1;
+		 
 
         if (MC_particleID==(-1)*genBsCand.daughter(0)->pdgId()) {
+
           //bsRootTree_->BdEndFlavour_=(int)(genBsCand.daughter(0)->pdgId()/511);
           BdHasMixed=1;
           if (genBsCand2->numberOfDaughters()==2) {
+//
             if (abs(genBsCand2->daughter(0)->pdgId())==443 && abs(genBsCand2->daughter(1)->pdgId())==313) {
               if (genBsCand2->daughter(0)->numberOfDaughters()>1) 
                 if (abs(genBsCand2->daughter(0)->daughter(0)->pdgId())==13 || abs(genBsCand2->daughter(0)->daughter(1)->pdgId())==13) {
@@ -3489,6 +3814,8 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
                 if (genBsCand2->daughter(1)->daughter(1)->pdgId()<0) {bdkminus=genBsCand2->daughter(1)->daughter(1); bdkplus=genBsCand2->daughter(1)->daughter(0);}
               }
             }
+
+//
             if (abs(genBsCand2->daughter(1)->pdgId())==443 && abs(genBsCand2->daughter(0)->pdgId())==313) {
               if (genBsCand2->daughter(1)->numberOfDaughters()>1)
                 if (abs(genBsCand2->daughter(1)->daughter(0)->pdgId())==13 || abs(genBsCand2->daughter(1)->daughter(1)->pdgId())==13) {
@@ -3505,11 +3832,13 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
                 if (genBsCand2->daughter(0)->daughter(1)->pdgId()<0) {bdkminus=genBsCand2->daughter(0)->daughter(1); bdkplus=genBsCand2->daughter(0)->daughter(0);}
               }
             }
+//
             bdsvx=genBsCand2->daughter(0)->vx();
             bdsvy=genBsCand2->daughter(0)->vy();
             bdsvz=genBsCand2->daughter(0)->vz();
-          }
-        } else {
+          } // number of daus = 2 if
+        } 
+			else {
           //bsRootTree_->BdEndFlavour_=(int)(MC_particleID/511);
           if (genBsCand.numberOfDaughters()==2) {
             if (abs(genBsCand.daughter(0)->pdgId())==443 && abs(genBsCand.daughter(1)->pdgId())==313) {
@@ -3645,80 +3974,9 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
 	  TVector3 p3_phi_JPsi;
 	  p3_phi_JPsi = p_phi_JPsi.Vect();
 	  bsRootTree_->BdcospsiMC_ = -1 * p3_phi_Kplus.Unit() * p3_phi_JPsi.Unit();
-        }	
-        bsRootTree_->BdIniFlavour_=(int)(MC_particleID/511);
-      }
-/*
-      bool isPosMu=0, isNegMu=0, isJpsi=0, isKplus=0, isNegPi=0, isPosPi=0, isKstar = 0, isNeutralPi=0; 
-
-      if( abs(MC_particleID) == 521 ){
-
-	cout << "Bplus MC matching! " << endl; 	
-	int numBplusDaughters = genBsCand.numberOfDaughters();
-	int jpsiIndex = -5;
-	int kstarIndex = -5;	
-   int kpmIndex = -5;
-	//checking of decay channels B+ -> Jpsi(mu+,mu-) K+ and B+ -> Jpsi K*(K+, pi0)  
-	if(numBplusDaughters == 2){ //check if Bplus has 2 daughters
-          for(int k = 0; k < numBplusDaughters; k++ ){ //check if the daughter's are J/psi and (K+ or K*)
-	    if( genBsCand.daughter(k)->pdgId() == 443){ 
-	      isJpsi = 1;
-	      jpsiIndex = k;
-     	    }  
-	    else if( abs(genBsCand.daughter(k)->pdgId()) == 321 ){ isKplus = 1; kpmIndex = k; }
-	    else if( genBsCand.daughter(k)->pdgId() == 323 ){ 
-	      isKstar = 1; 
-	      kstarIndex = k;	
-	    }
-	  }
-
-	  if( isJpsi == 1 && ( isKplus == 1 || isKstar == 1 ) ){	
-	    //check if J/psi has two muon daughters 
-	    const Candidate *JpsiCand = genBsCand.daughter(jpsiIndex);
-      	    for(unsigned int j = 0; j < JpsiCand->numberOfDaughters(); j++ ){ //check if Jpsi daughters are mu+ and mu-
-	      const Candidate * Jpsidau = JpsiCand->daughter(j);
-	      if(Jpsidau->pdgId() == 13 ){ isNegMu = 1; }
-              else if (Jpsidau->pdgId() == -13 ){ isPosMu = 1; }
-	    } 
-				//if(isPosMu != 1 &&  isNegMu!= 1) continue;
-            if( isPosMu == 1 && isNegMu == 1 && isKplus == 1 ){
-	      bsRootTree_->BplusDecayChannel_ = 1;	// channel 1 = B+ -> Jpsi(mu+,mu-) K+
-			cout << "Jpsi Cand id " << genBsCand.daughter(jpsiIndex) << endl;
-			cout << "Kaon Cand id " << genBsCand.daughter(kpmIndex) << endl;
-       	    }						
-	   isKplus = 0; 
-	   if(isKstar == 1){
-	     const Candidate *Kstar = genBsCand.daughter(kstarIndex);
-  	     if (Kstar->numberOfDaughters() == 2){							
-  	       for(unsigned int j = 0; j < Kstar->numberOfDaughters(); j++ ){ //check if Kstar daughters are Kplus and neutral pion
-	         const Candidate * Kstardau = Kstar->daughter(j);
-		 if(Kstardau->pdgId() == 321 ){ isKplus = 1; }
-		 else if (Kstardau->pdgId() == 111 ){ isNeutralPi = 1; }
-	       } 
-
-	       if( isNegMu == 1 && isPosMu == 1 && isNeutralPi == 1 && isKplus == 1 ){
-	         bsRootTree_->BplusDecayChannel_ = 3; // channel 3 = B+ -> Jpsi K*(K+ pi0) 
-	       }
-	     }
-	   }
-         }
-       }
-     // end of B+ -> Jpsi(mu+,mu-) K+ channel search					
-
-	//checking of decay channel B+ -> Jpsi K+ pi+ pi- 	
-       if(numBplusDaughters == 4){	
-         for(int j = 0; j < numBplusDaughters; j++ ){ //check if Bplus has 4 daughters
-	   if(genBsCand.daughter(j)->pdgId() == 443 ){ isJpsi = 1; } //check if the daughter's are J/psi, pi+, pi- and K+
-           else if(genBsCand.daughter(j)->pdgId() == 321 ){ isKplus = 1; }
-	   else if(genBsCand.daughter(j)->pdgId() == 211 ){ isPosPi = 1; }
-	   else if(genBsCand.daughter(j)->pdgId() == -211 ){ isNegPi = 1; }  			
-	 }  
-
-	 if(isJpsi == 1 && isKplus == 1 && isPosPi == 1 && isNegPi == 1 ){
-	   bsRootTree_->BplusDecayChannel_ = 2;	
-         } 	
-       } // end of  B+ -> Jpsi K+ pi+ pi- channel search	
-     } // end of Bplus search      
+        }	// ed of if(MC_particleID==(-1)*genBsCand.daughter(0)->pdgId())
+       // bsRootTree_->BdIniFlavour_=(int)(MC_particleID/511);
+      } // end of if(BID = 511)
 */
  
       if( abs(genBsCand.mother(0)->pdgId()) != 531 && abs(MC_particleID)==531) {
@@ -3775,6 +4033,19 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
           //bsRootTree_->BsEndFlavour_=(int)(genBsCand.daughter(0)->pdgId()/531);
           //cout<<"Mixing: "<<bsRootTree_->BsEndFlavour_<<endl;
           const Candidate * genBsCand2 =genBsCand.daughter(0);
+ /// cross check code			 
+			
+			 if(abs(genBsCand2->daughter(0)->pdgId() ) == 333 ){ 
+					if(genBsCand2->daughter(0)->numberOfDaughters() > 2 ){
+						cout << "Bs phi more than 2 daus " << endl;
+						for(size_t n =0; n<genBsCand2->daughter(0)->numberOfDaughters(); n++ ){
+							cout << "Bs phi dau " << genBsCand2->daughter(0)->daughter(n)->pdgId() << endl;
+						}
+					}
+			 }
+ // cross check code
+
+
           cout<<"Mixed - First vertex:"<<genBsCand.vx()<<" "<<genBsCand.vy()<<" "<<genBsCand.vz()<<" Second Vertex:"<<genBsCand2->vx()<<" "<<genBsCand2->vy()<<" "<<genBsCand2->vz()<<endl;		
           int numBsDau = genBsCand2->numberOfDaughters();
           for (int ghepensimi=0; ghepensimi<numBsDau; ghepensimi++) {
@@ -4152,7 +4423,7 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
 
 	      //	      cout << "(costheta,phi,cospsi): "<< p3_JPsi_muplus.Unit() * z << "," << angle_phi << "," << -1 * p3_phi_Kplus.Unit() * p3_phi_JPsi.Unit() << ")" << endl;
 	      
-	    }
+	    } // end of if((abs(MC_particleID)== 531 && numBsDaughters == 2 && Jpsi && Phi && mup && mum && Kp && Km) 
 	    
 	  }// loop Bs daughters daughters
 	} // loop Bs daughters
@@ -4183,11 +4454,11 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
     // check if there is a Jpsi (prompt or non-prompt) in the event
     if(absMC_particleID == 443 ) bsRootTree_->isGenJpsiEvent_ = 1;
     
-  }
+  } // end of genBscand loop
 
   bsRootTree_->GenNumberOfBdecays_ = iNumberOfBdecays;
 
-}
+} // end of fillMCinfo 
 
 
 

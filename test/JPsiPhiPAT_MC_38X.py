@@ -8,18 +8,19 @@ process.source = cms.Source("PoolSource",
 			    duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
 			    skipEvents = cms.untracked.uint32(0),
 			    fileNames = cms.untracked.vstring(
-      
-	#'file:/tmp/terhi/step2_RAW2DIGI_L1Reco_RECO_219_1_HIi.root' #ei toimi 5_3_3_patch1
-#	'file:/tmp/terhi/F895D87A-BDDC-E111-A4DA-00259073E346.root' #toimii 5_3_3_patch1
+ #  'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BuToJPsiK_K2MuPtEtaEtaFilter_8TeV-pythia6-evtgen/AODSIM/PU_S10_START53_V7A-v2/0000/001253E4-95DD-E111-865A-E41F131817F8.root'
 
-#	'file:/tmp/terhi/TagTestiBplusMC/2EADB8B3-63DF-E111-B174-008CFA0008C4.root' #Bplus toimii
-#	'file:/tmp/terhi/58967E7B-47DD-E111-9AAF-E61F13191CAB.root' #Bplus toimii 5_3_3_patch1
-#'file:/tmp/terhi/mcData2012/F4E74846-478E-E011-AF4C-0017A4770414.root'#ei toimi 5_3_3_patch1
-	#'file:/tmp/gfedi/step2_RAW2DIGI_L1Reco_RECO_27_1_dcf.root'
-        #'file:/tmp/gfedi/step2_RAW2DIGI_L1Reco_RECO_219_1_HIi.root',
+#'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BdToKstarJPsi_EtaPtFilter_8TeV-pythia6-evtgen/AODSIM/PU_RD2_START53_V19F-v1/00000/0002ECCA-AD4A-E311-99EE-1CC1DE050110.root'
+
+#'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BdToJpsiKstar_EtaPtFilter_8TeV-pythia6-evtgen/AODSIM/PU_S10_START53_V7C-v1/20000/00E29AAC-1465-E211-A82C-00266CFFCD00.root'
+
+#'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BsToJpsiPhiV2_BFilter_TuneZ2star_8TeV-pythia6-evtgen/AODSIM/PU_RD2_START53_V19F-v3/20000/00DAA62A-868E-E311-9185-E0CB4E29C4FD.root'
+
+#	'file:/afs/cern.ch/work/t/terhi/private/BuMCtest.root' 
+
 #        'file:/tmp/terhi/BsMCTestFile.root'
-		'file:/tmp/terhi/BuMCtest.root'
-#		'file:/tmp/terhi/BsMCtest.root'
+#		'file:/afs/cern.ch/work/t/terhi/private/BuMCtest.root'
+#		'file:/tmp/terhi/JpsiMCtest.root'
 	)
 )
 
@@ -28,8 +29,8 @@ process.source = cms.Source("PoolSource",
 process.load("Configuration.Geometry.GeometryIdeal_cff")
 #process.load("Configuration.StandardSequences.Geometry_cff")
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-#process.GlobalTag.globaltag = cms.string('START311_V2::All')
-process.GlobalTag.globaltag = cms.string('START53_V7A::All')
+process.GlobalTag.globaltag = cms.string('START53_V19F::All')
+#process.GlobalTag.globaltag = cms.string('START53_V7A::All')
 process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("Configuration.StandardSequences.Reconstruction_cff")
 
@@ -176,7 +177,7 @@ process.bsVertexAnalysis = cms.EDAnalyzer("BsToJpsiPhiAnalysis",
                                           BdLowerMassCutAfterFit = cms.double(4.9),
                                           BdUpperMassCutAfterFit = cms.double(5.7),
                                           verbose                = cms.bool( False ), 
-                                          outputFile = cms.untracked.string("BpMCtest.root"),
+                                         outputFile = cms.untracked.string("BdMCtest.root"),
                                           BsPDGMass = cms.double(5.3699),
                                           BdPDGMass = cms.double(5.2794),
                                           BpPDGMass = cms.double(5.2790)

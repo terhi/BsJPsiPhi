@@ -90,6 +90,8 @@ bsTree_->Branch("BpTagPhi",&BpTagPhi_,"BpTagPhi/D");
 bsTree_->Branch("BpTagP",&BpTagP_,"BpTagP/D");
 bsTree_->Branch("BpTagPF",&BpTagPF_,"BpTagPF/I");
 bsTree_->Branch("BpTagGENID",&BpTagGENID_,"BpTagGENID/I");
+bsTree_->Branch("BpTagMomGENID",&BpTagMomGENID_,"BpTagMomGENID/I");
+bsTree_->Branch("BpTagGmomGENID",&BpTagGmomGENID_,"BpTagGMomGENID/I");
 
 bsTree_->Branch("BsTagIP",&BsTagIP_,"BsTagIP/D");
 bsTree_->Branch("BsTagPt",&BsTagPt_,"BsTagPt/D");
@@ -99,6 +101,8 @@ bsTree_->Branch("BsTagPhi",&BsTagPhi_,"BsTagPhi/D");
 bsTree_->Branch("BsTagP",&BsTagP_,"BsTagP/D");
 bsTree_->Branch("BsTagPF",&BsTagPF_,"BsTagPF/I");
 bsTree_->Branch("BsTagGENID",&BsTagGENID_,"BsTagGENID/I");
+bsTree_->Branch("BsTagMomGENID",&BsTagMomGENID_,"BsTagMomGENID/I");
+bsTree_->Branch("BsTagGmomGENID",&BsTagGmomGENID_,"BsTagGMomGENID/I");
 
 bsTree_->Branch("BdTagIP",&BdTagIP_,"BdTagIP/D");
 bsTree_->Branch("BdTagPt",&BdTagPt_,"BdTagPt/D");
@@ -108,6 +112,8 @@ bsTree_->Branch("BdTagPhi",&BdTagPhi_,"BdTagPhi/D");
 bsTree_->Branch("BdTagP",&BdTagP_,"BdTagP/D");
 bsTree_->Branch("BdTagPF",&BdTagPF_,"BdTagPF/I");
 bsTree_->Branch("BdTagGENID",&BdTagGENID_,"BdTagGENID/I");
+bsTree_->Branch("BdTagMomGENID",&BdTagMomGENID_,"BdTagMomGENID/I");
+bsTree_->Branch("BdTagGmomGENID",&BdTagGmomGENID_,"BdTagGMomGENID/I");
 // Muon tagging //
 
 // Electron tagging //
@@ -121,6 +127,9 @@ bsTree_->Branch("BpTagEEta",&BpTagEEta_,"BpTagEEta/D");
 bsTree_->Branch("BpTagEPhi",&BpTagEPhi_,"BpTagEPhi/D");
 bsTree_->Branch("BpTagEP",&BpTagEP_,"BpTagEP/D");
 bsTree_->Branch("BpTagEGENID",&BpTagEGENID_,"BpTagEGENID/I");
+bsTree_->Branch("BpTagEMomGENID",&BpTagEMomGENID_,"BpTagEMomGENID/I");
+bsTree_->Branch("BpTagEGmomGENID",&BpTagEGmomGENID_,"BpTagEGMomGENID/I");
+
 
 bsTree_->Branch("BsTagEIDNonTrig",&BsTagEIDNonTrig_,"BsTagEIDNonTrig/D");
 bsTree_->Branch("BsTagEIDTrig",&BsTagEIDTrig_,"BsTagEIDTrig/D");
@@ -132,6 +141,9 @@ bsTree_->Branch("BsTagEEta",&BsTagEEta_,"BsTagEEta/D");
 bsTree_->Branch("BsTagEPhi",&BsTagEPhi_,"BsTagEPhi/D");
 bsTree_->Branch("BsTagEP",&BsTagEP_,"BsTagEP/D");
 bsTree_->Branch("BsTagEGENID",&BsTagEGENID_,"BsTagEGENID/I");
+bsTree_->Branch("BsTagEMomGENID",&BsTagEMomGENID_,"BsTagEMomGENID/I");
+bsTree_->Branch("BsTagEGmomGENID",&BsTagEGmomGENID_,"BsTagEGMomGENID/I");
+
 
 bsTree_->Branch("BdTagEIP",&BdTagEIP_,"BdTagEIP/D");
 bsTree_->Branch("BdTagEPt",&BdTagEPt_,"BdTagEPt/D");
@@ -143,6 +155,8 @@ bsTree_->Branch("BdTagEGENID",&BdTagEGENID_,"BdTagEGENID/I");
 bsTree_->Branch("BdTagEIDNonTrig",&BdTagEIDNonTrig_,"BdTagEIDNonTrig/D");
 bsTree_->Branch("BdTagEIDTrig",&BdTagEIDTrig_,"BdTagEIDTrig/D");
 bsTree_->Branch("BdTagEIDTrigNoIP",&BdTagEIDTrigNoIP_,"BdTagEIDTrigNoIP/D");
+bsTree_->Branch("BdTagEMomGENID",&BdTagEMomGENID_,"BdTagEMomGENID/I");
+bsTree_->Branch("BdTagEGmomGENID",&BdTagEGmomGENID_,"BdTagEGMomGENID/I");
 
 // Electron tagging //
 
@@ -262,7 +276,10 @@ bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v3"	  , &triggerbit_Dimuon0_Jpsi_v3_,
 bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v5"	  , &triggerbit_Dimuon0_Jpsi_v5_,     "triggerbit_Dimuon0_Jpsi_v5/I"  );                        
 bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v6"	  , &triggerbit_Dimuon0_Jpsi_v6_,     "triggerbit_Dimuon0_Jpsi_v6/I"  );                        
 bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v9"	  , &triggerbit_Dimuon0_Jpsi_v9_,     "triggerbit_Dimuon0_Jpsi_v9/I"  );                        
-bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v10"	  , &triggerbit_Dimuon0_Jpsi_v10_,     "triggerbit_Dimuon0_Jpsi_v10/I"  );                        
+bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v10"	  , &triggerbit_Dimuon0_Jpsi_v10_,     "triggerbit_Dimuon0_Jpsi_v10/I"  ); 
+
+bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_v14"	  , &triggerbit_Dimuon0_Jpsi_v14_,     "triggerbit_Dimuon0_Jpsi_v14/I"  ); 
+                       
 bsTree_->Branch(  "triggerbit_Dimuon10_Barrel"	  , &triggerbit_Dimuon10_Barrel_,     "triggerbit_Dimuon10_Barrel/I"  );                        
 bsTree_->Branch(  "triggerbit_Dimuon13_Barrel"	  , &triggerbit_Dimuon13_Barrel_,     "triggerbit_Dimuon13_Barrel/I"  );                        
 bsTree_->Branch(  "triggerbit_Dimuon0_Jpsi_Muon_v15"      , &triggerbit_Dimuon0_Jpsi_Muon_v15_,     "triggerbit_Dimuon0_Jpsi_Muon_v15/I"  );
@@ -647,7 +664,12 @@ bsTree_->Branch(  "BsCt3DMC"			  , &BsCt3DMC_,                              "BsC
 bsTree_->Branch(  "BsCt2DMC"			  , &BsCt2DMC_,                              "BsCt2DMC/D");                         
 bsTree_->Branch(  "BsIniFlavour"			  , &BsIniFlavour_,                              "BsIniFlavour/I");                         
 bsTree_->Branch(  "BsEndFlavour"			  , &BsEndFlavour_,                              "BsEndFlavour/I");                         
-bsTree_->Branch(  "BdIniFlavour"			  , &BdIniFlavour_,                              "BdIniFlavour/I");                         
+bsTree_->Branch(  "BdIniFlavour"			  , &BdIniFlavour_,                              "BdIniFlavour/I");      
+bsTree_->Branch(  "BdKstarPion"			  , &BdKstarPion_,                              "BdKstarPion/I");      
+bsTree_->Branch(  "BdKstarKaon"			  , &BdKstarKaon_,                              "BdKstarKaon/I");      
+
+
+                   
 bsTree_->Branch(  "BdEndFlavour"			  , &BdEndFlavour_,                              "BdEndFlavour/I");                         
 bsTree_->Branch(  "ChannelID"			  , &ChannelID_,                              "ChannelID_/I");                         
 bsTree_->Branch(  "BdChannelID"			  , &BdChannelID_,                              "BdChannelID_/I");                         
@@ -685,7 +707,10 @@ bsTree_->Branch(  "genBsSVtx_x"			  , &genBsSVtx_x_,                      "genBs
 bsTree_->Branch(  "isGenJpsiEvent"		  , &isGenJpsiEvent_,                   "isGenJpsiEvent/I");                                           
 bsTree_->Branch(  "BdFitChi2_Hyp1"		  , &BdFitChi2_Hyp1_,                   "BdFitChi2_Hyp1/D");                                            
 bsTree_->Branch(  "BdFitNdof_Hyp1"		  , &BdFitNdof_Hyp1_,                   "BdFitNdof_Hyp1/I");                                           
-bsTree_->Branch(  "BdFitVtxProb_Hyp1"		  , &BdFitVtxProb_Hyp1_,                "BdFitVtxProb_Hyp1/D");                                         
+bsTree_->Branch(  "BdFitVtxProb_Hyp1"		  , &BdFitVtxProb_Hyp1_,                "BdFitVtxProb_Hyp1/D");     
+bsTree_->Branch(  "BdFitVtxProb"		  , &BdFitVtxProb_,                "BdFitVtxProb/D");     
+
+                                    
 bsTree_->Branch(  "BdFitM_Hyp1"			  , &BdFitM_Hyp1_,                      "BdFitM_Hyp1/D");                                               
 bsTree_->Branch(  "BdFitEta_Hyp1"		  , &BdFitEta_Hyp1_,                    "BdFitEta_Hyp1/D");                                             
 bsTree_->Branch(  "BdFitPt_Hyp1"		  , &BdFitPt_Hyp1_,                     "BdFitPt_Hyp1/D");                                              
@@ -764,8 +789,15 @@ bsTree_->Branch(  "BdLxyErr"			  , &BdLxyErr_,                            "BdLxy
 bsTree_->Branch(  "BdErrX"			  , &BdErrX_,                           "BdErrX/D");                                                    
 bsTree_->Branch(  "BdErrY"			  , &BdErrY_,                           "BdErrY/D");                                                    
 bsTree_->Branch(  "BdErrXY"			  , &BdErrXY_,                          "BdErrXY/D");                                                   
-bsTree_->Branch(  "BdCt"			  , &BdCt_,                             "BdCt/D");                                                      
-bsTree_->Branch(  "BdCtErr"			  , &BdCtErr_,                           "BdCtErr/D");                                                      
+bsTree_->Branch(  "BdCt", &BdCt_,"BdCt/D");                                                      
+bsTree_->Branch(  "BdCtErr", &BdCtErr_,  "BdCtErr/D"); 
+bsTree_->Branch(  "BdCt2DPVCosTheta", &BdCt2DPVCosTheta_,"BdCt2DPVCosTheta/D");   
+bsTree_->Branch(  "Bdt2DPVCosTheta", &Bdt2DPVCosTheta_,"Bdt2DPVCosTheta/D");    
+bsTree_->Branch(  "BdCt2DPVCosThetaUnfitP", &BdCt2DPVCosThetaUnfitP_,"BdCt2DPVCosThetaUnfitP/D"); 
+
+bsTree_->Branch(  "BdCtErr2DCostheta", &BdCtErr2DCostheta_,"BdCtErr2DCostheta/D");   
+bsTree_->Branch(  "BdtErr2DCostheta", &BdtErr2DCostheta_,"BdtErr2DCostheta/D");  
+
 bsTree_->Branch(  "BdDist3d"			  , &BdDist3d_,                         "BdDist3d/D");                                                  
 bsTree_->Branch(  "BdDist3dErr"			  , &BdDist3dErr_,                      "BdDist3dErr/D");                                               
 bsTree_->Branch(  "BdTime3d"			  , &BdTime3d_,                         "BdTime3d/D");                                                  
@@ -834,6 +866,8 @@ ElectronMultiplicity_ = -9999999;
   BpTagP_=-9999999;
   BpTagPF_=-9999999;
   BpTagGENID_=-9999999;
+  BpTagMomGENID_ = -9999999;
+  BpTagGmomGENID_ = -9999999;
 
   BpTagEIDNonTrig_ = -9999999;
   BpTagEIDTrig_ = -9999999;
@@ -854,6 +888,8 @@ ElectronMultiplicity_ = -9999999;
   BpTagEPhi_=-9999999;
   BpTagEP_=-9999999;
   BpTagEGENID_=-9999999;
+  BpTagEGmomGENID_=-9999999;
+  BpTagEMomGENID_ =-9999999;
 
   BsTagEIP_=-9999999;
   BsTagEPt_=-9999999;
@@ -862,6 +898,8 @@ ElectronMultiplicity_ = -9999999;
   BsTagEPhi_=-9999999;
   BsTagEP_=-9999999;
   BsTagEGENID_=-9999999;
+  BsTagEGmomGENID_=-9999999;
+  BsTagEMomGENID_ =-9999999;
 
   BdTagEIP_=-9999999;
   BdTagEPt_=-9999999;
@@ -870,7 +908,8 @@ ElectronMultiplicity_ = -9999999;
   BdTagEPhi_=-9999999;
   BdTagEP_=-9999999;
   BdTagEGENID_=-9999999;
-
+  BdTagEGmomGENID_=-9999999;
+  BdTagEMomGENID_ =-9999999;
 
   BsTagIP_=-9999999;
   BsTagPt_=-9999999;
@@ -880,6 +919,9 @@ ElectronMultiplicity_ = -9999999;
   BsTagP_=-9999999;
   BsTagPF_=-9999999;
   BsTagGENID_=-9999999;
+  BsTagMomGENID_ = -9999999;
+  BsTagGmomGENID_ = -9999999;
+
   BdTagIP_=-9999999;
   BdTagPt_=-9999999;
   BdTagCharge_=-9999999;
@@ -888,6 +930,10 @@ ElectronMultiplicity_ = -9999999;
   BdTagP_=-9999999;
   BdTagPF_=-9999999;
   BdTagGENID_=-9999999;
+  BdTagMomGENID_ = -9999999;
+  BdTagGmomGENID_ = -9999999;
+
+
   BdMuonCat1_=-9999999;
   BdMuonCat2_=-9999999;
   BplusM_fit_=-9999999;
@@ -1002,6 +1048,7 @@ ElectronMultiplicity_ = -9999999;
   triggerbit_Dimuon0_Jpsi_v6_= -9999999;   
   triggerbit_Dimuon0_Jpsi_v9_= -9999999;   
   triggerbit_Dimuon0_Jpsi_v10_= -9999999;   
+  triggerbit_Dimuon0_Jpsi_v14_ = -9999999;
   triggerbit_Dimuon10_Barrel_= -9999999;
   triggerbit_Dimuon13_Barrel_= -9999999;
   triggerbit_Dimuon0_Jpsi_Muon_v15_= -9999999;
@@ -1372,6 +1419,7 @@ ElectronMultiplicity_ = -9999999;
   BdFitChi2_Hyp1_ = -9999999;
   BdFitNdof_Hyp1_ = -9999999;
   BdFitVtxProb_Hyp1_ = -9999999;
+  BdFitVtxProb_ = -9999999;
   BdFitM_Hyp1_ = -9999999;
   BdFitEta_Hyp1_ = -9999999;
   BdFitPt_Hyp1_ = -9999999;
@@ -1449,7 +1497,13 @@ BdPVerrz_refit_ = -9999999;
   BdErrXY_ = -9999999;
   BdCt_ = -9999999;
   BdCtErr_ = -9999999;
+  BdCt2DPVCosTheta_ = -9999999;
+  Bdt2DPVCosTheta_ = -9999999;
+  BdCtErr2DCostheta_ = -9999999;
+BdtErr2DCostheta_ = -9999999;
+BdCt2DPVCosThetaUnfitP_ = -9999999;
   BdDist3d_ = -9999999;
+
   BdDist3dErr_ = -9999999;
   BdTime3d_ = -9999999;
   BdTime3dErr_ = -9999999;
@@ -1482,6 +1536,8 @@ BdChannelID_ = -9999999;
 BscosthetaMC_ = -9999999;
 BsphiMC_ = -9999999;
 BscospsiMC_ = -9999999;
+BdKstarKaon_ = -9999999;
+BdKstarPion_ = -9999999;
 
   for(int i=0; i<7; i++){
     K1Fit_par_[i] = -9999999;
@@ -1786,7 +1842,9 @@ bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v3"	  , &triggerbit_Dimuon0
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v5"	  , &triggerbit_Dimuon0_Jpsi_v5_  );                        
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v6"	  , &triggerbit_Dimuon0_Jpsi_v6_  );                        
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v9"	  , &triggerbit_Dimuon0_Jpsi_v9_  );                        
-bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v10"	  , &triggerbit_Dimuon0_Jpsi_v10_  );                        
+bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v10"	  , &triggerbit_Dimuon0_Jpsi_v10_  );       
+bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_v14"	  , &triggerbit_Dimuon0_Jpsi_v14_  );   
+                 
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon10_Barrel"	  , &triggerbit_Dimuon10_Barrel_  );                        
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon13_Barrel"	  , &triggerbit_Dimuon13_Barrel_  );                        
 bsTree_->SetBranchAddress(  "triggerbit_Dimuon0_Jpsi_Muon_v15"    , &triggerbit_Dimuon0_Jpsi_Muon_v15_  );
@@ -2105,6 +2163,8 @@ bsTree_->SetBranchAddress(  "Mu2TMLastStationOptimizedBarrelLowPtTight", &Mu2TML
 bsTree_->SetBranchAddress(  "BsCtErr2DCostheta"                   , &BsCtErr2DCostheta_  );                   
 bsTree_->SetBranchAddress("BsCt3DPVCosTheta", &BsCt3DPVCosTheta_ );
 bsTree_->SetBranchAddress("BsCt2DPVCosTheta", &BsCt2DPVCosTheta_ ); 
+
+
 bsTree_->SetBranchAddress(  "BsDist3d"			  , &BsDist3d_  );                                             
 bsTree_->SetBranchAddress(  "BsDist3dErr"			  , &BsDist3dErr_  );                                          
 bsTree_->SetBranchAddress(  "BsTime3d"			  , &BsTime3d_  );                                             
@@ -2156,7 +2216,9 @@ bsTree_->SetBranchAddress(  "BsCt3DMC"			  , &BsCt3DMC_  );
 bsTree_->SetBranchAddress(  "BsIniFlavour"			  , &BsIniFlavour_  );                             
 bsTree_->SetBranchAddress(  "BsEndFlavour"			  , &BsEndFlavour_  );                             
 bsTree_->SetBranchAddress(  "BdIniFlavour"			  , &BdIniFlavour_  );                             
-bsTree_->SetBranchAddress(  "BdEndFlavour"			  , &BdEndFlavour_  );                             
+bsTree_->SetBranchAddress(  "BdEndFlavour"			  , &BdEndFlavour_  ); 
+bsTree_->SetBranchAddress(  "BdKstarPion"			  , &BdKstarPion_);
+bsTree_->SetBranchAddress(  "BdKstarKaon"			  , &BdKstarKaon_);
 bsTree_->SetBranchAddress(  "ChannelID"			  , &ChannelID_  );                             
 bsTree_->SetBranchAddress(  "BdChannelID"			  , &BdChannelID_  );                             
 bsTree_->SetBranchAddress(  "BPtMC"			  , BPtMC_  );                                         
@@ -2193,7 +2255,8 @@ bsTree_->SetBranchAddress(  "genBsSVtx_x"			  , &genBsSVtx_x_  );
 bsTree_->SetBranchAddress(  "isGenJpsiEvent"		  , &isGenJpsiEvent_  );                                      
 bsTree_->SetBranchAddress(  "BdFitChi2_Hyp1"		  , &BdFitChi2_Hyp1_  );                                       
 bsTree_->SetBranchAddress(  "BdFitNdof_Hyp1"		  , &BdFitNdof_Hyp1_  );                                      
-bsTree_->SetBranchAddress(  "BdFitVtxProb_Hyp1"		  , &BdFitVtxProb_Hyp1_  );                                    
+bsTree_->SetBranchAddress(  "BdFitVtxProb_Hyp1"		  , &BdFitVtxProb_Hyp1_  );   
+bsTree_->SetBranchAddress(  "BdFitVtxProb"		  , &BdFitVtxProb_  );                                    
 bsTree_->SetBranchAddress(  "BdFitM_Hyp1"			  , &BdFitM_Hyp1_  );                                          
 bsTree_->SetBranchAddress(  "BdFitEta_Hyp1"		  , &BdFitEta_Hyp1_  );                                        
 bsTree_->SetBranchAddress(  "BdFitPt_Hyp1"		  , &BdFitPt_Hyp1_  );                                         
@@ -2272,7 +2335,12 @@ bsTree_->SetBranchAddress(  "BdErrX"			  , &BdErrX_  );
 bsTree_->SetBranchAddress(  "BdErrY"			  , &BdErrY_  );                                               
 bsTree_->SetBranchAddress(  "BdErrXY"			  , &BdErrXY_  );                                              
 bsTree_->SetBranchAddress(  "BdCt"			  , &BdCt_  );                                                 
-bsTree_->SetBranchAddress(  "BdCtErr"			  , &BdCtErr_  );                                                 
+bsTree_->SetBranchAddress(  "BdCtErr"			  , &BdCtErr_  );       
+bsTree_->SetBranchAddress("BdCt2DPVCosTheta", &BdCt2DPVCosTheta_ );  
+bsTree_->SetBranchAddress("Bdt2DPVCosTheta", &Bdt2DPVCosTheta_ );  
+bsTree_->SetBranchAddress("BdCtErr2DCostheta", &BdCtErr2DCostheta_ );  
+bsTree_->SetBranchAddress("BdtErr2DCostheta", &BdtErr2DCostheta_ );  
+
 bsTree_->SetBranchAddress(  "BdDist3d"			  , &BdDist3d_  );                                             
 bsTree_->SetBranchAddress(  "BdDist3dErr"			  , &BdDist3dErr_  );                                          
 bsTree_->SetBranchAddress(  "BdTime3d"			  , &BdTime3d_  );                                             

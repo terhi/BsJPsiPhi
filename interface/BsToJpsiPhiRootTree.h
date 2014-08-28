@@ -49,7 +49,8 @@ public:
         double BpTagP_;
         int BpTagPF_;
         int BpTagGENID_;
-
+		  int BpTagMomGENID_ ;
+		  int BpTagGmomGENID_ ;	
 
 		  int TrackMultiplicity_ ;
 		  int TrackMultiplicityBp_ ;
@@ -67,6 +68,8 @@ public:
         double BpTagEPhi_;
         double BpTagEP_;
         int BpTagEGENID_;
+		  int BpTagEGmomGENID_;
+		  int BpTagEMomGENID_;		
 
 		  double BsTagEIDNonTrig_;
   		  double BsTagEIDTrig_; 
@@ -78,6 +81,9 @@ public:
         double BsTagEPhi_;
         double BsTagEP_;
         int BsTagEGENID_;
+		  int BsTagEGmomGENID_;
+		  int BsTagEMomGENID_;	
+
 
 		  double BdTagEIDNonTrig_;
   		  double BdTagEIDTrig_; 
@@ -89,6 +95,8 @@ public:
         double BdTagEPhi_;
         double BdTagEP_;
         int BdTagEGENID_;
+		  int BdTagEGmomGENID_;
+		  int BdTagEMomGENID_;	
 
         double BsTagIP_;
         double BsTagPt_;
@@ -98,6 +106,9 @@ public:
         double BsTagP_;
         int BsTagPF_;
         int BsTagGENID_;
+		  int BsTagMomGENID_ ;
+		  int BsTagGmomGENID_ ;	
+
         double BdTagIP_;
         double BdTagPt_;
         int BdTagCharge_;
@@ -106,6 +117,10 @@ public:
         double BdTagP_;
         int BdTagPF_;
         int BdTagGENID_;
+		  int BdTagMomGENID_ ;
+		  int BdTagGmomGENID_ ;	
+		
+
         int  BdMuonCat1_;
         int  BdMuonCat2_;
         double  BplusM_fit_;
@@ -205,6 +220,7 @@ public:
         int triggerbit_Dimuon0_Jpsi_v6_;
         int triggerbit_Dimuon0_Jpsi_v9_;
         int triggerbit_Dimuon0_Jpsi_v10_;
+		  int triggerbit_Dimuon0_Jpsi_v14_;
         int triggerbit_Dimuon10_Barrel_;
         int triggerbit_Dimuon13_Barrel_;
         int triggerbit_Dimuon0_Jpsi_Muon_v15_;
@@ -622,6 +638,8 @@ public:
         int BsEndFlavour_; 
         int BdEndFlavour_; 
         int BdIniFlavour_; 
+		  int BdKstarKaon_;	
+		  int BdKstarPion_;	
         int ChannelID_; 
         int BdChannelID_; 
 	int GenNumberOfBdecays_;
@@ -670,10 +688,10 @@ public:
 
 	// for the Bd->Kstar analysis
 	double BdFitChi2_Hyp1_;
-        int    BdFitNdof_Hyp1_;
+   int    BdFitNdof_Hyp1_;
 
-        double BdFitVtxProb_Hyp1_;
-   
+   double BdFitVtxProb_Hyp1_;
+   double BdFitVtxProb_;
 	int BdNumberOfCandidates_;
 
 	double BdPVx_refit_   ;
@@ -769,6 +787,11 @@ public:
 	double BdCt_;
 	double BdCtErr_;
 
+   double BdCt2DPVCosTheta_;
+   double Bdt2DPVCosTheta_;
+   double BdCtErr2DCostheta_;
+   double BdtErr2DCostheta_;
+	double BdCt2DPVCosThetaUnfitP_ ;
 	double BdDist3d_;
 	double BdDist3dErr_;
 	double BdTime3d_;

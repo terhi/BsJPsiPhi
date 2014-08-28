@@ -27,8 +27,12 @@ process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 #Analysis Global tag for dataset muonia24Aug2012-v1 reco'ed in CMSSW_5_3_2_pathc4
 
 
-process.GlobalTag.globaltag = cms.string('FT_53_V21_AN6::All')
-#Analysis Global tag for dataset /MuOnia/Run2012D-22Jan2013-v1/AOD  
+process.GlobalTag.globaltag = cms.string('FT_53_V18_AN3::All') 
+#Analysis Global tag for dataset /MuOnia/Run2012ABCD-22Jan2013-v1/AOD recoed with   CMSSW_5_3_7_pathc5!! 
+
+#process.GlobalTag.globaltag = cms.string('FT_53_V21_AN6::All') 
+#Analysis Global tag for dataset /MuOnia/Run2012ABCD-22Jan2013-v1/AOD recoed with   CMSSW_5_3_7_patch6
+
 
 #process.GlobalTag.globaltag = cms.string('GR_P_V41_AN3::All')
 #Analysis Global tag for dataset Run2012C-PromptReco-v2  
@@ -170,7 +174,7 @@ process.bsVertexAnalysis = cms.EDAnalyzer("BsToJpsiPhiAnalysis",
                                           BdLowerMassCutAfterFit = cms.double(4.9),
                                           BdUpperMassCutAfterFit = cms.double(5.7),
                                           verbose                = cms.bool( False ), 
-                                          outputFile = cms.untracked.string("DataPromptReco13C.root"),
+                                          outputFile = cms.untracked.string("DataJan13B.root"),
 														BsPDGMass = cms.double(5.36677),
                                           BdPDGMass = cms.double(5.27958),
                                           BpPDGMass = cms.double(5.27926 )

@@ -1957,8 +1957,6 @@ double bestVtxProbBplus = -1;
 	      }
 
 	      if(PVCosThetaIndex == -1){ continue;}
-//<<<<<<< HEAD
-           
 			/// Refitted Bd PV ///	
          BdPVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trkkst1 , trkkst2);
 
@@ -1969,13 +1967,11 @@ double bestVtxProbBplus = -1;
 	      bsRootTree_->BdPVerrx_refit_ = BdPVvtxCosTheta.xError();
 	      bsRootTree_->BdPVerry_refit_ = BdPVvtxCosTheta.yError();
 	      bsRootTree_->BdPVerrz_refit_ = BdPVvtxCosTheta.zError();	
-//=======
-//           
- //             BdPVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trkkst1 ,trkkst2);
- //             bsRootTree_->BdSoftMuon1_=mu1.isSoftMuon(BdPVvtxCosTheta);
- //             bsRootTree_->BdSoftMuon1_=mu2.isSoftMuon(BdPVvtxCosTheta);
-//>>>>>>> giacomo/master
-
+/*
+              BdPVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trkkst1 , trkkst2);
+              bsRootTree_->BdSoftMuon1_=mu1.isSoftMuon(BdPVvtxCosTheta);
+              bsRootTree_->BdSoftMuon1_=mu2.isSoftMuon(BdPVvtxCosTheta);
+*/
 			const Vertex &Bdvtx = (*recVtxs)[PVCosThetaIndex];
 		 	bsRootTree_->TrackMultiplicityBd_ = Bdvtx.nTracks();
 

@@ -1180,7 +1180,10 @@ double bestVtxProbBplus = -1;
 				bsRootTree_->TrackMultiplicity_ = Bsvtx.nTracks();
 	//		cout <<"Track multiplicity Bs " << Bsvtx.nTracks() << endl;
 
-            PVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trk1Ref, trk2Ref); 
+            PVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trk1Ref, trk2Ref);
+            bsRootTree_->BsSoftMuon1_=mu1.isSoftMuon(PVvtxCosTheta);
+            bsRootTree_->BsSoftMuon1_=mu2.isSoftMuon(PVvtxCosTheta);
+ 
             //bsRootTree_->BsCt3DPVCosTheta_ = BsPDGMass*( (bVertex->position().x()-PVvtxCosTheta.x())*Bsvec.x() + (bVertex->position().y()-PVvtxCosTheta.y())*Bsvec.y() + (bVertex->position().z()-PVvtxCosTheta.z())*Bsvec.z() )/( Bsvec.x()*Bsvec.x() + Bsvec.y()*Bsvec.y() + Bsvec.z()*Bsvec.z() );
             bsRootTree_->BsCt3DPVCosTheta_ = BsPDGMass_*( (kvfbsvertex.position().x()-PVvtxCosTheta.x())*Bsvec.x() + (kvfbsvertex.position().y()-PVvtxCosTheta.y())*Bsvec.y() + (kvfbsvertex.position().z()-PVvtxCosTheta.z())*Bsvec.z() )/( Bsvec.x()*Bsvec.x() + Bsvec.y()*Bsvec.y() + Bsvec.z()*Bsvec.z() );
             //bsRootTree_->BsCt2DPVCosTheta_ = BsPDGMass*( (bVertex->position().x()-PVvtxCosTheta.x())*Bsvec.x() + (bVertex->position().y()-PVvtxCosTheta.y())*Bsvec.y() )/( Bsvec.x()*Bsvec.x() + Bsvec.y()*Bsvec.y() );
@@ -1954,6 +1957,7 @@ double bestVtxProbBplus = -1;
 	      }
 
 	      if(PVCosThetaIndex == -1){ continue;}
+//<<<<<<< HEAD
            
 			/// Refitted Bd PV ///	
          BdPVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trkkst1 , trkkst2);
@@ -1965,6 +1969,12 @@ double bestVtxProbBplus = -1;
 	      bsRootTree_->BdPVerrx_refit_ = BdPVvtxCosTheta.xError();
 	      bsRootTree_->BdPVerry_refit_ = BdPVvtxCosTheta.yError();
 	      bsRootTree_->BdPVerrz_refit_ = BdPVvtxCosTheta.zError();	
+//=======
+//           
+ //             BdPVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trkkst1 ,trkkst2);
+ //             bsRootTree_->BdSoftMuon1_=mu1.isSoftMuon(BdPVvtxCosTheta);
+ //             bsRootTree_->BdSoftMuon1_=mu2.isSoftMuon(BdPVvtxCosTheta);
+//>>>>>>> giacomo/master
 
 			const Vertex &Bdvtx = (*recVtxs)[PVCosThetaIndex];
 		 	bsRootTree_->TrackMultiplicityBd_ = Bdvtx.nTracks();
@@ -2396,6 +2406,9 @@ BdCand.pt();
             reco::TrackRef nulltrack;
 
             BpPVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trkKplusRef , nulltrack);
+            bsRootTree_->BpSoftMuon1_=mu1.isSoftMuon(BpPVvtxCosTheta);
+            bsRootTree_->BpSoftMuon1_=mu2.isSoftMuon(BpPVvtxCosTheta);
+
             bsRootTree_->BpCt2DPVCosTheta_ = BpPDGMass_*( (kvfbpvertex.position().x()-BpPVvtxCosTheta.x())*Bplus.px() + (kvfbpvertex.position().y()-BpPVvtxCosTheta.y())*Bplus.py() )/( Bplus.px()*Bplus.px() + Bplus.py()*Bplus.py() );
    
             VertexDistanceXY d2Costheta;

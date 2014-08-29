@@ -1933,6 +1933,9 @@ double bestVtxProbBplus = -1;
 			}
 	      else {std::cout<<"error flag" << std::endl;  exit(1);}
 
+			cout << "KVF vertex prob " << vtxProbBd << endl;
+			cout << "Hyp1 vertex prob " << vtxProbHyp1 << endl;
+			cout << "Hyp2 vertex prob " << vtxProbHyp2 << endl;
 
 			cout <<"KVF vertex " << kvfbdvertex.position() << endl;
 			cout <<"Hyp vertex " << bdVertex->position() << endl;

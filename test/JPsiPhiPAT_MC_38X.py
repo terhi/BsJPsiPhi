@@ -2,7 +2,7 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("PAT")
 
-process.maxEvents = cms.untracked.PSet(  input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet(  input = cms.untracked.int32(20) )
 
 process.source = cms.Source("PoolSource",
 			    duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
@@ -10,7 +10,7 @@ process.source = cms.Source("PoolSource",
 			    fileNames = cms.untracked.vstring(
  #  'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BuToJPsiK_K2MuPtEtaEtaFilter_8TeV-pythia6-evtgen/AODSIM/PU_S10_START53_V7A-v2/0000/001253E4-95DD-E111-865A-E41F131817F8.root'
 
-#'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BdToKstarJPsi_EtaPtFilter_8TeV-pythia6-evtgen/AODSIM/PU_RD2_START53_V19F-v1/00000/0002ECCA-AD4A-E311-99EE-1CC1DE050110.root'
+'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BdToKstarJPsi_EtaPtFilter_8TeV-pythia6-evtgen/AODSIM/PU_RD2_START53_V19F-v1/00000/0002ECCA-AD4A-E311-99EE-1CC1DE050110.root'
 
 #'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BdToJpsiKstar_EtaPtFilter_8TeV-pythia6-evtgen/AODSIM/PU_S10_START53_V7C-v1/20000/00E29AAC-1465-E211-A82C-00266CFFCD00.root'
 

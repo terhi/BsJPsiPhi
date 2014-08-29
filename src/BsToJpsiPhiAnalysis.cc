@@ -1751,7 +1751,7 @@ double bestVtxProbBplus = -1;
 	       ( ( fittedBdMassHyp1 > BdLowerMassCutAfterFit_ && fittedBdMassHyp1 < BdUpperMassCutAfterFit_ ) ||
 		( fittedBdMassHyp2 > BdLowerMassCutAfterFit_ && fittedBdMassHyp2 < BdUpperMassCutAfterFit_ ) ) ) 	{bsRootTree_->BdNumberOfCandidates_++;}
 	    
-
+
 			/// Bd with highest vertex probability saved
 			if(vtxProbBd > MinBdVtxProb){
 
@@ -1919,6 +1919,7 @@ double bestVtxProbBplus = -1;
          bsRootTree_->BdMuDr1_ = max_Dr1;
          bsRootTree_->BdMuDr2_ = max_Dr2;
 
+
 	      RefCountedKinematicVertex bdVertex;
 	      AlgebraicSymMatrix77 bd_er;
 	      GlobalVector Bdvec;
@@ -1933,6 +1934,14 @@ double bestVtxProbBplus = -1;
 	      else {std::cout<<"error flag" << std::endl;  exit(1);}
 
 
+			cout <<"KVF vertex " << kvfbdvertex.position() << endl;
+			cout <<"Hyp vertex " << bdVertex->position() << endl;
+
+			cout <<"dx " << kvfbdvertex.position().x() - bdVertex->position().x() << endl;
+			cout <<"dy " << kvfbdvertex.position().y() - bdVertex->position().y() << endl;
+			cout <<"dz " << kvfbdvertex.position().z() - bdVertex->position().z() << endl;
+
+
 			// Pointing angle PV selection
  
          Int_t PVCosThetaIndex = -1;
@@ -1942,9 +1951,9 @@ double bestVtxProbBplus = -1;
 	      for(unsigned int BdVtxInd=0; BdVtxInd<recVtxs->size(); BdVtxInd++){
 	        const Vertex &vtx = (*recVtxs)[BdVtxInd];
 
-	        Double_t PVSVvecDotBdPvec = ( bdVertex->position().x()- vtx.x() )*Bdvec.x() + (bdVertex-> position().y() - vtx.y())*Bdvec.y() + (bdVertex-> position().z() - vtx.z() )*Bdvec.z();
+	        Double_t PVSVvecDotBdPvec = ( kvfbdvertex.position().x()- vtx.x() )*Bdvec.x() + (kvfbdvertex.position().y() - vtx.y())*Bdvec.y() + (kvfbdvertex.position().z() - vtx.z() )*Bdvec.z();
 
-	        Double_t PVSVlength = TMath::Sqrt( pow((bdVertex->position().x()- vtx.x()), 2.0) + pow((bdVertex->position().y()- vtx.y()), 2.0) + pow((bdVertex->position().z()- vtx.z()), 2.0) );
+	        Double_t PVSVlength = TMath::Sqrt( pow((kvfbdvertex.position().x()- vtx.x()), 2.0) + pow((kvfbdvertex.position().y()- vtx.y()), 2.0) + pow((kvfbdvertex.position().z()- vtx.z()), 2.0) );
 
     	     Double_t BplusPlength = TMath::Sqrt(Bdvec.x()*Bdvec.x()+Bdvec.y()*Bdvec.y() + Bdvec.z()*Bdvec.z());
 	        Double_t BplusCosTheta = PVSVvecDotBdPvec / (BplusPlength * PVSVlength);
@@ -1967,11 +1976,11 @@ double bestVtxProbBplus = -1;
 	      bsRootTree_->BdPVerrx_refit_ = BdPVvtxCosTheta.xError();
 	      bsRootTree_->BdPVerry_refit_ = BdPVvtxCosTheta.yError();
 	      bsRootTree_->BdPVerrz_refit_ = BdPVvtxCosTheta.zError();	
-/*
-              BdPVvtxCosTheta = reVertex(iSetup, vertexBeamSpot,  (*recVtxs)[PVCosThetaIndex], mu1, mu2, trkkst1 , trkkst2);
-              bsRootTree_->BdSoftMuon1_=mu1.isSoftMuon(BdPVvtxCosTheta);
-              bsRootTree_->BdSoftMuon1_=mu2.isSoftMuon(BdPVvtxCosTheta);
-*/
+
+
+         bsRootTree_->BdSoftMuon1_=mu1.isSoftMuon(BdPVvtxCosTheta);
+         bsRootTree_->BdSoftMuon1_=mu2.isSoftMuon(BdPVvtxCosTheta);
+
 			const Vertex &Bdvtx = (*recVtxs)[PVCosThetaIndex];
 		 	bsRootTree_->TrackMultiplicityBd_ = Bdvtx.nTracks();
 
@@ -3609,8 +3618,10 @@ void BsToJpsiPhiAnalysis::fillMCInfo( edm::Handle<GenParticleCollection> & genPa
       bdsvy=genBdCand->daughter(0)->vy();
       bdsvz=genBdCand->daughter(0)->vz();
 
-
-		
+		cout << "MC vertex x" << genBdCand->daughter(0)->vx() << endl;
+		cout << "MC vertex y" << genBdCand->daughter(0)->vy() << endl;
+		cout << "MC vertex z" << genBdCand->daughter(0)->vz() << endl;
+	
 		// calculate gen ctau 2D
       //double Lxy2D = ((bssvx-bspvx)*bsmomx+(bssvy-bspvy)*bsmomy);
       double Lxy2D = sqrt(pow(bdsvx-bdpvx,2)+pow(bdsvy-bdpvy,2));

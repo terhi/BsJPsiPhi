@@ -51,7 +51,10 @@ bool KinematicFitInterface::doFit(std::vector<reco::TransientTrack> t_tracks, co
   myTree_Jpsi=JpsiTree;
  
   // if the fit fails, do not consider this as candidate
-  if(JpsiTree->isEmpty()) return 0;
+  if(JpsiTree->isEmpty()) {
+    delete jpsi_const;
+    return 0;    
+  }
   
   JpsiTree->movePointerToTheTop();
   RefCountedKinematicParticle Jpsi_branch = JpsiTree->currentParticle();
@@ -60,21 +63,26 @@ bool KinematicFitInterface::doFit(std::vector<reco::TransientTrack> t_tracks, co
   myTree_Bs = Fitter.fit(allParticlesTrk);
   
   // if the fit fails, do not consider this as candidate
-  if(myTree_Bs->isEmpty()) return 0;
-  
+  if(myTree_Bs->isEmpty()) {
+    delete jpsi_const;
+    return 0;
+  }
   
   myTree_Bs->movePointerToTheTop();
  
   bs = myTree_Bs->currentParticle();
   bVertex = myTree_Bs->currentDecayVertex();
   
-  if (!bVertex->vertexIsValid()) return 0;
+  if (!bVertex->vertexIsValid()) {
+    delete jpsi_const;
+    return 0;    
+  }
   // vertex is valid
   
   
 
   vtxprob_Bs = TMath::Prob(bs->chiSquared(), (int)bs->degreesOfFreedom());
   
-  
+  delete jpsi_const;
   return 1;
 }

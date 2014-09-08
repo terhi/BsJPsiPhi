@@ -3,16 +3,19 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("PAT")
 
 #-- NUMBER OF EVENTS --#
-process.maxEvents = cms.untracked.PSet(  input = cms.untracked.int32(19) )
+process.maxEvents = cms.untracked.PSet(  input = cms.untracked.int32(20) )
 
 #-- SOURCE FILES --#
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
                             skipEvents = cms.untracked.uint32(0),
                             fileNames = cms.untracked.vstring(
-                     		'file:/afs/cern.ch/work/t/terhi/private/BsMCtest.root'
-                            #'file:/lustre/cmsdata/pazzini/BsJpsiPhi/BsJpsiPhi/0618D67F-EDD8-E111-85A7-001A645C984A.root'
-                            #'file:/lustre/cmsdata/pazzini/BsJpsiPhi/BdJpsiKstar/04219ACD-1065-E211-A83A-00266CFFCD50.root'
+
+									 #'root://xrootd.unl.edu//store/mc/Summer12_DR53X/BdToKstarJPsi_EtaPtFilter_8TeV-pythia6-evtgen/AODSIM/PU_RD2_START53_V19F-v1/00000/0002ECCA-AD4A-E311-99EE-1CC1DE050110.root'
+                     		#'file:/afs/cern.ch/work/t/terhi/private/BsMCtest.root'
+									'file:/afs/cern.ch/work/t/terhi/private/BuMCtest.root'
+                           #'file:/lustre/cmsdata/pazzini/BsJpsiPhi/BsJpsiPhi/0618D67F-EDD8-E111-85A7-001A645C984A.root'
+
                             )
 )
 
@@ -34,6 +37,7 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("Configuration.StandardSequences.Reconstruction_cff")
 
 #-- GLOBAL TAG --#
+#process.GlobalTag.globaltag = cms.string('START53_V19F::All')
 process.GlobalTag.globaltag = cms.string('START53_V7A::All')
 
 #-- PAT LAYER 0+1 --#
@@ -215,9 +219,9 @@ process.bsVertexAnalysis = cms.EDAnalyzer("BsToJpsiPhiAnalysis",
                                           BsPDGMass = cms.double(5.3699),
                                           BdPDGMass = cms.double(5.2794),
                                           BpPDGMass = cms.double(5.2790),
-                                          #outputFile                   = cms.untracked.string("BuToJPsiK.root"),
+                                          outputFile                   = cms.untracked.string("BuToJPsiK.root"),
                                           #outputFile                   = cms.untracked.string("BsToJPsiPhi.root"),
-                                          outputFile                   = cms.untracked.string("BdToJPsiKstar.root"),
+                                          #outputFile                   = cms.untracked.string("BdToJPsiKstarMu.root"),
 )
 
 #-- PAT MUONS --#

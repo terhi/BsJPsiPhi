@@ -77,6 +77,8 @@ void BsToJpsiPhiRootTree::createTree(const std::string filename)
   bsTree_->Branch("BplusCharge",&BplusCharge_, "BplusCharge/I");
   bsTree_->Branch("BplusMu1Eta",&BplusMu1Eta_, "BplusMu1Eta/D");
   bsTree_->Branch("BplusMu2Eta",&BplusMu2Eta_, "BplusMu2Eta/D");
+  bsTree_->Branch("BpSoftMuon1",&BpSoftMuon1_,"BpSoftMuon1/I");
+  bsTree_->Branch("BpSoftMuon2",&BpSoftMuon2_,"BpSoftMuon2/I");
   bsTree_->Branch("JpsiPtbplus_fit",&JpsiPtbplus_fit_, "JpsiPtbplus_fit/D");
 
   //BEGIN Muon tagging
@@ -1629,6 +1631,9 @@ void BsToJpsiPhiRootTree::createTree(const std::string filename)
   bsTree_->Branch(  "BdJpsiM_nofit"		  , &BdJpsiM_nofit_,                      "BdJpsiM_nofit/D");
   bsTree_->Branch(  "BdJpsiPhi_nofit"		  , &BdJpsiPhi_nofit_,                    "BdJpsiPhi_nofit/D");
   bsTree_->Branch(  "BdJpsiEta_nofit"		  , &BdJpsiEta_nofit_,                    "BdJpsiEta_nofit/D");
+  bsTree_->Branch(  "BsSoftMuon1"		  , &BsSoftMuon1_,                    "BsSoftMuon1/I");
+  bsTree_->Branch(  "BsSoftMuon2"		  , &BsSoftMuon2_,                    "BsSoftMuon2/I");
+
   bsTree_->Branch(  "BdJpsiPt_nofit"		  , &BdJpsiPt_nofit_,                     "BdJpsiPt_nofit/D");
   bsTree_->Branch(  "BdJpsiPz_nofit"		  , &BdJpsiPz_nofit_,                     "BdJpsiPz_nofit/D");
   bsTree_->Branch(  "PhiM_nofit"			  , &PhiM_nofit_,                       "PhiM_nofit/D");
@@ -1856,6 +1861,9 @@ void BsToJpsiPhiRootTree::createTree(const std::string filename)
   bsTree_->Branch(  "BdFitChi2_Hyp1"		  , &BdFitChi2_Hyp1_,                   "BdFitChi2_Hyp1/D");
   bsTree_->Branch(  "BdFitNdof_Hyp1"		  , &BdFitNdof_Hyp1_,                   "BdFitNdof_Hyp1/I");
   bsTree_->Branch(  "BdFitVtxProb_Hyp1"		  , &BdFitVtxProb_Hyp1_,                "BdFitVtxProb_Hyp1/D");
+  bsTree_->Branch(  "BdFitVtxProb"		  , &BdFitVtxProb_,                "BdFitVtxProb/D");
+
+
   bsTree_->Branch(  "BdFitM_Hyp1"			  , &BdFitM_Hyp1_,                      "BdFitM_Hyp1/D");
   bsTree_->Branch(  "BdFitEta_Hyp1"		  , &BdFitEta_Hyp1_,                    "BdFitEta_Hyp1/D");
   bsTree_->Branch(  "BdFitPt_Hyp1"		  , &BdFitPt_Hyp1_,                     "BdFitPt_Hyp1/D");
@@ -1944,6 +1952,17 @@ void BsToJpsiPhiRootTree::createTree(const std::string filename)
   bsTree_->Branch(  "BdDist2dErr"			  , &BdDist2dErr_,                      "BdDist2dErr/D");
   bsTree_->Branch(  "BdTime2d"			  , &BdTime2d_,                         "BdTime2d/D");
   bsTree_->Branch(  "BdTime2dErr"                   , &BdTime2dErr_,                      "BdTime2dErr/D");
+  bsTree_->Branch("BdCt2DPVCosTheta", &BdCt2DPVCosTheta_ ,"BdCt2DPVCosTheta/D");
+  bsTree_->Branch("Bdt2DPVCosTheta", &Bdt2DPVCosTheta_ ,"Bdt2DPVCosTheta/D");
+  bsTree_->Branch("BdCtErr2DCostheta", &BdCtErr2DCostheta_ ,"BdCtErr2DCostheta/D");
+  bsTree_->Branch("BdtErr2DCostheta", &BdtErr2DCostheta_ ,"BdtErr2DCostheta/D");
+
+  bsTree_->Branch(  "BdSoftMuon1"        , &BdSoftMuon1_   ,"BdSoftMuon1/I" );
+  bsTree_->Branch(  "BdSoftMuon2"        , &BdSoftMuon2_  ,"BdSoftMuon2/I");
+
+  bsTree_->Branch(  "BdMCKstarPion"        , &BdMCKstarPion_   ,"BdMCKstarPion/I" );
+  bsTree_->Branch(  "BdMCKstarKaon"        , &BdMCKstarKaon_  ,"BdMCKstarKaon/I");
+
   bsTree_->Branch(  "BdK1mcId"     , &BdK1mcId_     ,  "BdK1mcId/I"    );
   bsTree_->Branch(  "BdK1momId"	  ,	 &BdK1momId_    ,  "BdK1momId/I"   );
   bsTree_->Branch(  "BdK1gmomId"	  ,	 &BdK1gmomId_   ,  "BdK1gmomId/I"  );
@@ -2007,7 +2026,11 @@ void BsToJpsiPhiRootTree::resetEntries()
   BplusCharge_=-9999999;
   BplusMu1Eta_=-9999999;
   BplusMu2Eta_=-9999999;
+  BpSoftMuon1_=-9999999;
+  BpSoftMuon2_=-9999999;
   JpsiPtbplus_fit_=-9999999;
+
+
 
   //BEGIN Muon tagging
   //Bp
@@ -3424,6 +3447,9 @@ void BsToJpsiPhiRootTree::resetEntries()
   BdJpsiPhi_nofit_= -9999999;
   BdJpsiPt_nofit_= -9999999;
   BdJpsiPz_nofit_= -9999999;
+  BsSoftMuon1_ = -9999999;
+  BsSoftMuon2_ = -9999999;
+
 
   matchL11_ =  -9999999;
   matchL12_ =  -9999999;
@@ -3727,6 +3753,7 @@ void BsToJpsiPhiRootTree::resetEntries()
   BdFitChi2_Hyp1_ = -9999999;
   BdFitNdof_Hyp1_ = -9999999;
   BdFitVtxProb_Hyp1_ = -9999999;
+  BdFitVtxProb_ = -9999999;
   BdFitM_Hyp1_ = -9999999;
   BdFitEta_Hyp1_ = -9999999;
   BdFitPt_Hyp1_ = -9999999;
@@ -3812,7 +3839,15 @@ void BsToJpsiPhiRootTree::resetEntries()
   BdDist2dErr_ = -9999999;
   BdTime2d_ = -9999999;
   BdTime2dErr_ = -9999999;
+  BdCt2DPVCosTheta_ = -9999999;
+  Bdt2DPVCosTheta_  = -9999999;
+  BdCtErr2DCostheta_ = -9999999;
+  BdtErr2DCostheta_ = -9999999;
 
+  BdSoftMuon1_ =  -9999999;
+  BdSoftMuon2_ =  -9999999;
+  BdMCKstarKaon_ = -9999999;
+  BdMCKstarPion_ = -9999999;  
   BdK1mcId_    = -9999999;
   BdK1momId_   = -9999999;
   BdK1gmomId_  = -9999999;
@@ -3975,6 +4010,8 @@ void BsToJpsiPhiRootTree::setBranchAddresses(){
   bsTree_->SetBranchAddress( "BplusCharge", &BplusCharge_ );
   bsTree_->SetBranchAddress( "BplusMu1Eta", &BplusMu1Eta_ );
   bsTree_->SetBranchAddress( "BplusMu2Eta", &BplusMu2Eta_ );
+  bsTree_->SetBranchAddress("BpSoftMuon1",&BpSoftMuon1_);
+  bsTree_->SetBranchAddress("BpSoftMuon2",&BpSoftMuon2_);
   bsTree_->SetBranchAddress( "JpsiPtbplus_fit", &JpsiPtbplus_fit_ );
 
   //BEGIN Muon Tagging
@@ -5448,7 +5485,8 @@ void BsToJpsiPhiRootTree::setBranchAddresses(){
   bsTree_->SetBranchAddress( "BdJpsiPhi_nofit", &BdJpsiPhi_nofit_);
   bsTree_->SetBranchAddress( "BdJpsiPt_nofit", &BdJpsiPt_nofit_);
   bsTree_->SetBranchAddress( "BdJpsiPz_nofit", &BdJpsiPz_nofit_);
-
+  bsTree_->SetBranchAddress(  "BsSoftMuon1"		  , &BsSoftMuon1_);
+  bsTree_->SetBranchAddress(  "BsSoftMuon2"		  , &BsSoftMuon2_);
 
   bsTree_->SetBranchAddress( "MuonType", &MuonType_ );
 
@@ -5742,10 +5780,12 @@ void BsToJpsiPhiRootTree::setBranchAddresses(){
   bsTree_->SetBranchAddress(  "genBsSVtx_z"			  , &genBsSVtx_z_  );
   bsTree_->SetBranchAddress(  "genBsSVtx_y" 		  , &genBsSVtx_y_  );
   bsTree_->SetBranchAddress(  "genBsSVtx_x"			  , &genBsSVtx_x_  );
+
   bsTree_->SetBranchAddress(  "isGenJpsiEvent"		  , &isGenJpsiEvent_  );
   bsTree_->SetBranchAddress(  "BdFitChi2_Hyp1"		  , &BdFitChi2_Hyp1_  );
   bsTree_->SetBranchAddress(  "BdFitNdof_Hyp1"		  , &BdFitNdof_Hyp1_  );
   bsTree_->SetBranchAddress(  "BdFitVtxProb_Hyp1"		  , &BdFitVtxProb_Hyp1_  );
+  bsTree_->SetBranchAddress(  "BdFitVtxProb"		  , &BdFitVtxProb_  );
   bsTree_->SetBranchAddress(  "BdFitM_Hyp1"			  , &BdFitM_Hyp1_  );
   bsTree_->SetBranchAddress(  "BdFitEta_Hyp1"		  , &BdFitEta_Hyp1_  );
   bsTree_->SetBranchAddress(  "BdFitPt_Hyp1"		  , &BdFitPt_Hyp1_  );
@@ -5833,7 +5873,16 @@ void BsToJpsiPhiRootTree::setBranchAddresses(){
   bsTree_->SetBranchAddress(  "BdDist2dErr"			  , &BdDist2dErr_  );
   bsTree_->SetBranchAddress(  "BdTime2d"			  , &BdTime2d_  );
   bsTree_->SetBranchAddress(  "BdTime2dErr"                   , &BdTime2dErr_  );
+  bsTree_->SetBranchAddress("BdCt2DPVCosTheta", &BdCt2DPVCosTheta_ );
+  bsTree_->SetBranchAddress("Bdt2DPVCosTheta", &Bdt2DPVCosTheta_ );
+  bsTree_->SetBranchAddress("BdCtErr2DCostheta", &BdCtErr2DCostheta_ );
+  bsTree_->SetBranchAddress("BdtErr2DCostheta", &BdtErr2DCostheta_ );
 
+  bsTree_->SetBranchAddress(  "BdSoftMuon1"                   , &BdSoftMuon1_  );
+  bsTree_->SetBranchAddress(  "BdSoftMuon2"                   , &BdSoftMuon2_  );
+
+  bsTree_->SetBranchAddress(  "BdMCKstarKaon"                   , &BdMCKstarKaon_  );
+  bsTree_->SetBranchAddress(  "BdMCKstarPion"                   , &BdMCKstarPion_  );
   bsTree_->SetBranchAddress(  "BdK1mcId"           , &BdK1mcId_     );
   bsTree_->SetBranchAddress(  "BdK1momId"	  ,	 &BdK1momId_    );
   bsTree_->SetBranchAddress(  "BdK1gmomId"	  ,	 &BdK1gmomId_   );

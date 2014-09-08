@@ -39,6 +39,8 @@ public:
   int BplusCharge_;
   double BplusMu1Eta_;
   double BplusMu2Eta_;
+  int BpSoftMuon1_;
+  int BpSoftMuon2_;	
   double JpsiPtbplus_fit_;
 
   //BEGIN Muon Taggging
@@ -1607,6 +1609,8 @@ public:
   double BdJpsiEta_nofit_;
   double BdJpsiPt_nofit_;
   double BdJpsiPz_nofit_;
+  int BsSoftMuon1_;
+  int BsSoftMuon2_;
 
   double PhiM_nofit_;
   double PhiPhi_nofit_;
@@ -1845,7 +1849,7 @@ public:
   int    BdFitNdof_Hyp1_;
 
   double BdFitVtxProb_Hyp1_;
-
+  double BdFitVtxProb_;
   int    BdNumberOfCandidates_;
 
   double BdPVx_refit_   ;
@@ -1949,7 +1953,16 @@ public:
   double BdDist2dErr_;
   double BdTime2d_;
   double BdTime2dErr_;
+  double BdCt2DPVCosTheta_;
+  double Bdt2DPVCosTheta_;	
+  double BdCtErr2DCostheta_;
+  double BdtErr2DCostheta_;
 
+  int		BdSoftMuon1_;
+  int 	BdSoftMuon2_;
+
+  int		BdMCKstarKaon_;
+  int		BdMCKstarPion_;
   int    BdK1mcId_;
   int    BdK1momId_;
   int    BdK1gmomId_;

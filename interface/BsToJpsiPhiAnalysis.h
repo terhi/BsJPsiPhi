@@ -201,6 +201,7 @@ private:
   int L1_mu_size;
   int L1_mu_size2;
 
+  unsigned int tagmucounter_;
   unsigned int event_counter_;
   unsigned int elecounter_;
   unsigned int muoncounter_;
